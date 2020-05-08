@@ -108,6 +108,17 @@ function seleccionarNumeracionId($id) {
 		return $rows;
 	}
 
+	function seleccionargenero() {
+		$sql = "SELECT id_genero, nombre
+				FROM 	genero
+				order by nombre ASC
+				LIMIT 	7";
+
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
+
 	function seleccionarColorId($id) {
 		$sql = "SELECT id_color, nombre
 				FROM 	color
@@ -234,12 +245,25 @@ function seleccionarNumeracionId($id) {
 	return $dbres;
 	}
 
-	function crearProducto($codigo,$precio_compra, $precio_mayoreo, $categoria, $proveedor, $marca, $color, $estilo, $observacion) {
-	$sql = "INSERT INTO producto(codigo, precio_compra, precio_mayoreo, categoria_id_categoria,
-																proveedor_id_proveedor, marca_id_marca, color_id_color,estilo_id_estilo, observacion)
-			VALUES (?,?,?,?,?,?,?,?,?)";
+	function crearProducto($codigo,$precio_compra, $precio_mayoreo,$img_carusel,
+												$categoria,$genero, $marca, $color, $estilo, $observacion) {
+	$sql = "INSERT INTO producto(codigo, precio_compra, precio_mayoreo,img_carrusel,
+																categoria_id_categoria,genero_id_genero,
+																marca_id_marca, color_id_color,estilo_id_estilo,
+																observacion)
+			VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-	$valores = array($codigo, $precio_compra, $precio_mayoreo, $categoria, $proveedor, $marca, $color,$estilo, $observacion);
+	$valores = array($codigo, $precio_compra, $precio_mayoreo,$img_carusel, $categoria,$genero, $marca, $color,$estilo, $observacion);
+
+	$dbres = $this->db->query($sql, $valores);
+
+	return $dbres;
+	}
+	function ingresarUrlImagenes($url_img,$id_producto) {
+	$sql = "INSERT INTO img(URL,producto_id_producto)
+			VALUES (?,?)";
+
+	$valores = array($url_img, $id_producto);
 
 	$dbres = $this->db->query($sql, $valores);
 

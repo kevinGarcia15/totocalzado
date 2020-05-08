@@ -8,7 +8,7 @@
     </ul>
 
   <!-- The slideshow -->
-    <div class="carousel-inner ">
+  <div class="carousel-inner ">
       <div class="carousel-item active">
         <img src="<?=$base_url?>/recursos/img/slide_1.png"  style="width: 100%;">
       </div>

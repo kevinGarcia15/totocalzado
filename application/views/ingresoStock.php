@@ -19,9 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h6><strong>Estilo: </strong><?=$estilo;?></h6>
 			<h6><strong>Numeración: </strong><?=$numeracion?></h6>
 			<h6><strong>Color: </strong><?=$color?></h6>
-			<h6><strong>Precio de compra: </strong>Q<?=$this->session->userdata('precio_compra');?></h6>
+			<h6><strong>Precio al público: </strong>Q<?=$this->session->userdata('precio_compra');?></h6>
 			<h6><strong>Precio Mayoreo: </strong>Q<?=$this->session->userdata('Precio_mayoreo');?></h6>
-			<h6><strong>Provedor: </strong><?=$proveedor?></h6>
 			<br>
 			<table>
 				<h4 style="font-family: Vegur, 'PT Sans', Verdana, sans-serif;">Ingrese el inventario</h4>

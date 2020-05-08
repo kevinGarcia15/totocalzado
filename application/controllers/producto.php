@@ -15,12 +15,11 @@ class Producto extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 	}
 
+	//Datos de registro del producto------------------------------------------------
 	public function nuevo()
 	{
 		$data['base_url'] = $this->config->item('base_url');
-//Datos de registro del producto
-		if ($this->input->post('continuar') == 'continuar') {
-
+	if ($this->input->post('continuar') == 'continuar') {
 				$producto = array(
 												'codigo'  => $_POST['codigo'],
 												'marca'  => $_POST['marca'],
@@ -29,9 +28,11 @@ class Producto extends CI_Controller {
 												'color' => $_POST['color'],
 												'precio_compra' => $_POST['precio_compra'],
 												'Precio_mayoreo' => $_POST['Precio_mayoreo'],
-												'foto' => $_POST['foto'],
-												'proveedor' => $_POST['proveedor'],
-												'observaciones' => $_POST['observaciones']
+												'observaciones' => $_POST['observaciones'],
+												'genero' => $_POST['genero'],
+												'url_1' => $_POST['url_1'],
+												'url_2' => $_POST['url_2'],
+												'url_3' => $_POST['url_3'],
 											 );
 				$this->session->set_userdata($producto);
 			 	redirect("/producto/ingresarStock");
@@ -46,23 +47,30 @@ class Producto extends CI_Controller {
 		$data['numeracion'] = $this->producto_model->seleccionarNumeracionId($this->session->userdata('numeracion'));
 		$data['color'] = $this->producto_model->seleccionarColorId($this->session->userdata('color'));
 		$data['numeros'] = $this->producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
-		$data['proveedor'] = $this->producto_model->seleccionarProveedorId($this->session->userdata('proveedor'));
+
 
 			if (isset($_POST['Guardar'])) {
 				$data['numeros'] = $this->producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
-				$numeros = $_POST['numeros'];
+				$numeros = $_POST['numeros'];//cantidad que hay que ingresasr al stock
 				$this->producto_model->crearProducto(
 				$this->session->userdata('codigo'),
 				$this->session->userdata('precio_compra'),
 				$this->session->userdata('Precio_mayoreo'),
+				$this->session->userdata('url_1'),
 				$this->session->userdata('numeracion'),
-				$this->session->userdata('proveedor'),
+				$this->session->userdata('genero'),
 				$this->session->userdata('marca'),
 				$this->session->userdata('color'),
 				$this->session->userdata('estilo'),
 				$this->session->userdata('observaciones')
 			);
-			$id_producto = $this->producto_model->seleccionarIdProducto();
+		$id_producto = $this->producto_model->seleccionarIdProducto();
+//ingresar url de las imagenes a la BD
+			for ($i=1; $i < 4; $i++) {
+				$this->producto_model->ingresarUrlImagenes(
+					$this->session->userdata('url_'.$i.''),$id_producto);
+			}
+//ingresa los numeros del stok
 			$bandera = 0;
 				foreach ($data['numeros'] as $a ) {
 						$this->producto_model->ingresarStock($numeros[$bandera], $id_producto, $a['id_numero_categoria']);
@@ -113,6 +121,15 @@ class Producto extends CI_Controller {
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['color'] as $key) {
 			echo '<option value="'.$key['id_color'].'">'.$key['nombre'].'</option>'."\n";
+		}
+	}
+	public function genero(){
+		$data['base_url'] = $this->config->item('base_url');
+
+		$data['genero'] = $this->producto_model->seleccionargenero();
+		echo '<option value="">Seleccionar</option>';
+		foreach ($data['genero'] as $key) {
+			echo '<option value="'.$key['id_genero'].'">'.$key['nombre'].'</option>'."\n";
 		}
 	}
 

@@ -9,7 +9,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<title>nuevo producto</title>
 	</head>
 	<body>
-		<?php $this->load->view('menu'); ?>
 		<!-- Page content holder -->
 	<div class="page-content p-5" id="content">
 		<br>
@@ -63,30 +62,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</select>
 				</div>
 				<div class="col-2">
-					<button type="button" data-toggle="modal" data-target="#IngresoColor" data-whatever="@mdo" class="btn btn-primary"><i class='fas fa-plus'></i></button>
+					<button
+						type="button"
+						data-toggle="modal"
+						data-target="#IngresoColor"
+						data-whatever="@mdo"
+						class="btn btn-primary">
+						<i class='fas fa-plus'></i>
+					</button>
 				</div>
 			</div>
-			<label class="form-control-label" for="inputDanger1">Seleccione el proveedor</label>
+			<label class="form-control-label" for="inputDanger1">Seleccione el departameto</label>
 			<div class="row">
 				<div class="col-10">
-					<select class="custom-select" name="proveedor" required id="proveedor">
-							<option value="0">Seleccionar</option>
+					<select class="custom-select" required name="genero" id="genero">
+							<option value="">Seleccionar</option>
 					</select>
 				</div>
-				<div class="col-2">
-					<button type="button" data-toggle="modal" data-target="#IngresoProveedor" data-whatever="@mdo" class="btn btn-primary"><i class='fas fa-plus'></i></button>
+			</div>
+			<label class="form-control-label" for="inputDanger1">Ingrese el precio al público</label>
+			<div class="row">
+				<div class="col-10">
+					<input type="number"  step="any" min="0"class="form-control" placeholder="Precio" required name="precio_compra"  value="">
 				</div>
-				<div id="mensaje" onclick="$(this).hide(1000)"></div>
+			</div><br><hr>
+
+<!--input url imagenes-->
+			<h4>Ingrese las url para cargar las imagenes</h4>
+			<label class="form-control-label" for="inputDanger1"></label>
+			<div class="row">
+				<div class="col-10">
+					<input type="text" class="form-control" placeholder="URL 1" required name="url_1"  value="">
+				</div>
+			</div>
+			<label class="form-control-label" for="inputDanger1"></label>
+			<div class="row">
+				<div class="col-10">
+					<input type="text" class="form-control" placeholder="URL 2" required name="url_2"  value="">
+				</div>
+			</div>
+			<label class="form-control-label" for="inputDanger1"></label>
+			<div class="row">
+				<div class="col-10">
+					<input type="text" class="form-control" placeholder="URL 3" required name="url_3"  value="">
+				</div>
 			</div>
 			<hr>
 
 			<h4>Datos opcionales</h4>
-			<label class="form-control-label" for="inputDanger1">Ingrese el precio de compra</label>
-			<div class="row">
-				<div class="col-10">
-					<input type="number"  step="any" min="0"class="form-control" placeholder="Precio compra (Opcional)"  name="precio_compra"  value="">
-				</div>
-			</div>
 			<label class="form-control-label" for="inputDanger1">Ingrese el precio por mayor</label>
 			<div class="row">
 				<div class="col-10">
@@ -163,38 +186,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 <!-- Fin ventana emergente-->
-<!-- inicio del formulario emergente para ingresar proveedor nuevo-->
-<div class="modal fade" id="IngresoProveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Nuevo proveedor</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Ingrese el nombre del proveedor</label>
-						<input type="text" required class="form-control" id="nombre_proveedor" name="nombre_proveedor" value="">
-					</div>
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Ingrese numero de teléfono</label>
-						<input type="number" min="10000000" max="99999999" class="form-control" id="telefono_proveedor" name="telefono_proveedor" value="">
-					</div>
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Ingrese la dirección del proveedor</label>
-						<input type="text" class="form-control" id="direccion_proveedor" name="direccion_proveedor" value="">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Cerrar</button>
-						<button  onclick="nuevoProveedor()" data-dismiss="modal" class="btn btn-primary" name="guardar" value="Guardar" style="color:white;">Guardar</button>
-					</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Fin ventana emergente-->
 </body>
 
 <script type="text/javascript">
@@ -230,6 +221,12 @@ $(function(){
 		$(function(){
 			$.post('<?=$base_url?>/producto/proveedor').done(function(respuesta){
 				$('#proveedor').html(respuesta);
+			});
+		})
+	//funcion Ajax para buscar en base de datos los generos
+		$(function(){
+			$.post('<?=$base_url?>/producto/genero').done(function(respuesta){
+				$('#genero').html(respuesta);
 			});
 		})
 

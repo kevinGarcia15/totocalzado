@@ -11,7 +11,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <div id="container">
 	<header>
-		<?php $this->load->view('menu'); ?>
 	</header>
 	<div class="page-content p-5" id="content">
 		<div>

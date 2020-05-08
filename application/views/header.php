@@ -16,27 +16,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?=$base_url?>/recursos/js/sweetalert.min.js"></script>
 
 <style media="screen">
-.vertical-nav {
-min-width: 17rem;
-width: 17rem;
-height: 100vh;
-position: fixed;
-top: 58px;
-left: 0;
-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-transition: all 0.4s;
-}
-.horizontal-nav{
-	position: fixed;
-	right: 0px;
-	left: 0px;
-}
-.page-content {
-width: calc(100% - 17rem);
-margin-left: 17rem;
-transition: all 0.4s;
-}
-
 /* for toggle behavior */
 
 #sidebar.active {
@@ -113,4 +92,18 @@ color: #aaa;
 		position: inherit;
 	}
 }
+.table-color{
+	color: #000;
+}
+
+.padding-card-inicio{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.padding-content-inicio{
+	padding-top: 0px;
+	padding-bottom: 100px;
+	padding-left: 0px;
+}
+
 </style>
