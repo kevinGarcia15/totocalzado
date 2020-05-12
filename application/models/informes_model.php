@@ -9,7 +9,9 @@ class Informes_model extends CI_Model{
 	}
 
 		function mostrar($id) {
-		$sql = "SELECT p.id_producto id_producto, p.codigo codigo, p.codigo_proveedor codigo_proveedor,cat.nombre categoria, e.nombre nombre_prod, m.nombre marca, c.nombre color
+		$sql = "SELECT p.id_producto id_producto, p.codigo codigo,
+							p.codigo_proveedor codigo_proveedor,cat.nombre categoria,
+							e.nombre nombre_prod, m.nombre marca, c.nombre color
 				FROM 	producto p
 				join marca m on p.marca_id_marca = m.id_marca
 				join estilo e on p.estilo_id_estilo = e.id_estilo
@@ -67,14 +69,19 @@ class Informes_model extends CI_Model{
 	}
 
 	function 	mostrarProducto($id) {
-		$sql = "SELECT prod.codigo codigo, prod.codigo_proveedor cod_prov, prod.precio_compra compra, prod.precio_mayoreo precio_mayoreo,
-									 cat.nombre categoria, p.nombre_proveedor proveedor, m.nombre marca, col.nombre color, es.nombre estilo, prod.observacion observacion
+		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
+						prod.codigo_proveedor cod_prov, prod.precio_compra compra,
+						prod.precio_mayoreo precio_mayoreo, cat.nombre categoria,
+						m.nombre marca, col.nombre color, es.nombre estilo,
+						prod.observacion descripcion, prod.img_carrusel img_principal,
+						gen.nombre genero
+
 						FROM producto prod
 						join categoria cat on prod.categoria_id_categoria = cat.id_categoria
-						join proveedor p on prod.proveedor_id_proveedor = p.id_proveedor
 						join marca m on prod.marca_id_marca = m.id_marca
 						join color col on prod.color_id_color = col.id_color
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
+						join genero gen on prod.genero_id_genero = gen.id_genero
 						where prod.id_producto = ?
 						limit 1";
 
@@ -85,8 +92,35 @@ class Informes_model extends CI_Model{
 		return $rows;
 	}
 
+	function 	mostrarProductoCaballeros() {
+		$sql = "SELECT prod.id_producto id_producto, prod.precio_compra compra,
+									cat.nombre categoria,m.nombre marca, es.nombre estilo,
+									prod.img_carrusel img_carrusel
+
+						FROM producto prod
+						join categoria cat on prod.categoria_id_categoria = cat.id_categoria
+						join marca m on prod.marca_id_marca = m.id_marca
+						join estilo es on prod.estilo_id_estilo = es.id_estilo";
+
+		$dbres = $this->db->query($sql);
+
+		$rows = $dbres->result_array();
+
+		return $rows;
+	}
+	function 	mostrarImg($id) {
+		$sql = "SELECT id_img, URL
+						FROM img
+						where producto_id_producto = ?";
+
+		$dbres = $this->db->query($sql,$id);
+
+		$rows = $dbres->result_array();
+
+		return $rows;
+	}
 	function 	mostrarStock($id) {
-		$sql = "SELECT s.cantidad cantidad, num.numero numero
+		$sql = "SELECT s.id_stock id_stock, s.cantidad cantidad, num.numero numero
 						FROM stock s
 						join numero_categoria ncat on s.numero_categoria_id = ncat.id
 						join numero_calzado num on ncat.id_numero = num.id_numero
@@ -97,5 +131,15 @@ class Informes_model extends CI_Model{
 		$rows = $dbres->result_array();
 
 		return $rows;
+	}
+
+	function actualizarStock($id_stock,$cantidad) {
+		$sql = "UPDATE stock
+					SET cantidad = ?
+					WHERE id_stock = ?
+					";
+		$valores = array($cantidad,$id_stock);
+		$dbres = $this->db->query($sql,$valores);
+		return $dbres;
 	}
 }

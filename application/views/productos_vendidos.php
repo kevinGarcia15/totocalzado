@@ -11,7 +11,6 @@ $totalDia = 0;
 </head>
 <body>
 	<header>
-		<?php $this->load->view('menu'); ?>
 	</header>
 	<div class="page-content p-5" id="content">
 		<br>
@@ -24,7 +23,7 @@ $totalDia = 0;
 		</div>
 		<br>
 			<div class="table-responsive-xl">
-				<table class="table table-bordered" style="color: #000;">
+				<table class="table table-bordered table-color">
 				<thead>
 					<tr>
 						<th><div class="sizeTable">Fecha</div></th>
@@ -40,7 +39,7 @@ $totalDia = 0;
 								<div id="fechaNombre"></div>
 						</td>
 						<td>
-							<table class="table table-bordered" style="color: #000;">
+							<table class="table table-bordered table-color">
 								<thead>
 									<tr>
 										<th><div class="sizeTable">Código</div></th>

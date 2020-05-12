@@ -28,7 +28,6 @@ foreach ($arr as $a) {
 </head>
 <body>
 <div id="container">
-	<?php $this->load->view('menu'); ?>
 	<header>
 	</header>
 	<div id="body">

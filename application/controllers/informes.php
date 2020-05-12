@@ -62,4 +62,15 @@ class Informes extends CI_Controller {
 		$this->load->view('mostrar_producto', $data);
 	}
 
+	public function actualizar($id=0)
+	{
+		$data['base_url'] = $this->config->item('base_url');
+		$id_stock = $_POST['id_stock'];
+		$cantidad_actualizar = $_POST['cantidad_actualizar'];
+
+		for ($i=0; $i < count($id_stock); $i++) {
+			$this->informes_model->actualizarStock($id_stock[$i],$cantidad_actualizar[$i]);
+		}
+		redirect("/informes/mostrarProducto/${id}");
+	}
 }

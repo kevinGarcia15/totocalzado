@@ -39,14 +39,12 @@
   </ul>
 </div>
 <!-- End vertical navbar -->
-<button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
-
 <script>
 $(function() {
 // Sidebar toggle behavior
-$('#sidebarCollapse').on('click', function() {
-	$('#sidebar, #content').toggleClass('active');
-});
+  $('#sidebarCollapse').on('click', function() {
+  	$('#sidebar, #content').toggleClass('active');
+  });
 });
 </script>
 <!-- End demo content -->
