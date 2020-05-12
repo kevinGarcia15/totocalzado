@@ -43,7 +43,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</select>
 				</div>
 				<div class="col-2">
-					<button type="button" data-toggle="modal" data-target="#IngresoEstilo" data-whatever="@mdo" class="btn btn-primary"><i class='fas fa-plus'></i></button>
+					<button
+						type="button"
+						data-toggle="modal"
+						data-target="#IngresoEstilo"
+						data-whatever="@mdo" 
+						class="btn btn-primary">
+						<i class='fas fa-plus'></i>
+					</button>
 				</div>
 			</div>
 			<label class="form-control-label" for="inputDanger1">Seleccione la numeración</label>

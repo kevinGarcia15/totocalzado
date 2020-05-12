@@ -43,21 +43,27 @@ body {
 }
 .detalle-img{
   border-radius: 20px;
+  border: 2px solid white;
   overflow: hidden;
   position: relative;
   display: inline-block;
-  width: 400px;
-  height: 450px;
+  width: 630px;
+  height: 410px;
   margin-right: 100px;
   font-size: 20px;
 }
 .detalle__img{
-  width: 500px;
-  height: 550px;
+  width: 100%;
+  height: 410;
   -o-object-fit: cover;
      object-fit: cover;
 }
 .detalle-description{
+  background-color: rgba(255,255,255,0.1);
+  border: 2px solid white;
+  border-radius: 40px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,21 +71,22 @@ body {
   position: relative;
   width: 338px;
   height: 400px;
-  background-color: white;
 }
-.detalle-description h4{
-  color: #212121;
+.detalle-description p{
   font-size: 25px;
+  margin-top: 33px;
 }
 .detalle__item-text{
   align-items: flex-start;
-  color:#757575;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   width: 80%;
   height: 250px;
   margin-bottom: 50px;
+}
+.item_name{
+  display: none;
 }
 /*estilo para el select*/
 .detalle__text-content-select select{
@@ -97,7 +104,7 @@ body {
   width: 80%;
   margin-bottom: 35px;
 }
-.detalle__text-content-select h3{
+.title-select{
   margin-bottom: 0px;
   margin-top: 9px;
 }
@@ -111,9 +118,7 @@ body {
   	border: 0;
 	border-radius: 0;
 	background: #f0f0f0;
-	color: #7b7b7b;
 	font-size: 1em;
-	color: #999;
 	font-family:
 	'Quicksand', sans-serif;
 	border:2px solid rgba(0,0,0,0.2);
@@ -123,7 +128,7 @@ body {
 }
 
 .detalle__text-content-select select:hover{
-	background: #B1E8CD;
+	background: white;
 }
 .detalle__text-content-select i{
 	position: absolute;

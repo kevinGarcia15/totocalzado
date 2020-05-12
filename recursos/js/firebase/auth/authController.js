@@ -29,8 +29,9 @@ $(() => {
         $('#modalRegistro').modal('open');
     });
 
-    $('#btnIniciarSesion').click(() => {
-      window.location.href='/totocalzado/loggin'
+    $('#btnInicioSesion').click(() => {
+      console.log('loggin')
+      window.location.href='http://localhost/totocalzado/loggin'
     });
 
 });

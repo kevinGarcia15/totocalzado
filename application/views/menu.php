@@ -24,7 +24,11 @@ for ($i=1; $i < $cont ; $i++) {
       <ul>
         <li><?php echo $this->session->USUARIO; ?></li>
         <li>
-          <a id="btnInicioSesion" href="<?=$base_url?>/loggin">Iniciar sesión</a>
+          <?php if ($this->session->USUARIO){?>
+            <a id="salir" href="#">Salir</a>
+          <?php }else {?>
+            <a id="btnInicioSesion" href="<?=$base_url?>/loggin">Iniciar sesión</a>
+            <?php } ?>
         </li>
         <li>
           <a href="<?=$base_url?>/producto/nuevo">Producto</a>
@@ -40,11 +44,20 @@ for ($i=1; $i < $cont ; $i++) {
         </li>
       </ul>
     </div>
-    <?php if ($this->session->userdata('item1')): ?>
+<!--carrito de detalles-------------------------------------------------------->
+    <div class="carrito">
       <div class="carrito-total">
         <img src="<?=$base_url?>/recursos/img/carrito-compras.png" alt="">
-        <a href="">2 (Q. <?php echo $Total; ?>)</a>
+        <span class="simpleCart_quantity">0</span>Producto(s)
+        <span class="simpleCart_total">Q. 0.00</span>
       </div>
-    <?php endif; ?>
+      <div class="bolsa">
+        <div class="simpleCart_items"></div>
+        <div class="opciones">
+          <a class="boton simpleCart_empty btn btn-danger" href="javascript:void(0)">Vaciar carrito</a>
+          <a class="boton simpleCart_checkout btn btn-success" href="#">Pagar</a>
+        </div>
+      </div>
+    </div>
   </div>
 </header>

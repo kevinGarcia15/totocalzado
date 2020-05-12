@@ -3,12 +3,12 @@ class Autenticacion {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result =>{
         if (result.user.emailVerified) {
-            $('#avatar').attr('src', './recursos/img/usuario_auth.png')
+            $('#avatar').attr('src', 'http://localhost/totocalzado/recursos/img/usuario_auth.png')
             Materialize.toast(`Bienvenido ${result.user.displayName}, te estamos redirigiendo`, 5000)
             //variables de sesion en php
             let nombre = result.user.displayName
             let rol = 'usuario'
-            let user_photo = './recursos/img/usuario_auth.png'
+            let user_photo = 'http://localhost/totocalzado/recursos/img/usuario_auth.png'
             let uid = result.user.uid
             this.getPhpSession(nombre, rol, user_photo)
         }else {

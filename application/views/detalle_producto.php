@@ -5,13 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Font -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="<?=$base_url?>/recursos/js/jquery.mlens-1.7.min.js"></script>
   <script src="<?=$base_url?>/recursos/js/sweetalert.min.js"></script>
 
-
-
+<!-- Agregamos la librería Simple Cart -->
+<script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
+<script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
+<!--Firebase -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/config/ConfigFirebase.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/general.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/autenticacion.js"></script>
+<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/authController.js"></script>
   <!-- Styles -->
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/header.css" media="screen">
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/footer.css" media="screen">
@@ -26,7 +37,7 @@
   </header>
 <!--Informacion del producto--------------------------------------------------->
   <?php foreach ($detalle as $key): ?>
-  <section class="detalle">
+  <section class="detalle simpleCart_shelfItem">
     <div class="detalle-miniaturas">
       <?php $contImg = 0; foreach ($img as $img_min): ?>
         <img
@@ -39,33 +50,37 @@
     <div class="detalle-img">
       <img
         id="imagenPrincipal"
-        class="detalle__img"
+        class="detalle__img item_image"
         src="<?php echo $key['img_principal']?>"
         alt=""/>
     </div>
 
     <div class="detalle-description">
-      <h4><?php echo $key['estilo']; ?></h4>
+      <p> <?php echo $key['estilo']; ?></p>
       <div class="detalle__item-text">
         <ul>
           <li>
             <?php echo $key['descripcion'] ?>
           </li><br>
-          <li>Código: <b><?php echo $key['codigo']; ?></b></li>
+          <li>Código: <b class="item_codigo"><?php echo $key['codigo']; ?></b></li>
+          <div class="item-pageLink"><a href="https//proventa"></a></div>
           <li>Departamento: <b><?php echo $key['genero']; ?></b></li>
-          <li>Precio: <b>GTQ.<?php echo $key['compra']; ?></b></li>
+          <li class="item_price">Precio: <b>Q<?php echo $key['compra']; ?></b></li>
           <input type="hidden" id="precio" name="precio" value="<?php echo $key['compra']; ?>">
           <input type="hidden" id="id_producto" name="id_producto" value="<?php echo $key['id_producto']; ?>">
         </ul><br>
         <div class="detalle__text-content-select">
-          <h3>Elija la talla</h3>
-          <select class="" name="">
+          <div class="title-select">Elija la talla</div>
+          <select class="item_size" name="" required>
+            <option value="0">seleccionar</option>
             <?php foreach ($tallas as $a): ?>
               <option value="<?php echo $a['id_stock']; ?>"><?php echo $a['numero']; ?></option><i></i>
             <?php endforeach; ?>
           </select>
         </div>
-        <button onclick="addCarrito()" type="button" name="button">Lo Quiero</button>
+        <div id="numero" class="item_name">
+        </div>
+        <button id="add" type="button" name="button">LO QUIERO</button>
       </div>
     </div>
   </section>
@@ -197,19 +212,13 @@
     </div>
   </section>
   <?php var_dump($this->session->userdata()); ?>
-
+<?php echo $this->session->USUARIO; ?>
   <footer class="footer">
     <a href="/">Terminos de uso</a>
     <a href="/">Declaración de privacidad</a>
     <a href="/">Centro de ayuda</a>
   </footer>
 </body>
-<!-- Agregamos la librería jQuery (Importante)-->
-<script src="<?=$base_url?>/recursos/js/carrito/jquery.min.js"></script>
-<!-- Agregamos la librería Simple Cart -->
-<script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
-<!-- Código JS de inicialización  -->
-<script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
 <script type="text/javascript">
   function cambiarImagen(i){
     var img_min = $(".detalle-miniaturas").children().eq(i).attr("src")
@@ -252,5 +261,26 @@ function addCarrito(){
 //    location.reload();
   });
 }
+//validado el select para los numeros
+$('#add').on('click', function(){
+  var numero = $('.item_size option:selected').text()
+  if (numero == 'seleccionar') {
+    swal("Debe seleccionar un número", "error");
+  }else {
+    swal("Producto agregado al carrito de compras", "success");
+  }
+})
+
+$('.item_size').on('change', function(){
+  var numero = $('.item_size option:selected').text()
+  if (numero == 'seleccionar') {
+    $('#add').removeClass('item_add')
+  }else {
+    $('#add').addClass('item_add')
+    $('#numero').text(numero)
+    console.log(numero)
+    console.log('clase agregada')
+  }
+})
 </script>
 </html>
