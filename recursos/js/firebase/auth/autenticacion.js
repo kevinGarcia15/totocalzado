@@ -10,7 +10,7 @@ class Autenticacion {
             let rol = 'usuario'
             let user_photo = 'http://localhost/totocalzado/recursos/img/usuario_auth.png'
             let uid = result.user.uid
-            this.getPhpSession(nombre, rol, user_photo)
+            this.getPhpSession(nombre, rol, user_photo,uid)
         }else {
           firebase.auth().signOut()
           Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico`, 5000)
@@ -72,7 +72,7 @@ class Autenticacion {
       let rol = 'usuario'
       let user_photo = result.user.photoURL
       let uid = result.user.uid
-      this.getPhpSession(nombre, rol, user_photo)
+      this.getPhpSession(nombre, rol, user_photo,uid)
       console.log(uid)
     })
     .catch(error =>{
@@ -95,8 +95,9 @@ class Autenticacion {
       let nombre = result.user.displayName
       let rol = 'usuario'
       let user_photo = result.user.photoURL
-
-      this.getPhpSession(nombre, rol, user_photo)
+      let uid = result.user.uid
+      console.log(uid)
+      this.getPhpSession(nombre, rol, user_photo,uid)
     })
     .catch(error =>{
       console.error(error);
@@ -106,14 +107,15 @@ class Autenticacion {
   }
 
   //funcion para establecer variable de sesion en php
-  getPhpSession(nombre,rol,user_photo){
+  getPhpSession(nombre,rol,user_photo,uid){
     var request = $.ajax({
       method: "POST",
       url: "http://localhost/totocalzado/loggin/loggin",
       data: {
             usuario: nombre,
             rol: rol,
-            user_photo: user_photo
+            user_photo: user_photo,
+            uid: uid,
           }
     });
     request.done(function(){

@@ -53,6 +53,16 @@ class Informes_model extends CI_Model{
 
 		return $rows;
 	}
+	function 	seleccionarAldea() {
+		$sql = "SELECT id_aldea, nombre
+				FROM 	aldea
+				order by nombre ASC
+				LIMIT 	100";
+
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
 
 	function 	listarCategoria($id) {
 		$sql = "SELECT c.nombre nombre, col.nombre color, p.id_producto id_producto
@@ -141,5 +151,39 @@ class Informes_model extends CI_Model{
 		$valores = array($cantidad,$id_stock);
 		$dbres = $this->db->query($sql,$valores);
 		return $dbres;
+	}
+
+	function crearPedido($id_persona,$id_aldea,$direccionEnvio,$telefono){
+		$sql = "INSERT INTO pedidos(persona_id_persona, aldea_id_aldea, direccionEnvio,
+							telefono)
+						VALUES (?, ?, ?, ?)";
+
+	$valores = array($id_persona,$id_aldea,$direccionEnvio,$telefono);
+	$dbres = $this->db->query($sql, $valores);
+
+	$sql = "SELECT MAX(id_pedidos) as id_pedido FROM pedidos
+		LIMIT 	1";
+
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows[0]['id_pedido'];
+	}
+
+	function ingresarProductos($id_pedido,$codigo,$cantidad,$talla){
+		$sql = "SELECT id_producto FROM producto
+						where codigo = ?
+						LIMIT 	1";
+
+			$dbres = $this->db->query($sql,$codigo);
+			$rows = $dbres->result_array();
+
+		$sql = "INSERT INTO lineapedido(pedido_id_pedido, producto_id_producto,
+			 				unidades,stock_id_stock)
+						VALUES (?, ?, ?, ?)";
+
+	$valores = array($id_pedido,$rows[0]['id_producto'],$cantidad,$talla);
+	$dbres = $this->db->query($sql, $valores);
+
+	return $rows;
 	}
 }

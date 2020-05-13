@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="<?=$base_url?>/recursos/js/jquery.mlens-1.7.min.js"></script>
-  <script src="<?=$base_url?>/recursos/js/sweetalert.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
 <!-- Agregamos la librería Simple Cart -->
 <script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
 <script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
@@ -256,7 +256,7 @@ function addCarrito(){
         }
   });
   request.done(function(respuesta){
-    swal('Agregado al carrito exitosamente')
+    swal.fire('Agregado al carrito exitosamente')
     console.log(respuesta)
 //    location.reload();
   });
@@ -265,9 +265,18 @@ function addCarrito(){
 $('#add').on('click', function(){
   var numero = $('.item_size option:selected').text()
   if (numero == 'seleccionar') {
-    swal("Debe seleccionar un número", "error");
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Debe seleccionar un número!',
+      footer: '<a href></a>'
+    })
   }else {
-    swal("Producto agregado al carrito de compras", "success");
+    Swal.fire(
+      'Excelente!',
+      'Producto agregado al carrito de compras',
+      'success'
+    )
   }
 })
 

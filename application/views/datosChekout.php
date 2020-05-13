@@ -21,13 +21,9 @@
 					</div>
 					<div class="form-group">
 						<label for="recipient-name" class="col-form-label">Ingrese su aldea/zona</label>
-						<input
-							type="text"
-							required
-							class="form-control"
-							id="direccion"
-							name="nombre_estilo"
-							value="">
+							<select class="form-control" id="aldea" name="">
+								<option value="">Seleccionar</option>
+							</select>
 					</div>
 					<div class="form-group">
 						<label
@@ -50,7 +46,7 @@
 						</button>
 						<button
 							data-dismiss="modal"
-							class="btn btn-primary"
+							class="btn btn-primary simpleCart_empty"
 							name="Enviar"
 							id="finalizar"
 							value="Enviar"

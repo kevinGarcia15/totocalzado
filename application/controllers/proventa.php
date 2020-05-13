@@ -30,47 +30,50 @@ class Proventa extends CI_Controller {
 		$this->load->view('detalle_producto', $data);
 	}
 
-	public function add(){
-		$data['base_url'] = $this->config->item('base_url');
-			if (!isset($cont) && $this->session->userdata('cont') == NULL) {
-					$cont = 1;
-				}else {
-					$cont = $this->session->userdata('cont'); //contador para saber cuantos items hay en el carrito
-				}
-		$carrito = array(
-								'cont'=>$cont + 1,
-								'item'.$cont =>array('id'=>$_POST['id_producto'],
-																'precio'=>$_POST['precio_producto'],
-																'cantidad'=>$_POST['cantidad'])
-							 );
-				$Total = 0;
-				$this->session->set_userdata($carrito);
-				for ($i=1; $i <= $cont ; $i++) {
-					echo $this->session->userdata('item'.$i)['id'].'<br>';
-					$Total = $Total + $this->session->userdata('item'.$i)['precio'];
-				}
-				echo $this->session->userdata('cont').'<br>';
-				echo $Total;
-	}
-
 	public function pagar(){
 		$data['base_url'] = $this->config->item('base_url');
-//  	$this->restringirAcceso();
+  	//$this->restringirAcceso();
 
 			$cont = $_POST['itemCount'];
 			$data['contItems'] = $cont;
-			$productos = array();
-		for ($i=1; $i <= $cont; $i++) {
-			for ($j=1; $j <= 1 ; $j++) {
-				$data['producto'.$i][$j-1] = $_POST['item_name_'.$i];
-				$data['producto'.$i][$j] = $_POST['item_quantity_'.$i];
-				$data['producto'.$i][$j+1] = $_POST['item_price_'.$i];
-				$data['producto'.$i][$j+2] = $_POST['item_options_'.$i];
-				$data['producto'.$i][$j+3] = $_POST['item_codigo_'.$i];
-				$data['producto'.$i][$j+4] = $_POST['item_size_'.$i];
-				$data['producto'.$i][$j+5] = $_POST['item_options_'.$i];
-			}
-		}
 		$this->load->view('pagar_carrito', $data);
+	}
+
+	public function aldea(){
+		$data['base_url'] = $this->config->item('base_url');
+
+		$data['aldea'] = $this->Informes_model->seleccionarAldea();
+		echo '<option value="">Seleccionar</option>';
+		foreach ($data['aldea'] as $key) {
+			echo '<option value="'.$key['id_aldea'].'">'.$key['nombre'].'</option>'."\n";
+		}
+	}
+	public function datosPedido(){
+		$data['base_url'] = $this->config->item('base_url');
+	//	$this->restringirAcceso();
+
+		$id_persona = $_POST['id_persona'];
+		$id_aldea = $_POST['id_aldea'];
+		$direccionEnvio = $_POST['direccionEnvio'];
+		$telefono = $_POST['telefono'];
+
+		$id_pedido = $this->Informes_model->crearPedido(
+			$id_persona,$id_aldea,$direccionEnvio,$telefono);
+
+		echo $id_pedido;
+	}
+	public function ingresoProductos(){
+		$data['base_url'] = $this->config->item('base_url');
+//		$this->restringirAcceso();
+
+		$id_pedido = $_POST['id_pedido'];
+		$codigo = $_POST['codigo'];
+		$cantidad = $_POST['cantidad'];
+		$talla = $_POST['talla'];
+
+		$this->Informes_model->ingresarProductos(
+			$id_pedido,$codigo,$cantidad,$talla);
+
+		echo 'pedido ingresado exitosamente';
 	}
 }
