@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: 'Muli', sans-serif;
+  background: #1976D2;
+}
+
+* {
+  box-sizing: border-box;
+}
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.envio{
+    color: white;
+    background-color: rgba(255,255,255,0.1);
+    border: 2px solid white;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    position: relative;
+    width: 400px;
+    height: 200px;
+}
+.envio p{
+  font-size: 25px;
+}
+.envio-datos{
+
+}
+.productos{
+  color: white;
+  margin-left: 35px;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+.fas{
+  margin-left: 20px;
+}
+.productos img{
+    border-radius: 5px;
+    width: 100px;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+}
+.accion{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.accion button{
+  width: 40%;
+  height: 60px;
+  font-size: 30px;
+}
+.despachadoBtn{
+  color: white;
+  background: #28a745;
+  width: 40%;
+  height: 60px;
+  font-size: 30px;
+  display:flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 1080px) {
+  .main{
+    flex-direction: column;
+  }
+  .productos{
+    width: 400px;
+    margin-top: 35px;
+    margin-left: 0px;
+  }
+  .despachadoBtn{
+    font-size: 20px;
+  }
+}

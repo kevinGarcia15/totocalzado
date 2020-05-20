@@ -15,6 +15,8 @@ class inicio extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 		$data['caballeros'] = $this->Informes_model->mostrarProductoCaballeros();
+		$data['Damas'] = $this->Informes_model->mostrarProductoDamas();
+		$data['Ofertas'] = $this->Informes_model->mostrarProductoOfertas();
 		$this->load->view('inicio', $data);
 	}
 }

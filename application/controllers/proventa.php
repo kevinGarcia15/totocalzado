@@ -23,18 +23,23 @@ class Proventa extends CI_Controller {
 	public function detalle(){
 		$data['base_url'] = $this->config->item('base_url');
 		$id = $_GET['id'];
+		$dep = $_GET['dep'];
 
-		$data['tallas'] = $this->Informes_model->mostrarStock($id);
+		$data['tallas'] = $this->Informes_model->mostrarStockDetalle($id);
 		$data['img'] = $this->Informes_model->mostrarImg($id);
 		$data['detalle'] = $this->Informes_model->mostrarProducto($id);
+		$data['recomendacion'] = $this->Informes_model->mostrarRecomendacion($dep);
+
 		$this->load->view('detalle_producto', $data);
 	}
 
 	public function pagar(){
 		$data['base_url'] = $this->config->item('base_url');
   	//$this->restringirAcceso();
-
 			$cont = $_POST['itemCount'];
+			if ($cont < 1) {
+				redirect("/inicio");
+			}
 			$data['contItems'] = $cont;
 		$this->load->view('pagar_carrito', $data);
 	}
@@ -51,29 +56,25 @@ class Proventa extends CI_Controller {
 	public function datosPedido(){
 		$data['base_url'] = $this->config->item('base_url');
 	//	$this->restringirAcceso();
+			$contador = $_POST['contador'];//numero de productos
+			$codigo= $_POST['codigo'];//ARRAY
+			$numero= $_POST['talla'];//ARRAY
+			$cantidad= $_POST['cantidad'];//ARRAY
+			$id_persona = $_POST['id_persona'];
+			$id_aldea = $_POST['id_aldea'];
+			$direccionEnvio = $_POST['direccionEnvio'];
+			$telefono = $_POST['telefono'];
+			if ($id_aldea == '' || $direccionEnvio ==  '' || $telefono =='') {
+				echo "0";
+			}else {
+				$id_pedido = $this->Informes_model->crearPedido(
+					$id_persona,$id_aldea,$direccionEnvio,$telefono);
 
-		$id_persona = $_POST['id_persona'];
-		$id_aldea = $_POST['id_aldea'];
-		$direccionEnvio = $_POST['direccionEnvio'];
-		$telefono = $_POST['telefono'];
-
-		$id_pedido = $this->Informes_model->crearPedido(
-			$id_persona,$id_aldea,$direccionEnvio,$telefono);
-
-		echo $id_pedido;
-	}
-	public function ingresoProductos(){
-		$data['base_url'] = $this->config->item('base_url');
-//		$this->restringirAcceso();
-
-		$id_pedido = $_POST['id_pedido'];
-		$codigo = $_POST['codigo'];
-		$cantidad = $_POST['cantidad'];
-		$talla = $_POST['talla'];
-
-		$this->Informes_model->ingresarProductos(
-			$id_pedido,$codigo,$cantidad,$talla);
-
-		echo 'pedido ingresado exitosamente';
-	}
+					for ($i=0; $i <$contador ; $i++) {
+						$this->Informes_model->ingresarProductos(
+							$id_pedido,$codigo[$i],$cantidad[$i],$numero[$i]);
+						}
+						echo "1";
+					}
+			}
 }

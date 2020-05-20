@@ -9,11 +9,7 @@ body {
 }
 
 .main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 300px;
+  height: 400px;
   border-radius: 0px 0px 40px 40px;
 }
 
@@ -33,7 +29,7 @@ body {
 }
 
 .carousel {
-  overflow: scroll;
+  overflow: auto;
   padding-left: 30px;
   width: 100%;
   position: relative;
@@ -64,8 +60,8 @@ body {
   overflow: hidden;
   position: relative;
   display: inline-block;
-  width: 200px;
-  height: 250px;
+  width: 300px;
+  height: 200px;
   margin-right: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -80,8 +76,8 @@ body {
 }
 
 .carousel-item__img {
-  width: 200px;
-  height: 250px;
+  width: 300px;
+  height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }

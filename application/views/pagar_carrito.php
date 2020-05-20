@@ -83,43 +83,61 @@ $(function (){
     var telefono = $('#num_telefono').val()
     var aldea = $('#aldea').val()
     var direccionExacta = $('#dirEspecifico').val()
-    var id_persona = '<?=$this->session->ID?>';
-
+//    var id_persona = '<?=$this->session->ID?>';
+    var id_persona = '1'
+    var codigo = [];
+    var numero = [];
+    var cantidad= [];
+    for (var i = 0; i < contador ; i++) {
+      codigo[i] = $('.row-'+i+' td').eq(2).html();
+      numero[i] = $('.row-'+i+' td').eq(3).html();
+      cantidad[i] = $('.row-'+i+' td').eq(6).html();
+    }
+    console.log(codigo)
+    console.log(numero)
+    console.log(cantidad)
       var request = $.ajax({
         method: "POST",
         url: "<?=$base_url?>/proventa/datosPedido",
         data: {
-              id_persona: id_persona,
-              id_aldea: aldea,
-              direccionEnvio: direccionExacta,
-              telefono: telefono,
-            }
+          contador : contador,
+          id_persona: id_persona,
+          id_aldea: aldea,
+          direccionEnvio: direccionExacta,
+          telefono: telefono,
+          codigo: codigo,
+          cantidad: cantidad,
+          talla: numero,
+        }
       });
       request.done(function(respuesta){
-        for (var i = 0; i < contador ; i++) {
-          var codigo = $('.row-'+i+' td').eq(2).html();
-          var numero = $('.row-'+i+' td').eq(3).html();
-          var cantidad = $('.row-'+i+' td').eq(6).html();
-
-          var requestIProd = $.ajax({
-            method: "POST",
-            url: "<?=$base_url?>/proventa/ingresoProductos",
-            data: {
-                  id_pedido: respuesta,
-                  codigo: codigo,
-                  cantidad: cantidad,
-                  talla: numero,
-                }
-          });
-        request.done(function(respuesta){
-
-        });
-      }
-      Swal.fire(
-        'Excelente!',
-        'Tu pedido fué realizado exitosamente',
-        'success'
-      )
+        if (respuesta == '1') {
+          Swal.fire({
+            title: 'Excelente!!',
+            text: "Tu pedido fue enviado exitosamente",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = "<?=$base_url?>";
+            }else {
+              window.location.href = "<?=$base_url?>";                            
+            }
+          })
+        }else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debe llenar los campos obligatorios',
+            footer: '<a href></a>'
+          })
+        }
+      });
+      request.fail(function() {
+        console.log('error')
     });
   });
 

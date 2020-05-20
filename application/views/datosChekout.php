@@ -10,32 +10,46 @@
 			</div>
 			<div class="modal-body">
 					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Ingrese número de teléfono</label>
+						<label for="recipient-name" class="col-form-label">Ingrese número de teléfono
+							<div style="color: red;">
+								(obligatorio)
+							</div>
+						</label>
 						<input
-							type="text"
+							type="number"
+							max="99999999"
+							min="10000000"
 							required
 							class="form-control"
 							id="num_telefono"
 							name="nombre_estilo"
 							value="">
 					</div>
-					<div class="form-group">
-						<label for="recipient-name" class="col-form-label">Ingrese su aldea/zona</label>
+					<div id="inpAldea"class="form-group">
+						<label for="recipient-name" class="col-form-label">Ingrese su aldea/zona
+							<div style="color: red;">
+								(obligatorio)
+							</div>
+						</label>
 							<select class="form-control" id="aldea" name="">
 								<option value="">Seleccionar</option>
 							</select>
 					</div>
-					<div class="form-group">
+					<div id="inpDireccion"class="form-group">
 						<label
 							for="recipient-name"
 							class="col-form-label">Especifique su dirección
 							(caserio, número de casa, otras referencias)
+							<div style="color: red;">
+								(obligatorio)
+							</div>
 						</label>
-						<textarea
+						<input
+						type="text"
 							class="form-control"
 							id="dirEspecifico"
 							rows="3">
-						</textarea>
+						</input>
 					</div>
 					<div class="modal-footer">
 						<button type="button"
@@ -46,7 +60,7 @@
 						</button>
 						<button
 							data-dismiss="modal"
-							class="btn btn-primary simpleCart_empty"
+							class="btn btn-primary simpleCart_empty "
 							name="Enviar"
 							id="finalizar"
 							value="Enviar"
@@ -58,3 +72,37 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#inpAldea').hide()
+		$('#inpDireccion').hide()
+		$('#finalizar').hide()
+	})
+		$('#num_telefono').on('keyup', function(){
+			if ($('#num_telefono').val().length ==8) {
+				$('#inpAldea').show()
+	  }else {
+	  	$('#inpAldea').hide()
+			$('#finalizar').hide()
+			$('#dirEspecifico').val("")
+	  }
+	})
+
+	$('#aldea').on('change', function(){
+		if ($('#aldea').val() != '') {
+			$('#inpDireccion').show()
+		}else {
+			$('#inpDireccion').hide()
+			$('#finalizar').hide()
+			$('#dirEspecifico').val("")
+		}
+	})
+
+	$('#dirEspecifico').on('keyup', function(){
+		if ($('#dirEspecifico').val() != '') {
+			$('#finalizar').show()
+		}else {
+			$('#finalizar').hide()
+		}
+	})
+</script>

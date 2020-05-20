@@ -44,7 +44,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<tbody>
 						<tr id="fila">
 							<td>
-								<input required onchange="buscar_codigo(id='codigo0',0)" id="codigo0" class="form-control" type="text" name="codigo[]" value="" placeholder="Código">
+								<input required
+									onchange="buscar_codigo(id='codigo0',0)"
+									id="codigo0"
+									class="form-control"
+									type="text"
+									name="codigo[]"
+									value=""
+									placeholder="Código">
 							</td>
 							<td id="descripcion0"></td>
 							<td>
@@ -53,15 +60,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</select>
 							</td>
 							<td>
-								<input id="cantidad0" class="form-control" onchange="totales(0)" min="1" type="number" required name="cantidad[]" value="1" placeholder="Cantidad">
+								<input
+									id="cantidad0"
+									class="form-control"
+									onchange="totales(0)"
+									min="1"
+									type="number"
+									required
+									name="cantidad[]"
+									value="1"
+									placeholder="Cantidad">
 							</td>
 							<td>
-								<input id="precio0" class="form-control" onchange="totales(0)" type="number" required name="precioUnidad[]" value="" placeholder="precio">
+								<input
+									id="precio0"
+									class="form-control"
+									onchange="totales(0)"
+									type="number"
+									required
+									name="precioUnidad[]"
+									value=""
+									placeholder="precio">
 							</td>
 							<td id="subtotal0">Q. 0</td>
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
 				<div class="row">
 					<div class="col-11">

@@ -39,14 +39,23 @@ class Venta_model extends CI_Model{
 			return $rows;
 	}
 
-	function ingresarVenta($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria) {
-	$sql = "INSERT INTO venta(cantidad, monto_unidad, monto_total, producto_id_producto, vendedor_id_vendedor,numero_categoria_id)
-			VALUES (?,?,?,?,?,?)";
+	function ingresarVenta($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria,$id_pedido) {
+	$sql = "INSERT INTO venta(cantidad, monto_unidad, monto_total,
+														producto_id_producto, vendedor_id_vendedor,
+														numero_categoria_id,pedidos_id_pedidos)
+			VALUES (?,?,?,?,?,?,?)";
 
-	$valores = array($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria);
+	$valores = array($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria,$id_pedido);
 
 	$dbres = $this->db->query($sql, $valores);
 
+	return $dbres;
+	}
+
+	function borrarLineaPedido($linea) {
+	$sql = "DELETE FROM `lineapedido` WHERE `lineapedido`.`id_lineaPedido` = ?";
+	$valores = array($linea);
+	$dbres = $this->db->query($sql, $valores);
 	return $dbres;
 	}
 
@@ -95,5 +104,16 @@ class Venta_model extends CI_Model{
 		$rows = $dbres->result_array();
 
 		return $rows;
+	}
+
+	function actalizarPedido($id_pedido) {
+		$sql = "UPDATE pedidos
+					SET estado = ?
+					WHERE id_pedidos = ?
+					";
+		$estado = 'B';
+		$valores = array($estado,$id_pedido);
+		$dbres = $this->db->query($sql,$valores);
+		return $dbres;
 	}
 }

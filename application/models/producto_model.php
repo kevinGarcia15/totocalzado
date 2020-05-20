@@ -245,15 +245,15 @@ function seleccionarNumeracionId($id) {
 	return $dbres;
 	}
 
-	function crearProducto($codigo,$precio_compra, $precio_mayoreo,$img_carusel,
+	function crearProducto($codigo,$precio_compra, $oferta,$img_carusel,
 												$categoria,$genero, $marca, $color, $estilo, $observacion) {
-	$sql = "INSERT INTO producto(codigo, precio_compra, precio_mayoreo,img_carrusel,
+	$sql = "INSERT INTO producto(codigo, precio_compra, oferta,img_carrusel,
 																categoria_id_categoria,genero_id_genero,
 																marca_id_marca, color_id_color,estilo_id_estilo,
 																observacion)
 			VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-	$valores = array($codigo, $precio_compra, $precio_mayoreo,$img_carusel, $categoria,$genero, $marca, $color,$estilo, $observacion);
+	$valores = array($codigo, $precio_compra, $oferta,$img_carusel, $categoria,$genero, $marca, $color,$estilo, $observacion);
 
 	$dbres = $this->db->query($sql, $valores);
 

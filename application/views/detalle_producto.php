@@ -43,7 +43,7 @@
         <img
         onclick="cambiarImagen(<?php echo $contImg; ?>)"
         class="detalle-miniaturas__img"
-        src="<?php echo $img_min['URL']; ?>"
+        src="<?=$base_url?>/<?=$img_min['URL']?>"
         alt="min"/>
       <?php $contImg = $contImg + 1; endforeach; ?>
     </div>
@@ -51,7 +51,7 @@
       <img
         id="imagenPrincipal"
         class="detalle__img item_image"
-        src="<?php echo $key['img_principal']?>"
+        src="<?=$base_url?>/<?=$key['img_principal']?>"
         alt=""/>
     </div>
 
@@ -65,7 +65,24 @@
           <li>Código: <b class="item_codigo"><?php echo $key['codigo']; ?></b></li>
           <div class="item-pageLink"><a href="https//proventa"></a></div>
           <li>Departamento: <b><?php echo $key['genero']; ?></b></li>
-          <li class="item_price">Precio: <b>Q<?php echo $key['compra']; ?></b></li>
+<!--en caso que haya oferta--------------------------------------------------->
+          <?php if ($key['oferta'] == '0'): ?>
+            <li
+              class="item_price">
+              Precio:
+              <b>Q<?=$key['compra']?></b>
+            </li>
+          <?php else: ?>
+            <li>
+            Precio:
+            <b><strike>Q<?=$key['compra']?></strike></b>
+          </li>
+            <li
+            class="item_price">
+            <b>OFERTA: Q<?=$key['oferta']?></b>
+          </li>
+          <?php endif; ?>
+
           <input type="hidden" id="precio" name="precio" value="<?php echo $key['compra']; ?>">
           <input type="hidden" id="id_producto" name="id_producto" value="<?php echo $key['id_producto']; ?>">
         </ul><br>
@@ -86,131 +103,37 @@
   </section>
 <?php endforeach; ?>
 <!--Recmendaciones----------------------------------------------------------------------->
-  <h1 class="categories__title">Tambien te recomendamos</h1>
-  <section class="carousel">
-    <div class="carousel__container">
+<h3 class="categories__title">También te recomendamos</h3>
+<section class="carousel">
+  <div class="carousel__container">
 
-      <div class="carousel-item">
-        <img
-          class="carousel-item__img"
-          src="https://www.podoactiva.com/sites/default/files/blog_35.jpg"
-          alt=""/>
-        <div class="carousel-item__details">
-          <div>
-            <a href="<?=$base_url?>/proventa/detalle">
-              <img
-                class="carousel-item__details--img"
-                src="./recursos/img/plus-icon.png"
-                alt="Plus Icon">
-              </a>
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/1427741/pexels-photo-1427741.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260" alt=""  />
-        <div class="carousel-item__details">
-          <div>
+  <?php foreach ($recomendacion as $key): ?>
+    <div class="carousel-item">
+      <img
+      class="carousel-item__img"
+      src="<?=$base_url?>/<?=$key['img_carrusel']?>"
+      alt=""/>
+      <div class="carousel-item__details">
+        <div>
+          <a href="<?=$base_url?>/proventa/detalle?id=<?php echo $key['id_producto']; ?>&dep=<?=$key['dep']?>">
             <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
+            class="carousel-item__details--img"
+            src="<?=$base_url?>/recursos/img/plus-icon.png"
+            alt="Plus Icon">
+          </a>
         </div>
+        <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
+        <?php if ($key['oferta'] == '0'): ?>
+          <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
+        <?php else: ?>
+          <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
+        <?php endif; ?>
       </div>
-
-      <div class="carousel-item">
-        <img
-          class="carousel-item__img"
-          src="https://lh3.googleusercontent.com/J8eBNM7g5XpzQD7ik5zrIGGrxrwIe3_VZnKD0SkmCMq8hnRdqAorJNqZeWmkgBBr3yWEUS44f6sPoWrrZZ7Iirg5Gs-8CiWU_X_mE3klRqRua6hgDcsr2r8Pf5jBftDpYxgkf2EP1gSDhOhqUm-4VhiATmWutqwWj5qGxr-MfwX9EgkWMwc-r9hzjJsTzRhGVEHeg4Li3KYp_CUnf4no0T1xqKfh_j-eTaYyD8XftR3DAHycgzuOGn6lXTmCckzsQA_WVkqdjLq3PdfsmmLLi6vHED4VtV_0sOzm91gpjQ_QVLR7otutXVOXqeV1r5HvCkbH-oHhG_RNnD8i7KtijO9_WCKZZyJUh62kNk1NybFGM1TyyJSqE1xYEupw8Pxd7i1f4s_kWiUoR2lf7f6SlOWbnbWeoNZ4ipSbQqfMuwQo5yOtWxw3QPkVW29NmbOLOcBaJ80Gg9FXKWsKHwr78K31mZT9wm0PwyfymnRa7M_lfUtsy90B4fsGHWtXIuLC1iqLGCVHu8us7HQInqTghRWaWdHKcX3h__NQBds8-rgN_cTn7Ud8LbDYuGDnncpmHYNV2Mz3dGqWXNnsUDNhSZX99_C8XzFo-XnWYNhAXG7s1M1diTriNnIDwxAmOAd_NxElbfP6Ma1zwzNc8-Yr322chk5XrEAOXpq2IqSS1C6OUpXZXdeiliL9MdRUvYpLivXxKrmIvLE5TiOm-Dl3TvXxDWAHLsUGW9TBWDLOMg249_A_ADVViH4=w704-h939-no" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/904276/pexels-photo-904276.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/1172207/pexels-photo-1172207.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&w=500" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/233129/pexels-photo-233129.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/1666779/pexels-photo-1666779.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
-      <div class="carousel-item">
-        <img class="carousel-item__img" src="https://images.pexels.com/photos/413879/pexels-photo-413879.jpeg?auto=format%2Ccompress&cs=tinysrgb&dpr=2&h=750&w=1260" alt=""  />
-        <div class="carousel-item__details">
-          <div>
-            <img
-              class="carousel-item__details--img"
-              src="./recursos/img/plus-icon.png"
-              alt="Plus Icon">
-          </div>
-          <p class="carousel-item__details--title">Título descriptivo</p>
-          <p class="carousel-item__details--subtitle">2019 16+ 114 minutos</p>
-        </div>
-      </div>
-
     </div>
-  </section>
+  <?php endforeach; ?>
+  </div>
+</section>
+
   <?php var_dump($this->session->userdata()); ?>
 <?php echo $this->session->USUARIO; ?>
   <footer class="footer">

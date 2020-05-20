@@ -73,4 +73,20 @@ class Informes extends CI_Controller {
 		}
 		redirect("/informes/mostrarProducto/${id}");
 	}
+
+	public function mostrarPedidos(){
+		$data['base_url'] = $this->config->item('base_url');
+		$data['pedidos'] = $this->informes_model->seleccionar_pedidos();
+		$this->load->view('pedidosEnTransito', $data);
+	}
+
+	public function detallepedidos(){
+		$data['base_url'] = $this->config->item('base_url');
+		$id = $_GET['id'];
+		$data['pedidos'] = $this->informes_model->seleccionarLineaPedidos($id);
+		$data['despachado'] = $this->informes_model->seleccionarVentaPedidos($id);
+
+		$this->load->view('detallepedidos', $data);
+	}
+
 }

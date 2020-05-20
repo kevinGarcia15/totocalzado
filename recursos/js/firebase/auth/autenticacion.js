@@ -14,7 +14,7 @@ class Autenticacion {
         }else {
           firebase.auth().signOut()
           Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico`, 5000)
-          window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+  //        window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
         }
       })
     //$('#avatar').attr('src', 'imagenes/usuario_auth.png')
@@ -33,8 +33,8 @@ class Autenticacion {
         })
 
         const configuracion = {
-         url:'http://localhost/totocalzado/'
-        //  url:'http://192.168.0.120:80/totocalzado'
+        // url:'http://localhost/totocalzado/'
+          url:'http://192.168.0.109:80/totocalzado'
         }
 
         result.user.sendEmailVerification(configuracion).catch(error =>{
@@ -121,6 +121,6 @@ class Autenticacion {
     request.done(function(){
       console.log('variables de sesión establecidas')
     });
-    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+//    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
   }
 }

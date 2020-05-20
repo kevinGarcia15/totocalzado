@@ -13,7 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="page-content p-5" id="content">
 		<br>
 		<?php $this->load->view('navVertical'); ?>
-		<form class="" action="<?=$base_url?>/producto/nuevo/" method="post" enctype="multipart/form-data">
+		<form
+			class=""
+			action="<?=$base_url?>/producto/nuevo/"
+			method="post"
+			enctype="multipart/form-data">
 				  <!-- Demo content -->
 		<br>
 		<h4 style="font-family: Vegur, 'PT Sans', Verdana, sans-serif;">Ingresar Nuevo Producto</h4><br>
@@ -47,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						type="button"
 						data-toggle="modal"
 						data-target="#IngresoEstilo"
-						data-whatever="@mdo" 
+						data-whatever="@mdo"
 						class="btn btn-primary">
 						<i class='fas fa-plus'></i>
 					</button>
@@ -99,28 +103,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<label class="form-control-label" for="inputDanger1"></label>
 			<div class="row">
 				<div class="col-10">
-					<input type="text" class="form-control" placeholder="URL 1" required name="url_1"  value="">
+					<input type="file" class="form-control" placeholder="URL 1" required name="url_1"  value="">
 				</div>
 			</div>
 			<label class="form-control-label" for="inputDanger1"></label>
 			<div class="row">
 				<div class="col-10">
-					<input type="text" class="form-control" placeholder="URL 2" required name="url_2"  value="">
+					<input type="file" class="form-control" placeholder="URL 2" required name="url_2"  value="">
 				</div>
 			</div>
 			<label class="form-control-label" for="inputDanger1"></label>
 			<div class="row">
 				<div class="col-10">
-					<input type="text" class="form-control" placeholder="URL 3" required name="url_3"  value="">
+					<input type="file" class="form-control" placeholder="URL 3" required name="url_3"  value="">
 				</div>
 			</div>
 			<hr>
 
 			<h4>Datos opcionales</h4>
-			<label class="form-control-label" for="inputDanger1">Ingrese el precio por mayor</label>
+			<label class="form-control-label" for="inputDanger1">ingrese el precio en oferta</label>
 			<div class="row">
 				<div class="col-10">
-					<input type="number" step="any" min="0"class="form-control" placeholder="Precio Mayoreo (Opcional)" name="Precio_mayoreo"  value="">
+					<input
+						type="number"
+						step="any"
+						min="0"
+						class="form-control"
+						placeholder="Precio en oferta"
+						name="oferta"
+						value="">
 				</div>
 			</div>
 <!--			<label class="form-control-label" for="inputDanger1">Seleccione una foto de referencia</label>
@@ -129,10 +140,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<input type="file" class="fform-control-file" name="foto" value="<?php $estilo ?>">
 				</div>
 		</div>  -->
-		<label for="exampleFormControlTextarea1">Observaciones</label>
+		<label for="exampleFormControlTextarea1">Descripcion del producto</label>
 		<div class="row">
 			<div class="col-10">
-    		<textarea class="form-control" name="observaciones" maxlength="50" rows="3"></textarea>
+    		<textarea class="form-control" name="observaciones" maxlength="250" rows="3"></textarea>
 			</div>
 		</div>
 		<td colspan="2">
