@@ -7,6 +7,7 @@ class Loggin extends CI_Controller {
 		//$this->load->helper('form');
 		$this->load->library('session');
 		$this->load->helper('url');
+		$this->load->model('loggin_model');
 	}
 
 	public function index()
@@ -16,15 +17,21 @@ class Loggin extends CI_Controller {
 	}
 
 	public function loggin() {
+
 		$usuario = $_POST['usuario'];
 		$rol = $_POST['rol'];
 		$photo_url = $_POST['user_photo'];
-		//Establecer variables de sesion
-		$this->session->USUARIO = $usuario;
-		$this->session->ROL = $rol;
-		$this->session->PHOTO_URL = $photo_url;
+		$uid = $_POST['uid'];
 
+		$id = $this->loggin_model->autenticarUsuario($uid,$usuario, $rol);
+
+			//Establecer variables de sesion
+			$this->session->USUARIO = $usuario;
+			$this->session->ROL = $rol;
+			$this->session->PHOTO_URL = $photo_url;
+			$this->session->ID = $id;
 	}
+
 	public function logout() {
 		$this->session->sess_destroy(); // Destruir todas las variables de sesión
 	}

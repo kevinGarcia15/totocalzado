@@ -48,7 +48,7 @@ if (count($arr) < 1) {
 							</tr>
 							<tr>
 								<td><strong>Precio Mayoreo: </strong></td>
-								<td><?=$key['precio_mayoreo']?></td>
+								<td><?=$key['oferta']?></td>
 							</tr>
 						</tbody>
 					</table>

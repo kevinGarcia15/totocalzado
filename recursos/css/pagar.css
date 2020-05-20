@@ -77,9 +77,7 @@ body {
   height: 69px;
   font-size: 1.2em;
 }
-.datosTableHidden{
-  display: none;
-}
+
 @media only screen and (max-width: 1080px) {
   .productos{
     margin-top: 70px;

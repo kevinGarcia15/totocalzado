@@ -20,6 +20,17 @@ class Producto extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 	if ($this->input->post('continuar') == 'continuar') {
+		//para subir las imagenes
+		$img_1 = $_FILES['url_1']['tmp_name'];
+		$destino1 = "./recursos/productos/".$_FILES['url_1']['name'];
+		move_uploaded_file($img_1, $destino1);
+		$img_2 = $_FILES['url_2']['tmp_name'];
+		$destino2 = "./recursos/productos/".$_FILES['url_2']['name'];
+		move_uploaded_file($img_2, $destino2);
+		$img_3 = $_FILES['url_3']['tmp_name'];
+		$destino3 = "./recursos/productos/".$_FILES['url_3']['name'];
+		move_uploaded_file($img_3, $destino3);
+
 				$producto = array(
 												'codigo'  => $_POST['codigo'],
 												'marca'  => $_POST['marca'],
@@ -27,12 +38,12 @@ class Producto extends CI_Controller {
 												'numeracion' => $_POST['numeracion'],
 												'color' => $_POST['color'],
 												'precio_compra' => $_POST['precio_compra'],
-												'Precio_mayoreo' => $_POST['Precio_mayoreo'],
+												'oferta' => $_POST['oferta'],
 												'observaciones' => $_POST['observaciones'],
 												'genero' => $_POST['genero'],
-												'url_1' => $_POST['url_1'],
-												'url_2' => $_POST['url_2'],
-												'url_3' => $_POST['url_3'],
+												'url_1' => $destino1,
+												'url_2' => $destino2,
+												'url_3' => $destino3,
 											 );
 				$this->session->set_userdata($producto);
 			 	redirect("/producto/ingresarStock");
@@ -55,7 +66,7 @@ class Producto extends CI_Controller {
 				$this->producto_model->crearProducto(
 				$this->session->userdata('codigo'),
 				$this->session->userdata('precio_compra'),
-				$this->session->userdata('Precio_mayoreo'),
+				$this->session->userdata('oferta'),
 				$this->session->userdata('url_1'),
 				$this->session->userdata('numeracion'),
 				$this->session->userdata('genero'),

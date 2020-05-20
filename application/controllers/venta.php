@@ -21,17 +21,64 @@ class Venta extends CI_Controller {
 
 		if (isset($_POST['guardar'])) {
 			$elementos = count($_POST['id_producto']);
+
 			for ($i=0; $i < $elementos; $i++) {
 				$numero = $_POST['numero'];
 				$cantidad = $_POST['cantidad'];
 				$precioUnidad = $_POST['precioUnidad'];
 				$id_producto = $_POST['id_producto'];
-
+				$id_pedido = $_POST['id_pedido'];
 				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
-			$this->venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i], $montoTotal,$id_producto[$i], 1,$numero[$i]);
+			$this->venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
+																				$montoTotal,$id_producto[$i],
+																				1,$numero[$i],$id_pedido);
+
+				if (isset($_POST['id_linea'])) {
+					$id_linea = $_POST['id_linea'];
+					$this->venta_model->borrarLineaPedido($id_linea[$i]);
+
+				}
+			}
+//si flag existe significa que no hay existencia en algun producto
+			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
+				$id_pedido = $_POST['id_pedido'];
+				$this->venta_model->actalizarPedido($id_pedido);
+				redirect("/informes/detallepedidos?id=${id_pedido}");
 			}
 		}
 		$this->load->view('nueva_venta', $data);
+	}
+
+	public function ingresarventa()
+	{
+		$data['base_url'] = $this->config->item('base_url');
+
+		$id_pedido = $_POST['id_pedido'];
+		if (isset($_POST['guardar'])) {
+			$elementos = count($_POST['id_producto']);
+
+			for ($i=0; $i < $elementos; $i++) {
+				$numero = $_POST['numero'];
+				$cantidad = $_POST['cantidad'];
+				$precioUnidad = $_POST['precioUnidad'];
+				$id_producto = $_POST['id_producto'];
+				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
+				$this->venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
+																				$montoTotal,$id_producto[$i],
+																				1,$numero[$i],$id_pedido);
+
+				$id_linea = $_POST['id_linea'];
+				$this->venta_model->borrarLineaPedido($id_linea[$i]);
+
+			}
+//si flag existe significa que no hay existencia en algun producto y no cambia el valor de pedido a despachado
+			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
+				$id_pedido = $_POST['id_pedido'];
+				$this->venta_model->actalizarPedido($id_pedido);
+				redirect("/informes/detallepedidos?id=${id_pedido}");
+			}
+			redirect("/informes/detallepedidos?id=${id_pedido}");
+		}
 	}
 
 	public function buscar_codigo(){
