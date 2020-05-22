@@ -34,7 +34,7 @@ simpleCart({
   checkout: {
       type: "SendForm" ,
       //url: "http://192.168.0.109:80/totocalzado/proventa/pagar" ,
-      url: "http://localhost/totocalzado/proventa/pagar" ,
+      url: "http://13.84.34.160/totocalzado/proventa/pagar" ,
       // http method for form, "POST" or "GET", default is "POST"
       method: "POST" ,
       // url to return to on successful checkout, default is null

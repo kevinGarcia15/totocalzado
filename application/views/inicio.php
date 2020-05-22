@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <img
         class="carousel-item__img"
         src="<?=$base_url?>/<?=$key['img_carrusel']?>"
-        alt=""/>
+        alt="">
         <div class="carousel-item__details">
           <div>
             <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
@@ -56,6 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               alt="Plus Icon">
             </a>
           </div>
+          <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
           <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
           <?php if ($key['oferta'] == '0'): ?>
             <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
@@ -63,6 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
           <?php endif; ?>
         </div>
+      </a>
       </div>
     <?php endforeach; ?>
     </div>

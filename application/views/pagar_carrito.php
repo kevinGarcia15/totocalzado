@@ -114,7 +114,7 @@ $(function (){
         if (respuesta == '1') {
           Swal.fire({
             title: 'Excelente!!',
-            text: "Tu pedido fue enviado exitosamente",
+            text: "Tu pedido fue enviado exitosamente, tardará de 1 a 3 días",
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -124,7 +124,7 @@ $(function (){
             if (result.value) {
               window.location.href = "<?=$base_url?>";
             }else {
-              window.location.href = "<?=$base_url?>";                            
+              window.location.href = "<?=$base_url?>";
             }
           })
         }else {

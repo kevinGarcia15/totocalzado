@@ -74,7 +74,7 @@ for ($i=1; $i < $cont ; $i++) {
       </div>
     </div>
     <div class="dropdown">
-      <button class="dropbtn">Contáctanos</button>
+      <button class="dropbtn">Ofertas</button>
     </div>
   </div>
 </div>
