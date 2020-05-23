@@ -27,9 +27,9 @@ class Loggin extends CI_Controller {
 
 			//Establecer variables de sesion
 			$this->session->USUARIO = $usuario;
-			$this->session->ROL = $rol;
+			$this->session->ROL = $id[0]['rol'];
 			$this->session->PHOTO_URL = $photo_url;
-			$this->session->ID = $id;
+			$this->session->ID = $id[0]['id_persona'];
 	}
 
 	public function logout() {

@@ -97,7 +97,7 @@
         </div>
         <div id="numero" class="item_name">
         </div>
-        <button id="add" type="button" name="button">LO QUIERO</button>
+        <button class="btn btn-success" id="add" type="button" name="button">LO QUIERO</button>
       </div>
     </div>
   </section>
@@ -135,7 +135,7 @@
   </div>
 </section>
 
-  <?php var_dump($this->session->userdata()); ?>
+  <?php //var_dump($this->session->userdata()); ?>
 <?php echo $this->session->USUARIO; ?>
 <?php $this->load->view('FloatingActionButton'); ?>
   <footer class="footer">

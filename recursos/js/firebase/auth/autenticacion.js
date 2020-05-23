@@ -121,6 +121,6 @@ class Autenticacion {
     request.done(function(){
       console.log('variables de sesión establecidas')
     });
-//    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
   }
 }

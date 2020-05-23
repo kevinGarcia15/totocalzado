@@ -137,6 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
   </section>
   <?php $this->load->view('FloatingActionButton'); ?>
+
   <footer class="footer">
     <a href="/">Terminos de uso</a>
     <a href="/">Declaración de privacidad</a>

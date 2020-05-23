@@ -54,16 +54,18 @@ for ($i=1; $i < $cont ; $i++) {
 <!--Admin----------------------------------------------------------------->
 <div class="menu-secundario">
   <div class="items">
-    <div class="dropdown">
-      <button class="dropbtn">Admin</button>
-      <div class="dropdown-content">
-        <a href="<?=$base_url?>/Producto/nuevo">Producto</a>
-        <a href="<?=$base_url?>/Venta/nuevaVenta">Venta</a>
-        <a href="<?=$base_url?>/Informes/mostrar">Inventario</a>
-        <a href="<?=$base_url?>/Venta/productosVendidosHoy">Productos vendidos</a>
-        <a href="<?=$base_url?>/Informes/mostrarPedidos">pedidos</a>
+    <?php if ($this->session->ROL == "Admin"): ?>
+      <div class="dropdown">
+        <button class="dropbtn">Admin</button>
+        <div class="dropdown-content">
+          <a href="<?=$base_url?>/Producto/nuevo">Producto</a>
+          <a href="<?=$base_url?>/Venta/nuevaVenta">Venta</a>
+          <a href="<?=$base_url?>/Informes/mostrar">Inventario</a>
+          <a href="<?=$base_url?>/Venta/productosVendidosHoy">Productos vendidos</a>
+          <a href="<?=$base_url?>/Informes/mostrarPedidos">pedidos</a>
+        </div>
       </div>
-    </div>
+    <?php endif; ?>
     <div class="dropdown">
       <button class="dropbtn">Departamentos</button>
       <div class="dropdown-content">

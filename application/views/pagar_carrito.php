@@ -85,8 +85,8 @@ $(function (){
     var telefono = $('#num_telefono').val()
     var aldea = $('#aldea').val()
     var direccionExacta = $('#dirEspecifico').val()
-//    var id_persona = '<?=$this->session->ID?>';
-    var id_persona = '1'
+    var id_persona = '<?=$this->session->ID?>';
+
     var codigo = [];
     var numero = [];
     var cantidad= [];
@@ -100,7 +100,7 @@ $(function (){
     console.log(cantidad)
       var request = $.ajax({
         method: "POST",
-        url: "<?=$base_url?>/proventa/datosPedido",
+        url: "<?=$base_url?>/Proventa/datosPedido",
         data: {
           contador : contador,
           id_persona: id_persona,

@@ -35,7 +35,7 @@ class Proventa extends CI_Controller {
 
 	public function pagar(){
 		$data['base_url'] = $this->config->item('base_url');
-  	//$this->restringirAcceso();
+  	$this->restringirAcceso();
 			$cont = $_POST['itemCount'];
 			if ($cont < 1) {
 				redirect("/inicio");
@@ -55,7 +55,7 @@ class Proventa extends CI_Controller {
 	}
 	public function datosPedido(){
 		$data['base_url'] = $this->config->item('base_url');
-	//	$this->restringirAcceso();
+		$this->restringirAcceso();
 			$contador = $_POST['contador'];//numero de productos
 			$codigo= $_POST['codigo'];//ARRAY
 			$numero= $_POST['talla'];//ARRAY
