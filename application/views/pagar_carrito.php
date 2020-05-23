@@ -65,6 +65,8 @@
     </div>
   </div>
   <?php $this->load->view('datosChekout'); ?>
+  <?php $this->load->view('FloatingActionButton'); ?>
+
   <br><br><br><br><br>
   <footer class="footer">
     <a href="/">Terminos de uso</a>

@@ -7,7 +7,7 @@ class Informes extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('session');
 		$this->load->helper('url');
-		$this->load->model('informes_model');
+		$this->load->model('Informes_model');
 	}
 
 	public function index()
@@ -19,7 +19,7 @@ class Informes extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['arr'] = $this->informes_model->mostrar($id);
+		$data['arr'] = $this->Informes_model->mostrar($id);
 		$data['mensaje'] = "Datos ingresados exitosamente";
 
 		$this->load->view('nueva_incersion', $data);
@@ -29,7 +29,7 @@ class Informes extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['arr'] = $this->informes_model->listarMarcas();
+		$data['arr'] = $this->Informes_model->listarMarcas();
 
 		$this->load->view('listar_marca', $data);
 	}
@@ -38,7 +38,7 @@ class Informes extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['arr'] = $this->informes_model->listarEstilo($id);
+		$data['arr'] = $this->Informes_model->listarEstilo($id);
 
 		$this->load->view('listar_estilo', $data);
 	}
@@ -47,7 +47,7 @@ class Informes extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['arr'] = $this->informes_model->listarCategoria($id);
+		$data['arr'] = $this->Informes_model->listarCategoria($id);
 
 		$this->load->view('listar_categoria', $data);
 	}
@@ -56,8 +56,8 @@ class Informes extends CI_Controller {
 	{
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['arr'] = $this->informes_model->mostrarProducto($id);
-		$data['numeros'] = $this->informes_model->mostrarStock($id);
+		$data['arr'] = $this->Informes_model->mostrarProducto($id);
+		$data['numeros'] = $this->Informes_model->mostrarStock($id);
 
 		$this->load->view('mostrar_producto', $data);
 	}
@@ -69,22 +69,22 @@ class Informes extends CI_Controller {
 		$cantidad_actualizar = $_POST['cantidad_actualizar'];
 
 		for ($i=0; $i < count($id_stock); $i++) {
-			$this->informes_model->actualizarStock($id_stock[$i],$cantidad_actualizar[$i]);
+			$this->Informes_model->actualizarStock($id_stock[$i],$cantidad_actualizar[$i]);
 		}
 		redirect("/informes/mostrarProducto/${id}");
 	}
 
 	public function mostrarPedidos(){
 		$data['base_url'] = $this->config->item('base_url');
-		$data['pedidos'] = $this->informes_model->seleccionar_pedidos();
+		$data['pedidos'] = $this->Informes_model->seleccionar_pedidos();
 		$this->load->view('pedidosEnTransito', $data);
 	}
 
 	public function detallepedidos(){
 		$data['base_url'] = $this->config->item('base_url');
 		$id = $_GET['id'];
-		$data['pedidos'] = $this->informes_model->seleccionarLineaPedidos($id);
-		$data['despachado'] = $this->informes_model->seleccionarVentaPedidos($id);
+		$data['pedidos'] = $this->Informes_model->seleccionarLineaPedidos($id);
+		$data['despachado'] = $this->Informes_model->seleccionarVentaPedidos($id);
 
 		$this->load->view('detallepedidos', $data);
 	}

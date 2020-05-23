@@ -15,6 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!-- Title -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
   <!-- Agregamos la librería Simple Cart -->
   <script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
   <script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
@@ -133,10 +134,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php endforeach; ?>
     </div>
   </section>
-
     </div>
   </section>
-
+  <?php $this->load->view('FloatingActionButton'); ?>
   <footer class="footer">
     <a href="/">Terminos de uso</a>
     <a href="/">Declaración de privacidad</a>

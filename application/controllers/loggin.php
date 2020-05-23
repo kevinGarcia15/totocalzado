@@ -7,13 +7,13 @@ class Loggin extends CI_Controller {
 		//$this->load->helper('form');
 		$this->load->library('session');
 		$this->load->helper('url');
-		$this->load->model('loggin_model');
+		$this->load->model('Loggin_model');
 	}
 
 	public function index()
 	{
 		$data['base_url'] = $this->config->item('base_url');
-		$this->load->view('loggin', $data);
+		$this->load->view('Loggin', $data);
 	}
 
 	public function loggin() {
@@ -23,7 +23,7 @@ class Loggin extends CI_Controller {
 		$photo_url = $_POST['user_photo'];
 		$uid = $_POST['uid'];
 
-		$id = $this->loggin_model->autenticarUsuario($uid,$usuario, $rol);
+		$id = $this->Loggin_model->autenticarUsuario($uid,$usuario, $rol);
 
 			//Establecer variables de sesion
 			$this->session->USUARIO = $usuario;
@@ -38,6 +38,6 @@ class Loggin extends CI_Controller {
 
 	public function registro(){
 		$data['base_url'] = $this->config->item('base_url');
-		$this->load->view('registro', $data);
+		$this->load->view('Registro', $data);
 	}
 }

@@ -45,7 +45,7 @@ for ($i=1; $i < $cont ; $i++) {
           <?php if ($this->session->USUARIO){?>
             <a id="salir" href="#">Salir</a>
           <?php }else {?>
-            <a id="btnInicioSesion" href="<?=$base_url?>/loggin">Iniciar sesión</a>
+            <a id="btnInicioSesion" href="<?=$base_url?>/Loggin">Iniciar sesión</a>
             <?php } ?>
       </ul>
     </div>
@@ -57,20 +57,20 @@ for ($i=1; $i < $cont ; $i++) {
     <div class="dropdown">
       <button class="dropbtn">Admin</button>
       <div class="dropdown-content">
-        <a href="<?=$base_url?>/producto/nuevo">Producto</a>
-        <a href="<?=$base_url?>/venta/nuevaVenta">Venta</a>
-        <a href="<?=$base_url?>/informes/mostrar">Inventario</a>
-        <a href="<?=$base_url?>/venta/productosVendidosHoy">Productos vendidos</a>
-        <a href="<?=$base_url?>/informes/mostrarPedidos">pedidos</a>
+        <a href="<?=$base_url?>/Producto/nuevo">Producto</a>
+        <a href="<?=$base_url?>/Venta/nuevaVenta">Venta</a>
+        <a href="<?=$base_url?>/Informes/mostrar">Inventario</a>
+        <a href="<?=$base_url?>/Venta/productosVendidosHoy">Productos vendidos</a>
+        <a href="<?=$base_url?>/Informes/mostrarPedidos">pedidos</a>
       </div>
     </div>
     <div class="dropdown">
       <button class="dropbtn">Departamentos</button>
       <div class="dropdown-content">
-        <a href="<?=$base_url?>/departamento/dep?dep=Caballero">Caballero</a>
-        <a href="<?=$base_url?>/departamento/dep?dep=Dama">Dama</a>
-        <a href="<?=$base_url?>/departamento/dep?dep=Niño">Niño</a>
-        <a href="<?=$base_url?>/departamento/dep?dep=Niña">Niña</a>
+        <a href="<?=$base_url?>/Departamento/dep?dep=Caballero">Caballero</a>
+        <a href="<?=$base_url?>/Departamento/dep?dep=Dama">Dama</a>
+        <a href="<?=$base_url?>/Departamento/dep?dep=Niño">Niño</a>
+        <a href="<?=$base_url?>/Departamento/dep?dep=Niña">Niña</a>
       </div>
     </div>
     <div class="dropdown">
