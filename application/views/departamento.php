@@ -37,7 +37,7 @@
   </header>
   <div class="container">
     <div class="">
-      <h2><b><?=$dep?></b></h2>
+      <h2><b><?=$dep?> (<?=count($departamentos)?>)</b></h2>
     </div>
     <div class="row">
 
@@ -68,6 +68,8 @@
 
     </div>
   </div>
+  <?php $this->load->view('FloatingActionButton'); ?>
+
   <footer class="footer">
     <a href="/">Terminos de uso</a>
     <a href="/">Declaración de privacidad</a>

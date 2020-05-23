@@ -65,6 +65,8 @@
     </div>
   </div>
   <?php $this->load->view('datosChekout'); ?>
+  <?php $this->load->view('FloatingActionButton'); ?>
+
   <br><br><br><br><br>
   <footer class="footer">
     <a href="/">Terminos de uso</a>
@@ -83,8 +85,8 @@ $(function (){
     var telefono = $('#num_telefono').val()
     var aldea = $('#aldea').val()
     var direccionExacta = $('#dirEspecifico').val()
-//    var id_persona = '<?=$this->session->ID?>';
-    var id_persona = '1'
+    var id_persona = '<?=$this->session->ID?>';
+
     var codigo = [];
     var numero = [];
     var cantidad= [];
@@ -98,7 +100,7 @@ $(function (){
     console.log(cantidad)
       var request = $.ajax({
         method: "POST",
-        url: "<?=$base_url?>/proventa/datosPedido",
+        url: "<?=$base_url?>/Proventa/datosPedido",
         data: {
           contador : contador,
           id_persona: id_persona,
@@ -114,7 +116,7 @@ $(function (){
         if (respuesta == '1') {
           Swal.fire({
             title: 'Excelente!!',
-            text: "Tu pedido fue enviado exitosamente",
+            text: "Tu pedido fue enviado exitosamente, tardará de 1 a 3 días",
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#3085d6',
@@ -124,7 +126,7 @@ $(function (){
             if (result.value) {
               window.location.href = "<?=$base_url?>";
             }else {
-              window.location.href = "<?=$base_url?>";                            
+              window.location.href = "<?=$base_url?>";
             }
           })
         }else {

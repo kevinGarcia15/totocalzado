@@ -40,13 +40,13 @@
   <section class="detalle simpleCart_shelfItem">
     <div class="detalle-miniaturas">
       <?php $contImg = 0; foreach ($img as $img_min): ?>
-        <img
-        onclick="cambiarImagen(<?php echo $contImg; ?>)"
+        <a href="#img<?=$contImg?>"><img
         class="detalle-miniaturas__img"
         src="<?=$base_url?>/<?=$img_min['URL']?>"
-        alt="min"/>
+        alt="min"/></a>
       <?php $contImg = $contImg + 1; endforeach; ?>
     </div>
+
     <div class="detalle-img">
       <img
         id="imagenPrincipal"
@@ -97,11 +97,12 @@
         </div>
         <div id="numero" class="item_name">
         </div>
-        <button id="add" type="button" name="button">LO QUIERO</button>
+        <button class="btn btn-success" id="add" type="button" name="button">LO QUIERO</button>
       </div>
     </div>
   </section>
 <?php endforeach; ?>
+
 <!--Recmendaciones----------------------------------------------------------------------->
 <h3 class="categories__title">También te recomendamos</h3>
 <section class="carousel">
@@ -134,34 +135,46 @@
   </div>
 </section>
 
-  <?php var_dump($this->session->userdata()); ?>
+  <?php //var_dump($this->session->userdata()); ?>
 <?php echo $this->session->USUARIO; ?>
+<?php $this->load->view('FloatingActionButton'); ?>
   <footer class="footer">
     <a href="/">Terminos de uso</a>
     <a href="/">Declaración de privacidad</a>
     <a href="/">Centro de ayuda</a>
   </footer>
+
+<!--Imagen modal------------------------------------------------------------->
+<?php $Next = 0; $Prev = 2; foreach ($img as $imgModal): ?>
+    <?php $contPrev = $Prev-$Next;
+          ($Prev-$Next == -2) ? $contPrev = 1 : $contPrev;
+
+          $contNext = $Next +1;
+          ($contNext == 3) ? $contNext = 0 : $contNext;
+
+    ?>
+  <div class="img-modal" id="img<?=$Next?>">
+    <h3>CATALOGO</h3>
+    <div class="img-modal-princpal">
+      <a onclick="clickpage()" href="#img<?=$contPrev?>"><</a>
+      <a onclick="clickpage()" href="#img<?=$contNext?>"><img src="<?=$base_url?>/<?=$imgModal['URL']?>"></a>
+      <a onclick="clickpage()" href="#img<?=$contNext?>">></a>
+    </div>
+    <a onclick="go()" class="img-cerrar" href="">X</a>
+  </div>
+  <?php $Next = $Next+1;  $Prev = $Prev - 1;?>
+<?php endforeach; ?>
+<!--Imagen modal------------------------------------------------------------->
 </body>
 <script type="text/javascript">
-  function cambiarImagen(i){
-    var img_min = $(".detalle-miniaturas").children().eq(i).attr("src")
-    console.log(img_min)
-    $("#imagenPrincipal").attr("src",img_min)
-    mlens()
-  }
-
-function mlens(){
-    $("#imagenPrincipal").mlens(
-    {
-        imgSrc: $("#imagenPrincipal").attr("data-big"),   // path of the hi-res version of the image
-        lensShape: "square",                // shape of the lens (circle/square)
-        lensSize: 180,                  // size of the lens (in px)
-        borderSize: 4,                  // size of the lens border (in px)
-        borderColor: "#fff",                // color of the lens border (#hex)
-        borderRadius: 0,                // border radius (optional, only if the shape is square)
-        imgOverlay: $("#imagenPrincipal").attr("data-overlay"), // path of the overlay image (optional)
-        overlayAdapt: true // true if the overlay image has to adapt to the lens size (true/false)
-    });
+var contPageClickedModal = 0;
+function clickpage(){
+  contPageClickedModal = contPageClickedModal - 1
+  console.log(contPageClickedModal);
+}
+function go(){
+  window.history.go(contPageClickedModal-1);
+  contPageClickedModal = 0;
 }
 
 function addCarrito(){

@@ -9,7 +9,7 @@ class Loggin_model extends CI_Model{
 	}
 
 	function autenticarUsuario($uid,$usuario,$rol) {
-		$sql = "SELECT 	id_persona, UID
+		$sql = "SELECT 	id_persona, UID, rol
 				FROM 	persona
 				WHERE 	UID = ?
 				LIMIT 	1;";
@@ -24,13 +24,13 @@ class Loggin_model extends CI_Model{
 				$valores = array($usuario, $rol,$uid);
 				$dbres = $this->db->query($sql, $valores);
 
-				$sql = "SELECT MAX(id_persona) as id_persona FROM persona
+				$sql = "SELECT MAX(id_persona) as id_persona,rol FROM persona
 					LIMIT 	1";
 					$dbres = $this->db->query($sql);
 					$rows = $dbres->result_array();
-			return $rows[0]['id_persona'];
+			return $rows;
 		}else {
-			return  $rows[0]['id_persona'];
+			return  $rows;
 		}
 	}
 }

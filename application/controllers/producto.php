@@ -7,7 +7,7 @@ class Producto extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('session');
 		$this->load->helper('url');
-		$this->load->model('producto_model');
+		$this->load->model('Producto_model');
 	}
 
 	public function index()
@@ -53,17 +53,17 @@ class Producto extends CI_Controller {
 
 	public function ingresarStock(){
 		$data['base_url'] = $this->config->item('base_url');
-		$data['marca'] = $this->producto_model->seleccionarMarcaId($this->session->userdata('marca'));
-		$data['estilo'] = $this->producto_model->seleccionarEstiloId($this->session->userdata('estilo'));
-		$data['numeracion'] = $this->producto_model->seleccionarNumeracionId($this->session->userdata('numeracion'));
-		$data['color'] = $this->producto_model->seleccionarColorId($this->session->userdata('color'));
-		$data['numeros'] = $this->producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
+		$data['marca'] = $this->Producto_model->seleccionarMarcaId($this->session->userdata('marca'));
+		$data['estilo'] = $this->Producto_model->seleccionarEstiloId($this->session->userdata('estilo'));
+		$data['numeracion'] = $this->Producto_model->seleccionarNumeracionId($this->session->userdata('numeracion'));
+		$data['color'] = $this->Producto_model->seleccionarColorId($this->session->userdata('color'));
+		$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
 
 
 			if (isset($_POST['Guardar'])) {
-				$data['numeros'] = $this->producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
+				$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
 				$numeros = $_POST['numeros'];//cantidad que hay que ingresasr al stock
-				$this->producto_model->crearProducto(
+				$this->Producto_model->crearProducto(
 				$this->session->userdata('codigo'),
 				$this->session->userdata('precio_compra'),
 				$this->session->userdata('oferta'),
@@ -75,16 +75,16 @@ class Producto extends CI_Controller {
 				$this->session->userdata('estilo'),
 				$this->session->userdata('observaciones')
 			);
-		$id_producto = $this->producto_model->seleccionarIdProducto();
+		$id_producto = $this->Producto_model->seleccionarIdProducto();
 //ingresar url de las imagenes a la BD
 			for ($i=1; $i < 4; $i++) {
-				$this->producto_model->ingresarUrlImagenes(
+				$this->Producto_model->ingresarUrlImagenes(
 					$this->session->userdata('url_'.$i.''),$id_producto);
 			}
 //ingresa los numeros del stok
 			$bandera = 0;
 				foreach ($data['numeros'] as $a ) {
-						$this->producto_model->ingresarStock($numeros[$bandera], $id_producto, $a['id_numero_categoria']);
+						$this->Producto_model->ingresarStock($numeros[$bandera], $id_producto, $a['id_numero_categoria']);
 						$bandera = $bandera + 1;
 				}
 				$borrar = array('codigo',
@@ -108,7 +108,7 @@ class Producto extends CI_Controller {
 	public function marca(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['marca'] = $this->producto_model->seleccionarMarca();
+		$data['marca'] = $this->Producto_model->seleccionarMarca();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['marca'] as $key) {
 			echo '<option value="'.$key['id_marca'].'">'.$key['nombre'].'</option>'."\n";
@@ -118,7 +118,7 @@ class Producto extends CI_Controller {
 	public function numeracion(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['numeracion'] = $this->producto_model->seleccionarNumeracion();
+		$data['numeracion'] = $this->Producto_model->seleccionarNumeracion();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['numeracion'] as $key) {
 			echo '<option value="'.$key['id_categoria'].'">'.$key['nombre'].'</option>'."\n";
@@ -128,7 +128,7 @@ class Producto extends CI_Controller {
 	public function color(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['color'] = $this->producto_model->seleccionarColor();
+		$data['color'] = $this->Producto_model->seleccionarColor();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['color'] as $key) {
 			echo '<option value="'.$key['id_color'].'">'.$key['nombre'].'</option>'."\n";
@@ -137,7 +137,7 @@ class Producto extends CI_Controller {
 	public function genero(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['genero'] = $this->producto_model->seleccionargenero();
+		$data['genero'] = $this->Producto_model->seleccionargenero();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['genero'] as $key) {
 			echo '<option value="'.$key['id_genero'].'">'.$key['nombre'].'</option>'."\n";
@@ -148,7 +148,7 @@ class Producto extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 
 		$id_marca = $_POST['marca'];
-		$data['estilo'] = $this->producto_model->seleccionarEstilo($id_marca);
+		$data['estilo'] = $this->Producto_model->seleccionarEstilo($id_marca);
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['estilo'] as $key) {
 			echo '<option value="'.$key['id_estilo'].'">'.$key['nombre'].'</option>'."\n";
@@ -158,7 +158,7 @@ class Producto extends CI_Controller {
 	public function proveedor(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$data['proveedor'] = $this->producto_model->seleccionarProveedor();
+		$data['proveedor'] = $this->Producto_model->seleccionarProveedor();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['proveedor'] as $key) {
 			echo '<option value="'.$key['id_proveedor'].'">'.$key['nombre_proveedor'].'</option>'."\n";
@@ -171,7 +171,7 @@ class Producto extends CI_Controller {
 	$data['color'] ="";
 
 	$data['color'] = str_replace(["<",">"], "", $_POST['color']);
-	$this->producto_model->crearColor($data['color']);//ingresa datos en la tabla color
+	$this->Producto_model->crearColor($data['color']);//ingresa datos en la tabla color
 	redirect("/producto/nuevo");
 
 }
@@ -184,7 +184,7 @@ class Producto extends CI_Controller {
 	if (isset($_POST['guardar'])) {
 		$data['marca'] = str_replace(["<",">"], "", $_POST['marca']);
 
-	$this->producto_model->crearMarca($data['marca']);//ingresa datos en la tabla ruta
+	$this->Producto_model->crearMarca($data['marca']);//ingresa datos en la tabla ruta
 	redirect("/producto/nuevo");
 	}
 }
@@ -199,7 +199,7 @@ class Producto extends CI_Controller {
 			$data['telefono'] = str_replace(["<",">"], "", $_POST['telefono_proveedor']);
 			$data['direccion'] = str_replace(["<",">"], "", $_POST['direccion_proveedor']);
 
-		$this->producto_model->crearProveedor($data['nombre'],$data['telefono'],$data['direccion']);//ingresa datos en la tabla ruta
+		$this->Producto_model->crearProveedor($data['nombre'],$data['telefono'],$data['direccion']);//ingresa datos en la tabla ruta
 //		redirect("/producto/nuevo");
 	//	}
 	}
@@ -212,6 +212,6 @@ class Producto extends CI_Controller {
 		$data['estilo'] = str_replace(["<",">"], "", $_POST['nombre_estilo']);
 		$data['id_marca'] = str_replace(["<",">"], "", $_POST['id_marca']);
 
-		$this->producto_model->crearEstilo($data['estilo'],$data['id_marca']);//ingresa datos en la tabla ruta
+		$this->Producto_model->crearEstilo($data['estilo'],$data['id_marca']);//ingresa datos en la tabla ruta
 	}
 }

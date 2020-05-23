@@ -23,8 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://192.168.0.109:80/totocalzado';
-$config['base_url'] = 'http://localhost/totocalzado';
+$config['base_url'] = 'http://13.84.34.160:80/totocalzado';
+//$config['base_url'] = 'http://localhost/totocalzado';
+//$config['base_url'] = 'http://192.168.0.109/totocalzado';
+
 /*
 |--------------------------------------------------------------------------
 | Index File

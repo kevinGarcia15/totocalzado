@@ -3,12 +3,12 @@ class Autenticacion {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result =>{
         if (result.user.emailVerified) {
-            $('#avatar').attr('src', 'http://localhost/totocalzado/recursos/img/usuario_auth.png')
+            $('#avatar').attr('src', 'http://13.84.34.160/totocalzado/recursos/img/usuario_auth.png')
             Materialize.toast(`Bienvenido ${result.user.displayName}, te estamos redirigiendo`, 5000)
             //variables de sesion en php
             let nombre = result.user.displayName
             let rol = 'usuario'
-            let user_photo = 'http://localhost/totocalzado/recursos/img/usuario_auth.png'
+            let user_photo = 'http://13.84.34.160/totocalzado/recursos/img/usuario_auth.png'
             let uid = result.user.uid
             this.getPhpSession(nombre, rol, user_photo,uid)
         }else {
@@ -33,8 +33,8 @@ class Autenticacion {
         })
 
         const configuracion = {
-        // url:'http://localhost/totocalzado/'
-          url:'http://192.168.0.109:80/totocalzado'
+        // url:'http://13.84.34.160/totocalzado/'
+          url:'http://13.84.34.160:80/totocalzado'
         }
 
         result.user.sendEmailVerification(configuracion).catch(error =>{
@@ -110,7 +110,7 @@ class Autenticacion {
   getPhpSession(nombre,rol,user_photo,uid){
     var request = $.ajax({
       method: "POST",
-      url: "http://localhost/totocalzado/loggin/loggin",
+      url: "http://13.84.34.160/totocalzado/loggin/loggin",
       data: {
             usuario: nombre,
             rol: rol,
@@ -121,6 +121,6 @@ class Autenticacion {
     request.done(function(){
       console.log('variables de sesión establecidas')
     });
-//    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
   }
 }

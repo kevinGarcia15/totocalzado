@@ -7,7 +7,7 @@ class Venta extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('session');
 		$this->load->helper('url');
-		$this->load->model('venta_model');
+		$this->load->model('Venta_model');
 	}
 
 	public function index()
@@ -29,20 +29,20 @@ class Venta extends CI_Controller {
 				$id_producto = $_POST['id_producto'];
 				$id_pedido = $_POST['id_pedido'];
 				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
-			$this->venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
+			$this->Venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
 																				$montoTotal,$id_producto[$i],
 																				1,$numero[$i],$id_pedido);
 
 				if (isset($_POST['id_linea'])) {
 					$id_linea = $_POST['id_linea'];
-					$this->venta_model->borrarLineaPedido($id_linea[$i]);
+					$this->Venta_model->borrarLineaPedido($id_linea[$i]);
 
 				}
 			}
 //si flag existe significa que no hay existencia en algun producto
 			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
 				$id_pedido = $_POST['id_pedido'];
-				$this->venta_model->actalizarPedido($id_pedido);
+				$this->Venta_model->actalizarPedido($id_pedido);
 				redirect("/informes/detallepedidos?id=${id_pedido}");
 			}
 		}
@@ -63,18 +63,18 @@ class Venta extends CI_Controller {
 				$precioUnidad = $_POST['precioUnidad'];
 				$id_producto = $_POST['id_producto'];
 				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
-				$this->venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
+				$this->Venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
 																				$montoTotal,$id_producto[$i],
 																				1,$numero[$i],$id_pedido);
 
 				$id_linea = $_POST['id_linea'];
-				$this->venta_model->borrarLineaPedido($id_linea[$i]);
+				$this->Venta_model->borrarLineaPedido($id_linea[$i]);
 
 			}
 //si flag existe significa que no hay existencia en algun producto y no cambia el valor de pedido a despachado
 			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
 				$id_pedido = $_POST['id_pedido'];
-				$this->venta_model->actalizarPedido($id_pedido);
+				$this->Venta_model->actalizarPedido($id_pedido);
 				redirect("/informes/detallepedidos?id=${id_pedido}");
 			}
 			redirect("/informes/detallepedidos?id=${id_pedido}");
@@ -85,7 +85,7 @@ class Venta extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 
 		$codigo = $_POST['codigo_producto'];
-		$data['codigo'] = $this->venta_model->seleccionarCodigo($codigo);
+		$data['codigo'] = $this->Venta_model->seleccionarCodigo($codigo);
 
 		if (count($data['codigo']) < 1) {
 			echo "Producto inexistente";
@@ -101,7 +101,7 @@ class Venta extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 
 		$codigo_prod = $_POST['codigo'];
-		$data['numeros'] = $this->venta_model->seleccionarNumeros($codigo_prod);
+		$data['numeros'] = $this->Venta_model->seleccionarNumeros($codigo_prod);
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['numeros'] as $key) {
 			echo '<option value="'.$key['id_stock'].'">'.$key['numero'].'</option>'."\n";
@@ -112,7 +112,7 @@ class Venta extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 
 		$arg = $_POST['buscar_prod'];
-		$data['res'] = $this->venta_model->seleccionarProducto($arg);
+		$data['res'] = $this->Venta_model->seleccionarProducto($arg);
 
 		if ($arg == "") {
 			echo "ingresa la marca a buscar";
@@ -130,7 +130,7 @@ class Venta extends CI_Controller {
 			$mes = date("m");
 			$año = date("Y");
 			$ajaxFecha = $dia."/".$mes."/".$año;
-			$data['ventas'] = $this->venta_model->seleccionarVenta($ajaxFecha);
+			$data['ventas'] = $this->Venta_model->seleccionarVenta($ajaxFecha);
 		$this->load->view('productos_vendidos', $data);
 	}
 
@@ -139,7 +139,7 @@ class Venta extends CI_Controller {
 		$totalDia = 0;
 		if (isset($_POST['fechaPeticion'])) {
 			$ajaxFecha = $_POST['fechaPeticion'];
-			$data['ventas'] = $this->venta_model->seleccionarVenta($ajaxFecha);
+			$data['ventas'] = $this->Venta_model->seleccionarVenta($ajaxFecha);
 			foreach ($data['ventas'] as $key) {
 				$totalDia = $totalDia + $key['total'];
 				echo '<tr>
@@ -156,7 +156,7 @@ class Venta extends CI_Controller {
 
 	public function seleccionarFechas(){
 		$data['base_url'] = $this->config->item('base_url');
-		$data['fechas'] = $this->venta_model->seleccionarFechas();
+		$data['fechas'] = $this->Venta_model->seleccionarFechas();
 		echo '<option value="">Seleccionar</option>';
 		foreach ($data['fechas'] as $key) {
 			echo '<option value="'.$key['fecha'].'">'.$key['fecha'].'</option>'."\n";
