@@ -21,9 +21,10 @@ foreach ($arr as $a) {
 	<?php $this->load->view('header'); ?>
 	<title>Inventario</title>
 </head>
+<?php $this->load->view('menu'); ?>
+
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
 		<h6>Seleccione la marca para listar los estilos disponibles</h6>
 		<form class="" action="<?=$base_url?>/producto/nuevo/" method="post" enctype="multipart/form-data">
 			<hr><br><br>

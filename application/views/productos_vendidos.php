@@ -14,7 +14,7 @@ $totalDia = 0;
 	</header>
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
+		<?php $this->load->view('menu'); ?>
 
 	<div class="col-xs-12">
 		<h1>Ventas realizadas</h1>
@@ -70,6 +70,7 @@ $totalDia = 0;
 			</table>
 		</div>
 	</div>
+	  <?php $this->load->view('footer'); ?>
 </div>
 <script type="text/javascript">
 //muestra antes de cargar la pàgina

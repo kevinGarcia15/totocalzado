@@ -24,9 +24,10 @@ class Loggin_model extends CI_Model{
 				$valores = array($usuario, $rol,$uid);
 				$dbres = $this->db->query($sql, $valores);
 
-				$sql = "SELECT MAX(id_persona) as id_persona,rol FROM persona
+				$sql = "SELECT id_persona,rol FROM persona
+					where UID = ?
 					LIMIT 	1";
-					$dbres = $this->db->query($sql);
+					$dbres = $this->db->query($sql,$uid);
 					$rows = $dbres->result_array();
 			return $rows;
 		}else {

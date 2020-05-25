@@ -29,6 +29,8 @@ foreach ($arr as $a) {
 <body>
 <div id="container">
 	<header>
+		<?php $this->load->view('menu'); ?>
+
 	</header>
 	<div id="body">
 <hr><div class="table-responsive">
@@ -50,7 +52,6 @@ foreach ($arr as $a) {
 		<div class="alert alert-success" onclick="$(this).hide(1000)"><?=$mensaje?></div>
 	</div>
 </div>
-<script type="text/javascript">
- </script>
+  <?php $this->load->view('footer'); ?>
 </body>
 </html>

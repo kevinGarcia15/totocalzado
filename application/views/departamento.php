@@ -70,11 +70,7 @@
   </div>
   <?php $this->load->view('FloatingActionButton'); ?>
 
-  <footer class="footer">
-    <a href="/">Terminos de uso</a>
-    <a href="/">Declaración de privacidad</a>
-    <a href="/">Centro de ayuda</a>
-  </footer>
+  <?php $this->load->view('footer'); ?>
 </body>
 <script type="text/javascript">
 

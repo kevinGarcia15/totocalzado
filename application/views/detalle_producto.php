@@ -5,27 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Font -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="<?=$base_url?>/recursos/js/jquery.mlens-1.7.min.js"></script>
+  <?php $this->load->view('header'); ?>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
-<!-- Agregamos la librería Simple Cart -->
-<script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
-<script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
-<!--Firebase -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/config/ConfigFirebase.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/general.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/autenticacion.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/authController.js"></script>
   <!-- Styles -->
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/header.css" media="screen">
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/footer.css" media="screen">
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/detalle.css" media="screen">
 
   <!-- Title -->
@@ -56,7 +40,7 @@
     </div>
 
     <div class="detalle-description">
-      <p> <?php echo $key['estilo']; ?></p>
+      <p> <?php echo $key['marca'].' '.$key['estilo']; ?></p>
       <div class="detalle__item-text">
         <ul>
           <li>
@@ -136,14 +120,8 @@
 </section>
 
   <?php //var_dump($this->session->userdata()); ?>
-<?php echo $this->session->USUARIO; ?>
 <?php $this->load->view('FloatingActionButton'); ?>
-  <footer class="footer">
-    <a href="/">Terminos de uso</a>
-    <a href="/">Declaración de privacidad</a>
-    <a href="/">Centro de ayuda</a>
-  </footer>
-
+  <?php $this->load->view('footer'); ?>
 <!--Imagen modal------------------------------------------------------------->
 <?php $Next = 0; $Prev = 2; foreach ($img as $imgModal): ?>
     <?php $contPrev = $Prev-$Next;

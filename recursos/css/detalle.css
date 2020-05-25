@@ -55,7 +55,7 @@ body {
 }
 .detalle__img{
   width: 100%;
-  height: 410;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -80,7 +80,7 @@ body {
 }
 .img-modal-princpal{
   width: 100%;
-  height: 640px;
+  height: 520px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,8 +98,8 @@ body {
   flex-shrink: 2;
 }
 .img-modal-princpal img{
-  width: 1024px;
-  height: 640px;
+  width: 730px;
+  height: 510px;
   max-width: 100%;
   border: 7px solid #fff;
   box-sizing: border-box;

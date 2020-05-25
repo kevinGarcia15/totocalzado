@@ -11,11 +11,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 <div id="container">
 	<header>
+		<?php $this->load->view('menu'); ?>
+
 	</header>
 	<div class="page-content p-5" id="content">
 		<div>
 			<br>
-			<?php $this->load->view('navVertical'); ?>
 				<h1>Vender</h1>
 				<form action="<?=$base_url?>/venta/nuevaVenta/" method="POST">
 				<br>
@@ -86,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 					</tbody>
 				</table>
-				
+
 			</div>
 				<div class="row">
 					<div class="col-11">
@@ -107,6 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</form>
 			</div>
 	</div>
+	  <?php $this->load->view('footer'); ?>
 </div>
 <script type="text/javascript">
 var contador = 1;

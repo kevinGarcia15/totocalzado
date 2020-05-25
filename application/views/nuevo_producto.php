@@ -6,13 +6,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<head>
 		<meta charset="utf-8">
 		<?php $this->load->view('header'); ?>
+		<script type="text/javascript" src="<?=$base_url?>/recursos/js/bootstrap.min.js"></script>
 		<title>nuevo producto</title>
 	</head>
 	<body>
+		<?php $this->load->view('menu'); ?>
+
 		<!-- Page content holder -->
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
 		<form
 			class=""
 			action="<?=$base_url?>/producto/nuevo/"
@@ -204,6 +206,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</div>
 </div>
 <!-- Fin ventana emergente-->
+  <?php $this->load->view('footer'); ?>
 </body>
 
 <script type="text/javascript">

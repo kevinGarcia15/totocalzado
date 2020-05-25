@@ -46,6 +46,7 @@ for ($i=1; $i < $cont ; $i++) {
             <a id="salir" href="#">Salir</a>
           <?php }else {?>
             <a id="btnInicioSesion" href="<?=$base_url?>/Loggin">Iniciar sesión</a>
+            <a id="btnInicioSesion" href="<?=$base_url?>/loggin/registro">Registrate</a>
             <?php } ?>
       </ul>
     </div>

@@ -15,7 +15,8 @@ if (count($arr) < 1) {
 <body>
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
+		<?php $this->load->view('menu'); ?>
+
 		<?php foreach ($arr as $key) {?>
 			<div class="row justify-content-md-center">
 				<div class="col col-xl-4">
@@ -75,5 +76,6 @@ if (count($arr) < 1) {
 			</form>		  <!-- Demo content -->
 			</div>
 		<?php } ?>
+		  <?php $this->load->view('footer'); ?>
 		<br>
 	</div><br><br><br>

@@ -5,33 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Font -->
-  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <?php $this->load->view('header'); ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
-
-  <!-- Styles -->
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/loggin.css" media="screen">
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/header.css" media="screen">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-
-
-  <!--build:js js/main.min.js -->
-  <script type="text/javascript" src="./recursos/js/firebase/config/ConfigFirebase.js"></script>
-  <script type="text/javascript" src="./recursos/js/firebase/general.js"></script>
-  <script type="text/javascript" src="./recursos/js/firebase/auth/autenticacion.js"></script>
-  <script type="text/javascript" src="./recursos/js/firebase/auth/authController.js"></script>
-
-  <!-- Title -->
   <title>Inicia Sesión</title>
 </head>
 <body>
@@ -50,8 +29,8 @@
         </div>
       </div>
       <section class="login__container--social-media">
-        <div class="login__container--register"><img src="./recursos/img/google-icon.png"> <a id="authGoogle" href="#">Inicia sesión con Google</a></div>
-        <div class="login__container--register"><img src="./recursos/img/Facebook-icon.png"><a id="authFB" href="#">Inicia sesión con Facebook</a></div>
+        <div class="login__container--register"><img src="<?=$base_url?>/recursos/img/google-icon.png"> <a id="authGoogle" href="#">Inicia sesión con Google</a></div>
+        <div class="login__container--register"><img src="<?=$base_url?>/recursos/img/facebook-icon.png"><a id="authFB" href="#">Inicia sesión con Facebook</a></div>
       </section>
       <p
         class="login__container--register">No tienes ninguna cuenta
@@ -60,11 +39,7 @@
     </section>
   </section>
 
-  <footer class="footer">
-    <a href="/">Terminos de uso</a>
-    <a href="/">Declaración de privacidad</a>
-    <a href="/">Centro de ayuda</a>
-  </footer>
+  <?php $this->load->view('footer'); ?>
 </body>
 <script type="text/javascript">
   $(document).ready(function() {
@@ -73,6 +48,6 @@
   'Debes iniciar sesión para poder solicitar un producto',
   'warning'
   )
-  });
+});
 </script>
 </html>
