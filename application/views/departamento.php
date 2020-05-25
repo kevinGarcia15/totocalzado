@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/departamento.css" media="screen">
 
   <!-- Title -->
-  <title><?=$dep?></title>
+  <title><?php echo (isset($dep))? $dep: 'Oferta' ?></title>
 </head>
 <body>
   <?php $this->load->view('menu'); ?>
@@ -37,7 +37,12 @@
   </header>
   <div class="container">
     <div class="">
-      <h2><b><?=$dep?> (<?=count($departamentos)?>)</b></h2>
+      <h2><b>
+        <?php echo (isset($dep)) ? $dep.' ('.count($departamentos).')':
+          'Ofertas ('.count($departamentos).')';
+        ?>
+        </b></h2>
+
     </div>
     <div class="row">
 

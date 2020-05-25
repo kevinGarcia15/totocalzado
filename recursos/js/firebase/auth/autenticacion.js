@@ -17,6 +17,10 @@ class Autenticacion {
   //        window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
         }
       })
+      .catch(error =>{
+        console.error(error);
+        Materialize.toast(`Error al autenticar, revise su correo o contraseña!! `, 4000)
+      })
     //$('#avatar').attr('src', 'imagenes/usuario_auth.png')
     //Materialize.toast(`Bienvenido ${result.user.displayName}`, 5000)
     $('.modal').modal('close')

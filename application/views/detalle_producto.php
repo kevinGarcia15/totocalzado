@@ -24,10 +24,11 @@
   <section class="detalle simpleCart_shelfItem">
     <div class="detalle-miniaturas">
       <?php $contImg = 0; foreach ($img as $img_min): ?>
-        <a href="#img<?=$contImg?>"><img
-        class="detalle-miniaturas__img"
-        src="<?=$base_url?>/<?=$img_min['URL']?>"
-        alt="min"/></a>
+          <img
+          id="myImg<?=$contImg?>"
+          class="detalle-miniaturas__img"
+          src="<?=$base_url?>/<?=$img_min['URL']?>"
+          alt="CATALOGO"/>
       <?php $contImg = $contImg + 1; endforeach; ?>
     </div>
 
@@ -123,38 +124,74 @@
 <?php $this->load->view('FloatingActionButton'); ?>
   <?php $this->load->view('footer'); ?>
 <!--Imagen modal------------------------------------------------------------->
-<?php $Next = 0; $Prev = 2; foreach ($img as $imgModal): ?>
-    <?php $contPrev = $Prev-$Next;
-          ($Prev-$Next == -2) ? $contPrev = 1 : $contPrev;
-
-          $contNext = $Next +1;
-          ($contNext == 3) ? $contNext = 0 : $contNext;
-
-    ?>
-  <div class="img-modal" id="img<?=$Next?>">
-    <h3>CATALOGO</h3>
-    <div class="img-modal-princpal">
-      <a onclick="clickpage()" href="#img<?=$contPrev?>"><</a>
-      <a onclick="clickpage()" href="#img<?=$contNext?>"><img src="<?=$base_url?>/<?=$imgModal['URL']?>"></a>
-      <a onclick="clickpage()" href="#img<?=$contNext?>">></a>
-    </div>
-    <a onclick="go()" class="img-cerrar" href="">X</a>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <img  class="modal-content" id="img01">
+  <div class="modal-options">
+    <div id="caption"></div>
+    <span class="close">&times;</span>
   </div>
-  <?php $Next = $Next+1;  $Prev = $Prev - 1;?>
-<?php endforeach; ?>
+</div>
 <!--Imagen modal------------------------------------------------------------->
 </body>
 <script type="text/javascript">
-var contPageClickedModal = 0;
-function clickpage(){
-  contPageClickedModal = contPageClickedModal - 1
-  console.log(contPageClickedModal);
+//lightbox
+var modal = document.getElementById("myModal");
+var img0 = document.getElementById("myImg0");
+var img1 = document.getElementById("myImg1");
+var img2 = document.getElementById("myImg2");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var x = 0;
+img0.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
 }
-function go(){
-  window.history.go(contPageClickedModal-1);
-  contPageClickedModal = 0;
+img1.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+img2.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
 }
 
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+  var myImg = document.getElementById("img01");
+  var currWidth = myImg.clientWidth;
+  if (currWidth >= 1190) {
+    myImg.style.width = (700) + "px";
+  }else if (currWidth >= 850) {
+    myImg.style.width = (400) + "px";
+  }
+  modal.style.display = "none";
+}
+
+// $("#myModal").scroll(function(){
+//   x+=1
+//   if (x > 30) {
+//     modal.style.display = "none";
+//   }
+//   console.log(x)
+// });
+
+  $('#img01').on('dblclick' ,function(){
+      var myImg = document.getElementById("img01");
+      var currWidth = myImg.clientWidth;
+
+    if (currWidth >= 1190) {
+      myImg.style.width = (700) + "px";
+    }else if (currWidth >= 850) {
+      myImg.style.width = (400) + "px";
+    }else {
+      myImg.style.width = (currWidth + 500) + "px";
+    }
+  })
+//fin lightbox
 function addCarrito(){
   var precio = $("#precio").val();
   var id_producto = $("#id_producto").val();

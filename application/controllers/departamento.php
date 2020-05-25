@@ -24,4 +24,11 @@ class Departamento extends CI_Controller {
 		$this->load->view('departamento', $data);
 	}
 
+	public function oferta(){
+		$data['base_url'] = $this->config->item('base_url');
+
+		$data['departamentos'] = $this->Informes_model->seleccionarOferta();
+		$this->load->view('departamento', $data);
+	}
+
 }
