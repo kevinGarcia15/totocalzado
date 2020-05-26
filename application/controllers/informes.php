@@ -89,4 +89,13 @@ class Informes extends CI_Controller {
 		$this->load->view('detallepedidos', $data);
 	}
 
+	public function etiqueta(){
+		$data['base_url'] = $this->config->item('base_url');
+
+		$data['etiqueta'] = $this->Informes_model->seleccionarEtiqueta();
+		foreach ($data['etiqueta'] as $key) {
+			echo '<a href="'.$data['base_url'].'/Departamento/tag?tag='.$key['nombre_etiqueta'].'">
+						'.$key['nombre_etiqueta'].'</a>'."\n";
+		}
+	}
 }

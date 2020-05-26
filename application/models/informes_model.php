@@ -353,12 +353,32 @@ class Informes_model extends CI_Model{
 						where prod.oferta > '0'";
 
 		$dbres = $this->db->query($sql);
-
 		$rows = $dbres->result_array();
-
 		return $rows;
 	}
 
+	function seleccionarEtiquetas($tag) {
+		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
+						prod.codigo_proveedor cod_prov, prod.precio_compra precio,
+						prod.oferta oferta, cat.nombre categoria,
+						UPPER(m.nombre) as marca, UPPER(col.nombre) as color, UPPER(es.nombre) as estilo,
+						prod.observacion descripcion, prod.img_carrusel img_principal,
+						gen.nombre genero
+
+						FROM producto prod
+						join categoria cat on prod.categoria_id_categoria = cat.id_categoria
+						join marca m on prod.marca_id_marca = m.id_marca
+						join color col on prod.color_id_color = col.id_color
+						join estilo es on prod.estilo_id_estilo = es.id_estilo
+						join genero gen on prod.genero_id_genero = gen.id_genero
+						join tieneetiqueta tEtiqu on tEtiqu.producto_id_producto = prod.id_producto
+						join etiqueta et on et.id_etiqueta = tEtiqu.etiqueta_id_etiqueta
+						where et.nombre_etiqueta = ?";
+
+		$dbres = $this->db->query($sql,$tag);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
 	function seleccionarVentaPedidos($id){
 	$sql = "SELECT ven.cantidad unidades, ven.monto_unidad precio_unidad,
 								 DATE_FORMAT(ven.fecha_venta, '%d/%m/%Y') fecha,
@@ -388,5 +408,13 @@ class Informes_model extends CI_Model{
 		$rows = $dbres->result_array();
 		return $rows;
 	}
-
+	function 	seleccionarEtiqueta() {
+		$sql = "SELECT  id_etiqueta, nombre_etiqueta
+				FROM 	etiqueta
+				order by nombre_etiqueta ASC
+				LIMIT 20";
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
 }

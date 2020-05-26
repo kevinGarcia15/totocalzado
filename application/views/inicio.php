@@ -121,6 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <?php $this->load->view('footer'); ?>
 </body>
+<?php var_dump($this->session->userdata()); ?>
 <script type="text/javascript">
   function detalle(id,dep){
     window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";

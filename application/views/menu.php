@@ -1,10 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$Total = 0;
-$cont = $this->session->userdata('cont');
-for ($i=1; $i < $cont ; $i++) {
-  $Total = $Total + $this->session->userdata('item'.$i)['precio'];
-}
 ?>
 <header class="header">
   <a href="<?=$base_url?>">
@@ -77,7 +72,20 @@ for ($i=1; $i < $cont ; $i++) {
       </div>
     </div>
     <div class="dropdown">
+      <button class="dropbtn">Nuestros productos</button>
+      <div class="dropdown-content" id="etiqueta">
+      </div>
+    </div>
+    <div class="dropdown">
       <a class="dropbtn" href="<?=$base_url?>/Departamento/oferta">OFERTAS</a>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+//funcion Ajax para buscar en base de datos a los proveedores
+  $(function(){
+    $.post('<?=$base_url?>/Informes/etiqueta').done(function(respuesta){
+      $('#etiqueta').html(respuesta);
+    });
+  })
+</script>

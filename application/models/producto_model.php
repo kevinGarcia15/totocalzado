@@ -269,4 +269,23 @@ function seleccionarNumeracionId($id) {
 
 	return $dbres;
 	}
+
+	function 	seleccionarEtiqueta() {
+		$sql = "SELECT  id_etiqueta, nombre_etiqueta
+				FROM 	etiqueta
+				order by nombre_etiqueta ASC
+				LIMIT 20";
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
+
+	function ingresarTag($id_producto,$id_etiqueta) {
+	$sql = "INSERT INTO tieneetiqueta(producto_id_producto, etiqueta_id_etiqueta)
+			VALUES (?,?)";
+
+	$valores = array($id_producto, $id_etiqueta);
+	$dbres = $this->db->query($sql, $valores);
+	return $dbres;
+	}
 }

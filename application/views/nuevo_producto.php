@@ -9,6 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script type="text/javascript" src="<?=$base_url?>/recursos/js/bootstrap.min.js"></script>
 		<title>nuevo producto</title>
 	</head>
+	<style media="screen">
+		#content{
+			color: white;
+		}
+	</style>
 	<body>
 		<?php $this->load->view('menu'); ?>
 
@@ -136,20 +141,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						value="">
 				</div>
 			</div>
-<!--			<label class="form-control-label" for="inputDanger1">Seleccione una foto de referencia</label>
-			<div class="row">
-				<div class="col-10">
-					<input type="file" class="fform-control-file" name="foto" value="<?php $estilo ?>">
-				</div>
-		</div>  -->
+
 		<label for="exampleFormControlTextarea1">Descripcion del producto</label>
 		<div class="row">
 			<div class="col-10">
     		<textarea class="form-control" name="observaciones" maxlength="250" rows="3"></textarea>
 			</div>
 		</div>
+<br><br>
+		<label class="form-control-label" for="inputDanger1">Etiquetas</label>
+		<div class="row">
+			<?php foreach ($etiqueta as $key): ?>
+			<div class="col-sm-2">
+					<div class="form-check">
+							<label class="form-check-label" >
+								<input
+								class="form-check-input"
+								id=""
+								type="checkbox"
+								name="etiqueta[]"
+								value="<?=$key['id_etiqueta']?>">
+								<?=$key['nombre_etiqueta']?>
+							</label>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<br><br>
 		<td colspan="2">
-			<input class="btn btn-primary btn-md"  role="button" id="continuar" type="submit" name="continuar" value="continuar">
+			<input class="btn btn-success btn-md"  role="button" id="continuar" type="submit" name="continuar" value="continuar">
 			<input class="btn btn-warning btn-md"  role="button"  type="reset" required name="Reset" value="Reset">
 		</td>
 	</div>
@@ -205,6 +225,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+
 <!-- Fin ventana emergente-->
   <?php $this->load->view('footer'); ?>
 </body>
