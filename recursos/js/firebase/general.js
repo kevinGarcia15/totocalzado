@@ -14,11 +14,11 @@ $(() => {
       if (user.photoURL) {
         $('#avatar').attr('src', user.photoURL)
       }else {
-        $('#avatar').attr('src', 'http://localhost/totocalzado/recursos/img/usuario_auth.png')
+        $('#avatar').attr('src', 'http://totocalzado.com/recursos/img/usuario_auth.png')
       }
     }else {
       $('#btnInicioSesion').text('Iniciar Sesión')
-      $('#avatar').attr('src', 'http://localhost/totocalzado/recursos/img/user-icon.png')
+      $('#avatar').attr('src', 'http://totocalzado.com/recursos/img/user-icon.png')
     }
   })
 
@@ -26,16 +26,16 @@ $(() => {
   $('#salir').click(() => {
     firebase.auth().signOut()
     .then(()=>{
-      $('#avatar').attr('src', 'http://localhost/totocalzado/recursos/img/user-icon.png')
+      $('#avatar').attr('src', 'http://totocalzado.com/recursos/img/user-icon.png')
         Materialize.toast(`SignOut correcto`, 4000)
 
         var request = $.ajax({
           method: "POST",
-          url: "http://localhost/totocalzado/loggin/logout",
+          url: "http://totocalzado.com/loggin/logout",
         });
         request.done(function(){
           console.log('sesion destruida')
-          window.setTimeout(()=>{window.location.href='/totocalzado'},2000)
+          window.setTimeout(()=>{window.location.href='/'},2000)
         });
     })
     .catch(error => {

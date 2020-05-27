@@ -307,4 +307,7 @@ body {
   .items{
     width: 100%;
   }
+  .dropbtn {
+    padding: 5px;
+  }
 }

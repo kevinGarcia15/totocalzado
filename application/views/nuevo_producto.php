@@ -5,7 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="es" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<?php $this->load->view('header'); ?>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+			<?php $this->load->view('header'); ?>
 		<script type="text/javascript" src="<?=$base_url?>/recursos/js/bootstrap.min.js"></script>
 		<title>nuevo producto</title>
 	</head>
@@ -43,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</select>
 			</div>
 			<div class="col-2">
-				<button type="button" data-toggle="modal" data-target="#IngresoMarca" data-whatever="@mdo" class="btn btn-primary"><i class='fas fa-plus'></i></button>
+				<button type="button" data-toggle="modal" data-target="#IngresoMarca" data-whatever="@mdo" class="btn btn-success"><i class='fas fa-plus'></i></button>
 			</div>
 			</div>
 			<label class="form-control-label" for="inputDanger1">Seleccione estilo</label>
@@ -59,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data-toggle="modal"
 						data-target="#IngresoEstilo"
 						data-whatever="@mdo"
-						class="btn btn-primary">
+						class="btn btn-success">
 						<i class='fas fa-plus'></i>
 					</button>
 				</div>
@@ -85,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data-toggle="modal"
 						data-target="#IngresoColor"
 						data-whatever="@mdo"
-						class="btn btn-primary">
+						class="btn btn-success">
 						<i class='fas fa-plus'></i>
 					</button>
 				</div>
@@ -194,7 +196,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Cerrar</button>
-						<button  type="submit" class="btn btn-primary" name="guardar" value="Guardar" style="color:white;">Guardar</button>
+						<button  type="submit" class="btn btn-success" name="guardar" value="Guardar" style="color:white;">Guardar</button>
 					</div>
 				</form>
 			</div>
@@ -219,7 +221,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Cerrar</button>
-						<button  onclick="nuevoColor()" data-dismiss="modal" class="btn btn-primary" name="guardar" value="Guardar" style="color:white;">Guardar</button>
+						<button  onclick="nuevoColor()" data-dismiss="modal" class="btn btn-success" name="guardar" value="Guardar" style="color:white;">Guardar</button>
 					</div>
 			</div>
 		</div>
@@ -273,7 +275,6 @@ $(function(){
 		})
 
 		function nuevoProveedor(){
-			//validar No. de CUI
 			var nombre = $("#nombre_proveedor").val();
 			var telefono = $("#telefono_proveedor").val();
 			var direccion = $("#direccion_proveedor").val();

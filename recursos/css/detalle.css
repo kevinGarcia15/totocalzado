@@ -232,7 +232,7 @@ body {
   height: 50px;
   width: 100%;
 }
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 600px) {
   .detalle{
     flex-direction: column;
     height: 1115px;
