@@ -16,7 +16,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php $this->load->view('menu'); ?>
   <section class="main">
     <?php $this->load->view('carusel'); ?>
-
   </section>
 <!--Ofertas------------------------------------------------------------------->
   <h3 class="categories__title">OFERTAS</h3>

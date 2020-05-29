@@ -27,7 +27,7 @@ simpleCart({
   cartStyle: "table", //puede ser div o table
   checkout: {
       type: "SendForm" ,
-      url: "http://totocalzado.com/proventa/pagar" ,
+      url: "https://totocalzado.com/proventa/pagar" ,
       method: "POST" ,
       success: "success.html" ,
       cancel: "cancel.html" ,

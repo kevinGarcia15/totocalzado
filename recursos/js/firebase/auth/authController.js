@@ -31,7 +31,7 @@ $(() => {
 
     $('#btnInicioSesion').click(() => {
       console.log('loggin')
-      window.location.href='http://totocalzado.com/loggin'
+      window.location.href='https://totocalzado.com/loggin'
     });
 
 });

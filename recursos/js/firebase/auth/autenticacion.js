@@ -3,12 +3,12 @@ class Autenticacion {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result =>{
         if (result.user.emailVerified) {
-            $('#avatar').attr('src', 'http://totocalzado.com/recursos/img/usuario_auth.png')
+//            $('#avatar').attr('src', 'https://totocalzado.com/recursos/img/usuario_auth.png')
             Materialize.toast(`Bienvenido ${result.user.displayName}, te estamos redirigiendo`, 5000)
             //variables de sesion en php
             let nombre = result.user.displayName
             let rol = 'usuario'
-            let user_photo = 'http://totocalzado.com/recursos/img/usuario_auth.png'
+            let user_photo = 'https://totocalzado.com/recursos/img/usuario_auth.png'
             let uid = result.user.uid
             this.getPhpSession(nombre, rol, user_photo,uid)
         }else {
@@ -37,8 +37,8 @@ class Autenticacion {
         })
 
         const configuracion = {
-        // url:'http://totocalzado.com/'
-          url:'http://totocalzado.com'
+        // url:'https://totocalzado.com/'
+          url:'https://totocalzado.com/Loggin'
         }
 
         result.user.sendEmailVerification(configuracion).catch(error =>{
@@ -53,7 +53,7 @@ class Autenticacion {
           4000
       )
       console.log('bienvenido, realiza la verificacion en tu correo')
-      window.setTimeout(()=>{window.location.href='/'},3000)
+      window.setTimeout(()=>{window.location.href='/'},4000)
 
       })
       .catch(error =>{
@@ -67,7 +67,7 @@ class Autenticacion {
 
     firebase.auth().signInWithPopup(provider)
     .then(result => {
-      $('#avatar').attr('src', result.user.photoURL)
+//      $('#avatar').attr('src', result.user.photoURL)
       $('.modal').modal('close')
       Materialize.toast(`Bienvenido ${result.user.displayName} !! `, 4000)
 
@@ -90,7 +90,7 @@ class Autenticacion {
 
     firebase.auth().signInWithPopup(provider)
     .then(result => {
-      $('#avatar').attr('src', result.user.photoURL)
+//      $('#avatar').attr('src', result.user.photoURL)
       $('.modal').modal('close')
       Materialize.toast(`Bienvenido ${result.user.displayName} !! `, 4000)
 
@@ -114,7 +114,7 @@ class Autenticacion {
   getPhpSession(nombre,rol,user_photo,uid){
     var request = $.ajax({
       method: "POST",
-      url: "http://totocalzado.com/loggin/loggin",
+      url: "https://totocalzado.com/loggin/loggin",
       data: {
             usuario: nombre,
             rol: rol,
