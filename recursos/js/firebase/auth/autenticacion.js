@@ -3,7 +3,6 @@ class Autenticacion {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result =>{
         if (result.user.emailVerified) {
-//            $('#avatar').attr('src', 'https://totocalzado.com/recursos/img/usuario_auth.png')
             Materialize.toast(`Bienvenido ${result.user.displayName}, te estamos redirigiendo`, 5000)
             //variables de sesion en php
             let nombre = result.user.displayName
@@ -13,16 +12,13 @@ class Autenticacion {
             this.getPhpSession(nombre, rol, user_photo,uid)
         }else {
           firebase.auth().signOut()
-          Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico`, 5000)
-  //        window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+          Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico, esto puede tardar unos minutos`, 5000)
         }
       })
       .catch(error =>{
         console.error(error);
         Materialize.toast(`Error al autenticar, revise su correo o contraseña!! `, 4000)
       })
-    //$('#avatar').attr('src', 'imagenes/usuario_auth.png')
-    //Materialize.toast(`Bienvenido ${result.user.displayName}`, 5000)
     $('.modal').modal('close')
 
   }
@@ -37,7 +33,6 @@ class Autenticacion {
         })
 
         const configuracion = {
-        // url:'https://totocalzado.com/'
           url:'https://totocalzado.com/Loggin'
         }
 
@@ -49,7 +44,7 @@ class Autenticacion {
         firebase.auth().signOut()
 
         Materialize.toast(
-          `Bienvenido ${nombres}, debes realizar el proceso de verificación en tu correo electronico`,
+          `Bienvenido ${nombres}, debes realizar el proceso de verificación en tu correo electronico, esto puede tardar unos minutos`,
           4000
       )
       console.log('bienvenido, realiza la verificacion en tu correo')

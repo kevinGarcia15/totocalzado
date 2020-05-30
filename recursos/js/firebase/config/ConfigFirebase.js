@@ -1,10 +1,10 @@
 var firebaseConfig = {
-  apiKey: "AIzaSyA-ZnDHOS5rnDIJykW8GAGBHbnDqOeDpBc",
-  authDomain: "blogeekplatzi-ff97c.firebaseapp.com",
-  databaseURL: "https://blogeekplatzi-ff97c.firebaseio.com",
-  projectId: "blogeekplatzi-ff97c",
-  storageBucket: "blogeekplatzi-ff97c.appspot.com",
-  messagingSenderId: "993052324540",
-  appId: "1:993052324540:web:758684c9edb30c546296b9",
-  measurementId: "G-FVEL136BYN"
+  apiKey: "AIzaSyDOpHAEPTswEAEhSO4uX878Hj9Bcso1eUs",
+  authDomain: "totocalzado-e467b.firebaseapp.com",
+  databaseURL: "https://totocalzado-e467b.firebaseio.com",
+  projectId: "totocalzado-e467b",
+  storageBucket: "totocalzado-e467b.appspot.com",
+  messagingSenderId: "661855834262",
+  appId: "1:661855834262:web:10c975d6eef64361c672b7",
+  measurementId: "G-1MVB4X3CLP"
 };

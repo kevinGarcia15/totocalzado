@@ -129,7 +129,7 @@
   <img  class="modal-content" id="img01">
   <div class="modal-options">
     <div id="caption"></div>
-    <span class="close">&times;</span>
+    <span id="close" class="close">&times;</span>
   </div>
 </div>
 <!--Imagen modal------------------------------------------------------------->
@@ -159,7 +159,7 @@ img2.onclick = function(){
   captionText.innerHTML = this.alt;
 }
 
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementById("close");
 span.onclick = function() {
   var myImg = document.getElementById("img01");
   var currWidth = myImg.clientWidth;
@@ -170,15 +170,6 @@ span.onclick = function() {
   }
   modal.style.display = "none";
 }
-
-// $("#myModal").scroll(function(){
-//   x+=1
-//   if (x > 30) {
-//     modal.style.display = "none";
-//   }
-//   console.log(x)
-// });
-
   $('#img01').on('dblclick' ,function(){
       var myImg = document.getElementById("img01");
       var currWidth = myImg.clientWidth;

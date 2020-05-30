@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php $this->load->view('header'); ?>
 	<link rel="stylesheet" href="<?=$base_url?>/recursos/css/home.css" media="screen">
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/carouselInicio.css" media="screen">
-
+<?php $inicio = true; ?>
   <title>Totocalzado</title>
 </head>
 <body>
@@ -18,41 +18,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <?php $this->load->view('carusel'); ?>
   </section>
 <!--Ofertas------------------------------------------------------------------->
-  <h3 class="categories__title">OFERTAS</h3>
-  <section class="carousel">
-    <div class="carousel__container">
+<?php if (!empty($Ofertas)): ?>
+  <div class="title-carousel">
+    <a href="<?=$base_url?>/Departamento/oferta">
+      <h3 class="categories__title">OFERTAS</h3></a>
+    </div><br><br><br>
+    <section class="carousel">
+      <div class="carousel__container">
 
-    <?php foreach ($Ofertas as $key): ?>
-      <div onclick="detalle(<?=$key['id_producto'];?>,'<?=$key['dep']?>')" class="carousel-item">
-        <img
-        class="carousel-item__img"
-        src="<?=$base_url?>/<?=$key['img_carrusel']?>"
-        alt="">
-        <div class="carousel-item__details">
-          <div>
+        <?php foreach ($Ofertas as $key): ?>
+          <div
+          onclick="detalle(<?=$key['id_producto'];?>,'<?=$key['dep']?>')"
+          class="carousel-item">
+          <img
+          class="carousel-item__img"
+          src="<?=$base_url?>/<?=$key['img_carrusel']?>"
+          alt="">
+          <div class="carousel-item__details">
+            <div>
+              <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
+                <img
+                class="carousel-item__details--img"
+                src="<?=$base_url?>/recursos/img/plus-icon.png"
+                alt="Plus Icon">
+              </a>
+            </div>
             <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-              <img
-              class="carousel-item__details--img"
-              src="<?=$base_url?>/recursos/img/plus-icon.png"
-              alt="Plus Icon">
-            </a>
-          </div>
-          <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-          <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
-          <?php if ($key['oferta'] == '0'): ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
-          <?php else: ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
-          <?php endif; ?>
+              <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
+              <?php if ($key['oferta'] == '0'): ?>
+                <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
+              <?php else: ?>
+                <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
+              <?php endif; ?>
+            </div>
+          </a>
         </div>
-      </a>
-      </div>
-    <?php endforeach; ?>
+      <?php endforeach; ?>
     </div>
-  </section>
+  </section>  
+<?php endif; ?>
   <!--caballeros------------------------------------------------------------------->
-
-  <h3 class="categories__title">Caballeros</h3>
+<div class="title-carousel">
+  <a href="<?=$base_url?>/Departamento/dep?dep=Caballero">
+    <h3 class="categories__title">Caballeros</h3>
+  </a><br><br><br>
+</div>
   <section class="carousel">
     <div class="carousel__container">
 
@@ -84,7 +94,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </section>
 
   <!--Daams------------------------------------------------------------------->
-  <h3 class="categories__title">Damas</h3>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Dama">
+    <h3 class="categories__title">Damas</h3>
+  </a><br><br><br>
   <section class="carousel">
     <div class="carousel__container">
 
@@ -125,5 +137,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   function detalle(id,dep){
     window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
   }
+
+  $('#arrow-left').hide()
 </script>
 </html>

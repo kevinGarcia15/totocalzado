@@ -51,6 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <br id="space">
 <!--Admin----------------------------------------------------------------->
 <div class="menu-secundario">
+    <div class="arrow-left">
+      <a id="arrow-left" href="javascript:history.back()">
+        <img src="<?=$base_url?>/recursos/img/arrow-left.png" alt="arrow left">
+      </a>
+    </div>
   <div class="topnav" id="myTopnav">
    <a  id="textMenuHover" href="<?=$base_url?>" class="active">Menú</a>
 
@@ -76,8 +81,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      <div class="dropdown-content">
        <a href="<?=$base_url?>/Departamento/dep?dep=Caballero">Caballero</a>
        <a href="<?=$base_url?>/Departamento/dep?dep=Dama">Dama</a>
-       <a href="<?=$base_url?>/Departamento/dep?dep=Niño">Niño</a>
-       <a href="<?=$base_url?>/Departamento/dep?dep=Niña">Niña</a>
+<!--       <a href="<?=$base_url?>/Departamento/dep?dep=Niño">Niño</a> -->
+<!--       <a href="<?=$base_url?>/Departamento/dep?dep=Niña">Niña</a> -->
      </div>
    </div>
 

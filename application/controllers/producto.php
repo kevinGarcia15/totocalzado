@@ -19,17 +19,22 @@ class Producto extends CI_Controller {
 	public function nuevo(){
 		$data['base_url'] = $this->config->item('base_url');
 		$data['etiqueta'] = $this->Producto_model->seleccionarEtiqueta();
-
+//crea un directorio para guardar las imagenes
 	if ($this->input->post('continuar') == 'continuar') {
+		$nuevo_producto = "./recursos/productos/".$_POST['codigo']."";
+		if (!file_exists($nuevo_producto)) {
+		    mkdir($nuevo_producto, 0777, true);
+		}
+
 		//para subir las imagenes
 		$img_1 = $_FILES['url_1']['tmp_name'];
-		$destino1 = "./recursos/productos/".$_FILES['url_1']['name'];
+		$destino1 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_1']['name'];
 		move_uploaded_file($img_1, $destino1);
 		$img_2 = $_FILES['url_2']['tmp_name'];
-		$destino2 = "./recursos/productos/".$_FILES['url_2']['name'];
+		$destino2 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_2']['name'];
 		move_uploaded_file($img_2, $destino2);
 		$img_3 = $_FILES['url_3']['tmp_name'];
-		$destino3 = "./recursos/productos/".$_FILES['url_3']['name'];
+		$destino3 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_3']['name'];
 		move_uploaded_file($img_3, $destino3);
 
 				$producto = array(
@@ -60,7 +65,6 @@ class Producto extends CI_Controller {
 		$data['numeracion'] = $this->Producto_model->seleccionarNumeracionId($this->session->userdata('numeracion'));
 		$data['color'] = $this->Producto_model->seleccionarColorId($this->session->userdata('color'));
 		$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
-		var_dump($this->session->userdata());
 
 			if (isset($_POST['Guardar'])) {
 				$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros

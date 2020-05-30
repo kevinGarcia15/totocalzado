@@ -230,9 +230,15 @@ body {
 .menu-secundario{
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background: #11519b;
+}
+.arrow-left img{
+  margin-left: 5px;
+  height: 20px;
+  width: 20px;
 }
 .topnav {
   background-color: #11519b;

@@ -24,6 +24,9 @@ class Informes extends CI_Controller {
 
 		$this->load->view('nueva_incersion', $data);
 	}
+	public function inventario(){
+		
+	}
 
 	public function mostrar()
 	{
