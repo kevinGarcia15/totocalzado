@@ -1,4 +1,3 @@
-<link href="//db.onlinewebfonts.com/c/f518e4e7999e3a3b645a9605c23e2cf6?family=Bitsumishi" rel="stylesheet" type="text/css"/>
 <!-- Slideshow container -->
 <div class="slideshow-container">
 

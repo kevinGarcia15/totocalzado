@@ -76,7 +76,7 @@ class Autenticacion {
     })
     .catch(error =>{
       console.error(error);
-      Materialize.toast(`Error al autenticar usuario con google: ${error} !! `, 4000)
+      Materialize.toast(`Error al autenticar usuario con google: Por favor vuelve a intentarlo!! `, 4000)
     })
   }
 
@@ -100,7 +100,7 @@ class Autenticacion {
     })
     .catch(error =>{
       console.error(error);
-      Materialize.toast(`Error al autenticar usuario con facebook: ${error} !! `, 4000)
+      Materialize.toast(`Error al autenticar usuario con facebook:Por favor vuelve a intentarlo!! `, 4000)
     })
 
   }

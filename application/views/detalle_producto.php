@@ -94,7 +94,7 @@
   <div class="carousel__container">
 
   <?php foreach ($recomendacion as $key): ?>
-    <div class="carousel-item">
+    <div onclick="detalle(<?=$key['id_producto'];?>,'<?=$key['dep']?>')" class="carousel-item">
       <img
       class="carousel-item__img"
       src="<?=$base_url?>/<?=$key['img_carrusel']?>"
@@ -233,5 +233,9 @@ $('.item_size').on('change', function(){
     console.log('clase agregada')
   }
 })
+
+function detalle(id,dep){
+  window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
+}
 </script>
 </html>

@@ -55,13 +55,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       <?php endforeach; ?>
     </div>
-  </section>  
+  </section>
 <?php endif; ?>
+
   <!--caballeros------------------------------------------------------------------->
 <div class="title-carousel">
-  <a href="<?=$base_url?>/Departamento/dep?dep=Caballero">
-    <h3 class="categories__title">Caballeros</h3>
-  </a><br><br><br>
+<a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">
+  <h3 class="categories__title">Caballeros</h3>
+</a><br><br><br>
 </div>
   <section class="carousel">
     <div class="carousel__container">
@@ -90,11 +91,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     <?php endforeach; ?>
+    <!--Ver mas-->
+      <div class="carousel-item">
+        <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">
+          <img
+          class="carousel-item__img"
+          src="<?=$base_url?>/recursos/img/ver-mas.jpg"
+          alt=""/>
+        </a>
+      </div>
     </div>
   </section>
 
   <!--Daams------------------------------------------------------------------->
-  <a href="<?=$base_url?>/Departamento/dep?dep=Dama">
+  <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">
     <h3 class="categories__title">Damas</h3>
   </a><br><br><br>
   <section class="carousel">
@@ -124,6 +134,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     <?php endforeach; ?>
+    <!--Ver mas-->
+      <div class="carousel-item">
+        <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">
+          <img
+          class="carousel-item__img"
+          src="<?=$base_url?>/recursos/img/ver-mas.jpg"
+          alt=""/>
+        </a>
+      </div>
     </div>
   </section>
     </div>

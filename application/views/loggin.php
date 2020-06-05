@@ -15,7 +15,7 @@
 </head>
 <body>
   <?php $this->load->view('menu'); ?>
-  <header class="header">
+  <header class="header-loggin">
   </header>
   <section class="login">
     <section class="login__container">

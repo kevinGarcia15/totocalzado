@@ -22,6 +22,21 @@ h2{
   height: 350px;
   overflow: hidden;
 }
+.tallas{
+  background-color: #E0E0E0;
+  border: 2px solid #E0E0E0;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  width: 34px;
+  height: 34px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tallas a{
+  color: black;
+  text-align: center;
+}
 .col-lg-4{
   margin: 10px 0px 10px 0px;
 }

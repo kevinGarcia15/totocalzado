@@ -19,8 +19,15 @@ class Departamento extends CI_Controller {
 	public function dep(){
 		$data['base_url'] = $this->config->item('base_url');
 		$data['dep'] = $_GET['dep'];
-
-		$data['departamentos'] = $this->Informes_model->seleccionarDepartamento($data['dep']);
+		$data['num'] = $_GET['t'];
+		$data['numeros'] = $this->Informes_model->seleccionarNumeroDepto($data['num']);
+		if (isset($_GET['tall'])) {
+			$data['num_elegido_id'] = $_GET['tallid'];
+			$data['numero_elegido'] = $_GET['tall'];
+			$data['departamentos'] = $this->Informes_model->seleccionarDepartamento($data['dep'],$data['num_elegido_id']);
+		}else {
+			$data['departamentos'] = $this->Informes_model->seleccionarDepartamento($data['dep'],null);
+		}
 		$this->load->view('departamento', $data);
 	}
 

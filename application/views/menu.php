@@ -10,6 +10,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </a>
 
   <div class="rigth__menu">
+    <div class="whatsapp">
+      <a href="https://wa.me/50231068959">
+        <img
+          src="<?=$base_url?>/recursos/img/whatsappGreen.png"
+          alt=""
+          style="width: 48px;"
+          >
+      </a>
+    </div>
 <!--carrito de detalles-------------------------------------------------------->
     <div class="carrito">
       <div class="carrito-total">
@@ -73,18 +82,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </div>
   <?php endif; ?>
-
-   <div class="dropdown-second">
-     <button class="dropbtn">Categorías
-       <i class="fa fa-caret-down"></i>
-     </button>
-     <div class="dropdown-content">
-       <a href="<?=$base_url?>/Departamento/dep?dep=Caballero">Caballero</a>
-       <a href="<?=$base_url?>/Departamento/dep?dep=Dama">Dama</a>
-<!--       <a href="<?=$base_url?>/Departamento/dep?dep=Niño">Niño</a> -->
-<!--       <a href="<?=$base_url?>/Departamento/dep?dep=Niña">Niña</a> -->
-     </div>
-   </div>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">Dama</a>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">Caballero</a>
+  <a class="dropbtn" href="<?=$base_url?>/Departamento/oferta">OFERTAS</a>
 
    <div class="dropdown-second">
      <button class="dropbtn">Nuestros productos
@@ -93,11 +93,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      <div class="dropdown-content" id="etiqueta">
      </div>
    </div>
-   <a class="dropbtn" href="<?=$base_url?>/Departamento/oferta">OFERTAS</a>
    <a
+    style="background: #11519b"
      id="btnModal"
      type="button"
-     class="trigger"
+     class="trigger dropbtn"
      data-toggle="modal"
      data-target="#contacto"
      data-whatever="@mdo"

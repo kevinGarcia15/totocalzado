@@ -47,13 +47,19 @@
 			<span class="close">×</span>
 			<h2>Contacto</h2>
 			<div class="">
-				 <img src="<?=$base_url?>/recursos/img/whatsappGreen.png" alt="">+(502) 5746 9663
+				<a href="https://wa.me/50257469663">
+					<img
+						src="<?=$base_url?>/recursos/img/whatsappGreen.png"
+						alt=""
+						style="width: 48px;">
+						+(502) 5746 9663
+				</a>
 			</div>
 			<div class="">
 				<img src="<?=$base_url?>/recursos/img/facebook-icon-sm.png" alt=""> Totocalzado
 			</div>
 			<div class="">
-				<img src="<?=$base_url?>/recursos/img/gmail-icon.png" alt=""> totocalzado.toto@gmail.com
+				<img src="<?=$base_url?>/recursos/img/gmail-icon.png" alt=""> ventas@totocalzado.com
 			</div>
 		</div>
 	</div>

@@ -112,7 +112,8 @@ class Informes_model extends CI_Model{
 						join marca m on prod.marca_id_marca = m.id_marca
 						join genero gen on prod.genero_id_genero = gen.id_genero
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
-						where gen.nombre = 'Caballero' ";
+						where gen.nombre = 'Caballero'
+						limit 5";
 
 		$dbres = $this->db->query($sql);
 		$rows = $dbres->result_array();
@@ -129,7 +130,8 @@ class Informes_model extends CI_Model{
 						join marca m on prod.marca_id_marca = m.id_marca
 						join genero gen on prod.genero_id_genero = gen.id_genero
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
-						where gen.nombre = 'Dama'";
+						where gen.nombre = 'Dama'
+						limit 5";
 
 		$dbres = $this->db->query($sql);
 		$rows = $dbres->result_array();
@@ -146,7 +148,8 @@ class Informes_model extends CI_Model{
 						join marca m on prod.marca_id_marca = m.id_marca
 						join genero gen on prod.genero_id_genero = gen.id_genero
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
-						where prod.oferta > 0";
+						where prod.oferta > 0
+						limit 5";
 
 		$dbres = $this->db->query($sql);
 		$rows = $dbres->result_array();
@@ -192,11 +195,10 @@ class Informes_model extends CI_Model{
 						where s.producto_id_producto = ?";
 
 		$dbres = $this->db->query($sql,$id);
-
 		$rows = $dbres->result_array();
-
 		return $rows;
 	}
+
 //muietra el stok eseptuando los que no tengamos en existencia
 	function 	mostrarStockDetalle($id) {
 		$sql = "SELECT s.id_stock id_stock, s.cantidad cantidad, num.numero numero
@@ -312,24 +314,28 @@ class Informes_model extends CI_Model{
 		return $rows;
 	}
 
-	function seleccionarDepartamento($depto) {
+	function seleccionarDepartamento($depto,$filtro) {
+		(isset($filtro))? $where = 'join stock on stock.producto_id_producto = prod.id_producto
+																where gen.nombre = ? and stock.cantidad > 0 and
+																stock.numero_categoria_id ='.$filtro.''
+										: $where = 'where gen.nombre = ?';
+
 		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
 						prod.codigo_proveedor cod_prov, prod.precio_compra precio,
-						prod.oferta oferta, cat.nombre categoria,
+						prod.oferta oferta,
 						UPPER(m.nombre) as marca, UPPER(col.nombre) as color, UPPER(es.nombre) as estilo,
 						prod.observacion descripcion, prod.img_carrusel img_principal,
 						gen.nombre genero
 
 						FROM producto prod
-						join categoria cat on prod.categoria_id_categoria = cat.id_categoria
 						join marca m on prod.marca_id_marca = m.id_marca
 						join color col on prod.color_id_color = col.id_color
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
 						join genero gen on prod.genero_id_genero = gen.id_genero
-						where gen.nombre = ?";
+						".$where."";
 
-		$dbres = $this->db->query($sql,$depto);
-
+		$valores = array($depto);
+		$dbres = $this->db->query($sql,$valores);
 		$rows = $dbres->result_array();
 
 		return $rows;
@@ -339,13 +345,12 @@ class Informes_model extends CI_Model{
 	function seleccionarOferta() {
 		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
 						prod.codigo_proveedor cod_prov, prod.precio_compra precio,
-						prod.oferta oferta, cat.nombre categoria,
+						prod.oferta oferta,
 						UPPER(m.nombre) as marca, UPPER(col.nombre) as color, UPPER(es.nombre) as estilo,
 						prod.observacion descripcion, prod.img_carrusel img_principal,
 						gen.nombre genero
 
 						FROM producto prod
-						join categoria cat on prod.categoria_id_categoria = cat.id_categoria
 						join marca m on prod.marca_id_marca = m.id_marca
 						join color col on prod.color_id_color = col.id_color
 						join estilo es on prod.estilo_id_estilo = es.id_estilo
@@ -414,6 +419,16 @@ class Informes_model extends CI_Model{
 				order by nombre_etiqueta ASC
 				LIMIT 20";
 		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
+
+	function 	seleccionarNumeroDepto($num) {
+		$sql = "SELECT num.numero numero, ncat.id id_ncategoria
+						from numero_categoria ncat
+						join numero_calzado num on ncat.id_numero = num.id_numero
+						where ncat.id_categoria = ?";
+		$dbres = $this->db->query($sql,$num);
 		$rows = $dbres->result_array();
 		return $rows;
 	}
