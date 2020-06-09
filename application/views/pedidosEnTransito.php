@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Font -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <!-- Styles -->
-  <script src="<?=$base_url?>/recursos/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/header.css" media="screen">
-    <link rel="stylesheet" href="<?=$base_url?>/recursos/css/footer.css" media="screen">
+    <?php $this->load->view('header'); ?>
   <!-- Data tables------------------------------------------------------------>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
@@ -98,11 +93,7 @@
       </table>
     </div>
     </div>
-  <footer class="footer">
-    <a href="/">Terminos de uso</a>
-    <a href="/">Declaración de privacidad</a>
-    <a href="/">Centro de ayuda</a>
-  </footer>
+  <?php $this->load->view('footer'); ?>
 </body>
 <script type="text/javascript">
 $(document).ready(function() {

@@ -3,22 +3,22 @@ class Autenticacion {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(result =>{
         if (result.user.emailVerified) {
-            $('#avatar').attr('src', 'http://13.84.34.160/totocalzado/recursos/img/usuario_auth.png')
             Materialize.toast(`Bienvenido ${result.user.displayName}, te estamos redirigiendo`, 5000)
             //variables de sesion en php
             let nombre = result.user.displayName
             let rol = 'usuario'
-            let user_photo = 'http://13.84.34.160/totocalzado/recursos/img/usuario_auth.png'
+            let user_photo = 'https://totocalzado.com/recursos/img/usuario_auth.png'
             let uid = result.user.uid
             this.getPhpSession(nombre, rol, user_photo,uid)
         }else {
           firebase.auth().signOut()
-          Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico`, 5000)
-  //        window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+          Materialize.toast(`por favor realiza la verificación de la cuenta en tu correo electronico, esto puede tardar unos minutos`, 5000)
         }
       })
-    //$('#avatar').attr('src', 'imagenes/usuario_auth.png')
-    //Materialize.toast(`Bienvenido ${result.user.displayName}`, 5000)
+      .catch(error =>{
+        console.error(error);
+        Materialize.toast(`Error al autenticar, revise su correo o contraseña!! `, 4000)
+      })
     $('.modal').modal('close')
 
   }
@@ -33,8 +33,7 @@ class Autenticacion {
         })
 
         const configuracion = {
-        // url:'http://13.84.34.160/totocalzado/'
-          url:'http://13.84.34.160:80/totocalzado'
+          url:'https://totocalzado.com/Loggin'
         }
 
         result.user.sendEmailVerification(configuracion).catch(error =>{
@@ -45,11 +44,11 @@ class Autenticacion {
         firebase.auth().signOut()
 
         Materialize.toast(
-          `Bienvenido ${nombres}, debes realizar el proceso de verificación en tu correo electronico`,
+          `Bienvenido ${nombres}, debes realizar el proceso de verificación en tu correo electronico, esto puede tardar unos minutos`,
           4000
       )
       console.log('bienvenido, realiza la verificacion en tu correo')
-      window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+      window.setTimeout(()=>{window.location.href='/'},4000)
 
       })
       .catch(error =>{
@@ -63,7 +62,7 @@ class Autenticacion {
 
     firebase.auth().signInWithPopup(provider)
     .then(result => {
-      $('#avatar').attr('src', result.user.photoURL)
+//      $('#avatar').attr('src', result.user.photoURL)
       $('.modal').modal('close')
       Materialize.toast(`Bienvenido ${result.user.displayName} !! `, 4000)
 
@@ -77,7 +76,7 @@ class Autenticacion {
     })
     .catch(error =>{
       console.error(error);
-      Materialize.toast(`Error al autenticar usuario con google: ${error} !! `, 4000)
+      Materialize.toast(`Error al autenticar usuario con google: Por favor vuelve a intentarlo!! `, 4000)
     })
   }
 
@@ -86,7 +85,7 @@ class Autenticacion {
 
     firebase.auth().signInWithPopup(provider)
     .then(result => {
-      $('#avatar').attr('src', result.user.photoURL)
+//      $('#avatar').attr('src', result.user.photoURL)
       $('.modal').modal('close')
       Materialize.toast(`Bienvenido ${result.user.displayName} !! `, 4000)
 
@@ -101,7 +100,7 @@ class Autenticacion {
     })
     .catch(error =>{
       console.error(error);
-      Materialize.toast(`Error al autenticar usuario con facebook: ${error} !! `, 4000)
+      Materialize.toast(`Error al autenticar usuario con facebook:Por favor vuelve a intentarlo!! `, 4000)
     })
 
   }
@@ -110,7 +109,7 @@ class Autenticacion {
   getPhpSession(nombre,rol,user_photo,uid){
     var request = $.ajax({
       method: "POST",
-      url: "http://13.84.34.160/totocalzado/loggin/loggin",
+      url: "https://totocalzado.com/loggin/loggin",
       data: {
             usuario: nombre,
             rol: rol,
@@ -121,6 +120,6 @@ class Autenticacion {
     request.done(function(){
       console.log('variables de sesión establecidas')
     });
-    window.setTimeout(()=>{window.location.href='/totocalzado'},3000)
+    window.setTimeout(()=>{window.location.href='/'},3000)
   }
 }

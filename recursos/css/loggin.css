@@ -3,14 +3,16 @@ body {
   font-family: 'Muli', sans-serif;
   background: #1976D2;
 }
-
+.header-loggin{
+  height:30px;
+}
 .login {
   background-image: linear-gradient(#1976D2, #8f57fd);
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 30px;
+  padding: 60px 30px;
   min-height: calc(100vh - 200px); /* El ancho será igual al tamaño de todo el height menos 200px (100px del header + 100px del footer) */
 }
 
@@ -24,7 +26,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   min-height: 700px;
-  padding: 60px 68px 40px;
+  padding: 40px 68px 40px;
   width: 400px;
 }
 
@@ -141,6 +143,10 @@ body {
     box-shadow: none;
     padding: 0px;
     width: 100%;
+    height: 500px;
+  }
+  .login {
+  height: 600px;
   }
 
   .footer {

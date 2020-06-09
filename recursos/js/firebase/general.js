@@ -10,15 +10,15 @@ $(() => {
   // TODO: Firebase observador del cambio de estado
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
-      $('#btnInicioSesion').text('Salir')
+//      $('#btnInicioSesion').text('Salir')
       if (user.photoURL) {
-        $('#avatar').attr('src', user.photoURL)
+//        $('#avatar').attr('src', user.photoURL)
       }else {
-        $('#avatar').attr('src', 'http://13.84.34.160/totocalzado/recursos/img/usuario_auth.png')
+//        $('#avatar').attr('src', 'https://totocalzado.com/recursos/img/usuario_auth.png')
       }
     }else {
-      $('#btnInicioSesion').text('Iniciar Sesión')
-      $('#avatar').attr('src', 'http://13.84.34.160/totocalzado/recursos/img/user-icon.png')
+//      $('#btnInicioSesion').text('Iniciar Sesión')
+//      $('#avatar').attr('src', 'https://totocalzado.com/recursos/img/user-icon.png')
     }
   })
 
@@ -26,16 +26,16 @@ $(() => {
   $('#salir').click(() => {
     firebase.auth().signOut()
     .then(()=>{
-      $('#avatar').attr('src', 'http://13.84.34.160/totocalzado/recursos/img/user-icon.png')
+//      $('#avatar').attr('src', 'https://totocalzado.com/recursos/img/user-icon.png')
         Materialize.toast(`SignOut correcto`, 4000)
 
         var request = $.ajax({
           method: "POST",
-          url: "http://13.84.34.160/totocalzado/loggin/logout",
+          url: "https://totocalzado.com/loggin/logout",
         });
         request.done(function(){
           console.log('sesion destruida')
-          window.setTimeout(()=>{window.location.href='/totocalzado'},2000)
+          window.setTimeout(()=>{window.location.href='/'},2000)
         });
     })
     .catch(error => {

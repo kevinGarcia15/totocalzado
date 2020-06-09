@@ -19,4 +19,10 @@ class Inicio extends CI_Controller {
 		$data['Ofertas'] = $this->Informes_model->mostrarProductoOfertas();
 		$this->load->view('inicio', $data);
 	}
+
+	public function politicaprivacidad()
+	{
+		$data['base_url'] = $this->config->item('base_url');
+		$this->load->view('politicaPrivacidad', $data);
+	}
 }

@@ -10,7 +10,7 @@
      font-size: 50px;
      color: white;
      text-align: center;
-     line-height: 70px;
+     line-height: 1;
 
      position: fixed;
      bottom: 45px;

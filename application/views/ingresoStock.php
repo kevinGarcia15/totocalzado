@@ -20,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h6><strong>Numeración: </strong><?=$numeracion?></h6>
 			<h6><strong>Color: </strong><?=$color?></h6>
 			<h6><strong>Precio al público: </strong>Q<?=$this->session->userdata('precio_compra');?></h6>
-			<h6><strong>Precio Mayoreo: </strong>Q<?=$this->session->userdata('Precio_mayoreo');?></h6>
+			<h6><strong>Precio Oferta: </strong>Q<?=$this->session->userdata('oferta');?></h6>
 			<br>
 			<table>
 				<h4 style="font-family: Vegur, 'PT Sans', Verdana, sans-serif;">Ingrese el inventario</h4>
@@ -32,8 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php } ?>
 			</table><br>
 			<td colspan="2">
-				<input class="btn btn-primary btn-md"  role="button"  type="submit" name="Guardar" value="Guardar">
+				<input class="btn btn-success btn-md"  role="button"  type="submit" name="Guardar" value="Guardar">
 				<input class="btn btn-warning btn-md"  role="button"  type="reset" required name="Reset" value="Reset">
+				<a class="btn btn-danger btn-md" href="<?=$base_url?>/producto/borrarVariablesSesion?f=1">Cancelar</a>
 			</td>
 		</form>
 	<br><br><br><br>

@@ -16,19 +16,25 @@ class Producto extends CI_Controller {
 	}
 
 	//Datos de registro del producto------------------------------------------------
-	public function nuevo()
-	{
+	public function nuevo(){
 		$data['base_url'] = $this->config->item('base_url');
+		$data['etiqueta'] = $this->Producto_model->seleccionarEtiqueta();
+//crea un directorio para guardar las imagenes
 	if ($this->input->post('continuar') == 'continuar') {
+		$nuevo_producto = "./recursos/productos/".$_POST['codigo']."";
+		if (!file_exists($nuevo_producto)) {
+		    mkdir($nuevo_producto, 0777, true);
+		}
+
 		//para subir las imagenes
 		$img_1 = $_FILES['url_1']['tmp_name'];
-		$destino1 = "./recursos/productos/".$_FILES['url_1']['name'];
+		$destino1 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_1']['name'];
 		move_uploaded_file($img_1, $destino1);
 		$img_2 = $_FILES['url_2']['tmp_name'];
-		$destino2 = "./recursos/productos/".$_FILES['url_2']['name'];
+		$destino2 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_2']['name'];
 		move_uploaded_file($img_2, $destino2);
 		$img_3 = $_FILES['url_3']['tmp_name'];
-		$destino3 = "./recursos/productos/".$_FILES['url_3']['name'];
+		$destino3 = "./recursos/productos/".$_POST['codigo']."/".$_FILES['url_3']['name'];
 		move_uploaded_file($img_3, $destino3);
 
 				$producto = array(
@@ -44,10 +50,11 @@ class Producto extends CI_Controller {
 												'url_1' => $destino1,
 												'url_2' => $destino2,
 												'url_3' => $destino3,
+												'etiqueta'=>$_POST['etiqueta'],
 											 );
 				$this->session->set_userdata($producto);
-			 	redirect("/producto/ingresarStock");
-		}
+		 	 	redirect("/producto/ingresarStock/");
+			}
 		$this->load->view('nuevo_producto', $data);
 	}
 
@@ -58,7 +65,6 @@ class Producto extends CI_Controller {
 		$data['numeracion'] = $this->Producto_model->seleccionarNumeracionId($this->session->userdata('numeracion'));
 		$data['color'] = $this->Producto_model->seleccionarColorId($this->session->userdata('color'));
 		$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
-
 
 			if (isset($_POST['Guardar'])) {
 				$data['numeros'] = $this->Producto_model->seleccionarNumeros($this->session->userdata('numeracion'));//selecciona los numeros dentro de categoria de numeros
@@ -81,28 +87,45 @@ class Producto extends CI_Controller {
 				$this->Producto_model->ingresarUrlImagenes(
 					$this->session->userdata('url_'.$i.''),$id_producto);
 			}
+// //ingresar las etiquetas a la BD
+$num =	count($this->session->userdata('etiqueta'));
+
+	for ($i=0; $i < $num; $i++) {
+		$this->Producto_model->ingresarTag(
+		$id_producto,$this->session->userdata('etiqueta')[$i]);
+	}
 //ingresa los numeros del stok
 			$bandera = 0;
 				foreach ($data['numeros'] as $a ) {
 						$this->Producto_model->ingresarStock($numeros[$bandera], $id_producto, $a['id_numero_categoria']);
 						$bandera = $bandera + 1;
 				}
-				$borrar = array('codigo',
-											'precio_compra',
-											'Precio_mayoreo',
-											'numeracion',
-											'proveedor',
-											'marca',
-											'color',
-											'estilo',
-											'observaciones'
-										);
-				$this->session->unset_userdata($borrar);//borra las variables de sesion
-
+				$this->borrarVariablesSesion();
 				redirect("/informes/nuevaIncersion/${id_producto}");
 			}
 
 		$this->load->view('ingresoStock', $data);
+	}
+
+	public function borrarVariablesSesion(){
+		$borrar = array('codigo',
+		'marca',
+		'estilo',
+		'numeracion',
+		'color',
+		'precio_compra',
+		'oferta',
+		'observaciones',
+		'genero',
+		'url_1',
+		'url_2',
+		'url_3',
+		'etiqueta',
+	);
+	$this->session->unset_userdata($borrar);//borra las variables de sesion
+		if (isset($_GET['f'])) {
+			redirect("/");
+		}
 	}
 
 	public function marca(){

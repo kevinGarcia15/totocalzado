@@ -5,27 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- Font -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="<?=$base_url?>/recursos/js/jquery.mlens-1.7.min.js"></script>
+  <?php $this->load->view('header'); ?>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
-<!-- Agregamos la librería Simple Cart -->
-<script src="<?=$base_url?>/recursos/js/carrito/simpleCart.min.js"></script>
-<script src="<?=$base_url?>/recursos/js/carrito/app.js"></script>
-<!--Firebase -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/config/ConfigFirebase.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/general.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/autenticacion.js"></script>
-<script type="text/javascript" src="<?=$base_url?>/recursos/js/firebase/auth/authController.js"></script>
   <!-- Styles -->
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/header.css" media="screen">
-  <link rel="stylesheet" href="<?=$base_url?>/recursos/css/footer.css" media="screen">
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/detalle.css" media="screen">
 
   <!-- Title -->
@@ -40,10 +24,11 @@
   <section class="detalle simpleCart_shelfItem">
     <div class="detalle-miniaturas">
       <?php $contImg = 0; foreach ($img as $img_min): ?>
-        <a href="#img<?=$contImg?>"><img
-        class="detalle-miniaturas__img"
-        src="<?=$base_url?>/<?=$img_min['URL']?>"
-        alt="min"/></a>
+          <img
+          id="myImg<?=$contImg?>"
+          class="detalle-miniaturas__img"
+          src="<?=$base_url?>/<?=$img_min['URL']?>"
+          alt="CATALOGO"/>
       <?php $contImg = $contImg + 1; endforeach; ?>
     </div>
 
@@ -56,7 +41,7 @@
     </div>
 
     <div class="detalle-description">
-      <p> <?php echo $key['estilo']; ?></p>
+      <p> <?php echo $key['marca'].' '.$key['estilo']; ?></p>
       <div class="detalle__item-text">
         <ul>
           <li>
@@ -97,7 +82,27 @@
         </div>
         <div id="numero" class="item_name">
         </div>
-        <button class="btn btn-success" id="add" type="button" name="button">LO QUIERO</button>
+        <button
+          class="btn btn-success"
+          id="add"
+          type="button"
+          name="button">
+          LO QUIERO
+        </button>
+        <div class="pedir_whatsapp">
+          Ó
+          <button
+          id="btn_silicitar_whatsapp"
+          class="btn"
+          type="button">
+          SOLICITAR POR whatsapp
+          <img
+          src="<?=$base_url?>/recursos/img/icon-whatsapp.png"
+          alt="whatsapp"
+          style="width:21px;margin-left: 8px;"
+          >
+        </button>
+        </div>
       </div>
     </div>
   </section>
@@ -109,7 +114,7 @@
   <div class="carousel__container">
 
   <?php foreach ($recomendacion as $key): ?>
-    <div class="carousel-item">
+    <div onclick="detalle(<?=$key['id_producto'];?>,'<?=$key['dep']?>')" class="carousel-item">
       <img
       class="carousel-item__img"
       src="<?=$base_url?>/<?=$key['img_carrusel']?>"
@@ -136,96 +141,134 @@
 </section>
 
   <?php //var_dump($this->session->userdata()); ?>
-<?php echo $this->session->USUARIO; ?>
 <?php $this->load->view('FloatingActionButton'); ?>
-  <footer class="footer">
-    <a href="/">Terminos de uso</a>
-    <a href="/">Declaración de privacidad</a>
-    <a href="/">Centro de ayuda</a>
-  </footer>
-
+  <?php $this->load->view('footer'); ?>
 <!--Imagen modal------------------------------------------------------------->
-<?php $Next = 0; $Prev = 2; foreach ($img as $imgModal): ?>
-    <?php $contPrev = $Prev-$Next;
-          ($Prev-$Next == -2) ? $contPrev = 1 : $contPrev;
-
-          $contNext = $Next +1;
-          ($contNext == 3) ? $contNext = 0 : $contNext;
-
-    ?>
-  <div class="img-modal" id="img<?=$Next?>">
-    <h3>CATALOGO</h3>
-    <div class="img-modal-princpal">
-      <a onclick="clickpage()" href="#img<?=$contPrev?>"><</a>
-      <a onclick="clickpage()" href="#img<?=$contNext?>"><img src="<?=$base_url?>/<?=$imgModal['URL']?>"></a>
-      <a onclick="clickpage()" href="#img<?=$contNext?>">></a>
-    </div>
-    <a onclick="go()" class="img-cerrar" href="">X</a>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <img  class="modal-content" id="img01">
+  <div class="modal-options">
+    <div id="caption"></div>
+    <span id="close" class="close">&times;</span>
   </div>
-  <?php $Next = $Next+1;  $Prev = $Prev - 1;?>
-<?php endforeach; ?>
+</div>
 <!--Imagen modal------------------------------------------------------------->
 </body>
 <script type="text/javascript">
-var contPageClickedModal = 0;
-function clickpage(){
-  contPageClickedModal = contPageClickedModal - 1
-  console.log(contPageClickedModal);
-}
-function go(){
-  window.history.go(contPageClickedModal-1);
-  contPageClickedModal = 0;
-}
+$( document ).ready(function() {
+  $('.pedir_whatsapp').hide()
 
-function addCarrito(){
-  var precio = $("#precio").val();
-  var id_producto = $("#id_producto").val();
-  var cantidad = 1;
+  //lightbox
+  var modal = document.getElementById("myModal");
+  var img0 = document.getElementById("myImg0");
+  var img1 = document.getElementById("myImg1");
+  var img2 = document.getElementById("myImg2");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  var x = 0;
+  img0.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+  img1.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+  img2.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
 
-  var request = $.ajax({
-    method: "POST",
-    url: "<?=$base_url?>/proventa/add",
-    data: {
-          id_producto: id_producto,
-          precio_producto: precio,
-          cantidad: cantidad
-        }
-  });
-  request.done(function(respuesta){
-    swal.fire('Agregado al carrito exitosamente')
-    console.log(respuesta)
-//    location.reload();
-  });
-}
-//validado el select para los numeros
-$('#add').on('click', function(){
-  var numero = $('.item_size option:selected').text()
-  if (numero == 'seleccionar') {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Debe seleccionar un número!',
-      footer: '<a href></a>'
-    })
-  }else {
-    Swal.fire(
+  var span = document.getElementById("close");
+  span.onclick = function() {
+    var myImg = document.getElementById("img01");
+    var currWidth = myImg.clientWidth;
+    if (currWidth >= 1190) {
+      myImg.style.width = (700) + "px";
+    }else if (currWidth >= 850) {
+      myImg.style.width = (400) + "px";
+    }
+    modal.style.display = "none";
+  }
+  $('#img01').on('dblclick' ,function(){
+    var myImg = document.getElementById("img01");
+    var currWidth = myImg.clientWidth;
+
+    if (currWidth >= 1190) {
+      myImg.style.width = (700) + "px";
+    }else if (currWidth >= 850) {
+      myImg.style.width = (400) + "px";
+    }else {
+      myImg.style.width = (currWidth + 500) + "px";
+    }
+  })
+  //fin lightbox
+  function addCarrito(){
+    var precio = $("#precio").val();
+    var id_producto = $("#id_producto").val();
+    var cantidad = 1;
+
+    var request = $.ajax({
+      method: "POST",
+      url: "<?=$base_url?>/proventa/add",
+      data: {
+        id_producto: id_producto,
+        precio_producto: precio,
+        cantidad: cantidad
+      }
+    });
+    request.done(function(respuesta){
+      swal.fire('Agregado al carrito exitosamente')
+      console.log(respuesta)
+      //    location.reload();
+    });
+  }
+  //validado el select para los numeros
+  $('#add').on('click', function(){
+    var numero = $('.item_size option:selected').text()
+    if (numero == 'seleccionar') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe seleccionar un número!',
+        footer: '<a href></a>'
+      })
+    }else {
+      Swal.fire(
       'Excelente!',
       'Producto agregado al carrito de compras',
       'success'
-    )
-  }
-})
+      )
+    }
+  })
 
-$('.item_size').on('change', function(){
-  var numero = $('.item_size option:selected').text()
-  if (numero == 'seleccionar') {
-    $('#add').removeClass('item_add')
-  }else {
-    $('#add').addClass('item_add')
-    $('#numero').text(numero)
-    console.log(numero)
-    console.log('clase agregada')
+  $('.item_size').on('change', function(){
+    var numero = $('.item_size option:selected').text()
+    if (numero == 'seleccionar') {
+      $('#add').removeClass('item_add')
+      $('.pedir_whatsapp').hide()
+    }else {
+      $('#add').addClass('item_add')
+      $('#numero').text(numero)
+      $('.pedir_whatsapp').show()
+      //    console.log(numero)
+      //    console.log('clase agregada')
+    }
+  })
+
+  function detalle(id,dep){
+    window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
   }
-})
+
+  $("#btn_silicitar_whatsapp").on('click', function(){
+    var numero = $('.item_size option:selected').text()
+    var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
+    location.href = txt;
+    console.log(txt)
+  })
+});
 </script>
 </html>

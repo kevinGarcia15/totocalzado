@@ -5,14 +5,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="es" dir="ltr">
 	<head>
 		<meta charset="utf-8">
-		<?php $this->load->view('header'); ?>
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+			<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+			<?php $this->load->view('header'); ?>
+		<script type="text/javascript" src="<?=$base_url?>/recursos/js/bootstrap.min.js"></script>
 		<title>nuevo producto</title>
 	</head>
+	<style media="screen">
+		#content{
+			color: white;
+		}
+	</style>
 	<body>
+		<?php $this->load->view('menu'); ?>
+
 		<!-- Page content holder -->
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
 		<form
 			class=""
 			action="<?=$base_url?>/producto/nuevo/"
@@ -36,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</select>
 			</div>
 			<div class="col-2">
-				<button type="button" data-toggle="modal" data-target="#IngresoMarca" data-whatever="@mdo" class="btn btn-primary"><i class='fas fa-plus'></i></button>
+				<button type="button" data-toggle="modal" data-target="#IngresoMarca" data-whatever="@mdo" class="btn btn-success"><i class='fas fa-plus'></i></button>
 			</div>
 			</div>
 			<label class="form-control-label" for="inputDanger1">Seleccione estilo</label>
@@ -52,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data-toggle="modal"
 						data-target="#IngresoEstilo"
 						data-whatever="@mdo"
-						class="btn btn-primary">
+						class="btn btn-success">
 						<i class='fas fa-plus'></i>
 					</button>
 				</div>
@@ -78,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						data-toggle="modal"
 						data-target="#IngresoColor"
 						data-whatever="@mdo"
-						class="btn btn-primary">
+						class="btn btn-success">
 						<i class='fas fa-plus'></i>
 					</button>
 				</div>
@@ -134,20 +143,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						value="">
 				</div>
 			</div>
-<!--			<label class="form-control-label" for="inputDanger1">Seleccione una foto de referencia</label>
-			<div class="row">
-				<div class="col-10">
-					<input type="file" class="fform-control-file" name="foto" value="<?php $estilo ?>">
-				</div>
-		</div>  -->
+
 		<label for="exampleFormControlTextarea1">Descripcion del producto</label>
 		<div class="row">
 			<div class="col-10">
     		<textarea class="form-control" name="observaciones" maxlength="250" rows="3"></textarea>
 			</div>
 		</div>
+<br><br>
+		<label class="form-control-label" for="inputDanger1">Etiquetas</label>
+		<div class="row">
+			<?php foreach ($etiqueta as $key): ?>
+			<div class="col-sm-2">
+					<div class="form-check">
+							<label class="form-check-label" >
+								<input
+								class="form-check-input"
+								id=""
+								type="checkbox"
+								name="etiqueta[]"
+								value="<?=$key['id_etiqueta']?>">
+								<?=$key['nombre_etiqueta']?>
+							</label>
+					</div>
+				</div>
+			<?php endforeach; ?>
+		</div>
+		<br><br>
 		<td colspan="2">
-			<input class="btn btn-primary btn-md"  role="button" id="continuar" type="submit" name="continuar" value="continuar">
+			<input class="btn btn-success btn-md"  role="button" id="continuar" type="submit" name="continuar" value="continuar">
 			<input class="btn btn-warning btn-md"  role="button"  type="reset" required name="Reset" value="Reset">
 		</td>
 	</div>
@@ -172,7 +196,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Cerrar</button>
-						<button  type="submit" class="btn btn-primary" name="guardar" value="Guardar" style="color:white;">Guardar</button>
+						<button  type="submit" class="btn btn-success" name="guardar" value="Guardar" style="color:white;">Guardar</button>
 					</div>
 				</form>
 			</div>
@@ -197,13 +221,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" style="color:white;">Cerrar</button>
-						<button  onclick="nuevoColor()" data-dismiss="modal" class="btn btn-primary" name="guardar" value="Guardar" style="color:white;">Guardar</button>
+						<button  onclick="nuevoColor()" data-dismiss="modal" class="btn btn-success" name="guardar" value="Guardar" style="color:white;">Guardar</button>
 					</div>
 			</div>
 		</div>
 	</div>
 </div>
+
 <!-- Fin ventana emergente-->
+  <?php $this->load->view('footer'); ?>
 </body>
 
 <script type="text/javascript">
@@ -249,7 +275,6 @@ $(function(){
 		})
 
 		function nuevoProveedor(){
-			//validar No. de CUI
 			var nombre = $("#nombre_proveedor").val();
 			var telefono = $("#telefono_proveedor").val();
 			var direccion = $("#direccion_proveedor").val();

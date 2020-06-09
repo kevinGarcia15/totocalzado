@@ -22,9 +22,10 @@ foreach ($arr as $a) {
 	<?php $this->load->view('header'); ?>
 	<title>Estilos</title>
 </head>
+<?php $this->load->view('menu'); ?>
+
 	<div class="page-content p-5" id="content">
 		<br>
-		<?php $this->load->view('navVertical'); ?>
 		<h6>Seleccione la numeración y el color</h6>
 		<form class="" action="<?=$base_url?>/producto/nuevo/" method="post" enctype="multipart/form-data">
 			<hr><br><br>
