@@ -144,7 +144,7 @@ body {
   border-radius: 20px;
   position: relative;
   width: 338px;
-  height: 430px;
+  height: auto;
 }
 .detalle-description p{
   font-size: 25px;
@@ -156,7 +156,7 @@ body {
   flex-direction: column;
   border-radius: 10px;
   width: 80%;
-  height: 250px;
+  height: auto;
   margin-bottom: 50px;
 }
 .item_name{
@@ -231,6 +231,19 @@ body {
   color: white;
   height: 50px;
   width: 100%;
+}
+.pedir_whatsapp{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+#btn_silicitar_whatsapp{
+  background:#00bfa5;
+  border-radius: 21.5px;
+  margin-top:8px;
+  border: thin solid;
 }
 @media only screen and (max-width: 600px) {
   .detalle{

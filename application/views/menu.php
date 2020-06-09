@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <div class="rigth__menu">
     <div class="whatsapp">
-      <a href="https://wa.me/50231068959">
+      <a href="https://wa.me/50259788865">
         <img
           src="<?=$base_url?>/recursos/img/whatsappGreen.png"
           alt=""
@@ -74,9 +74,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <i class="fa fa-caret-down"></i>
       </button>
       <div class="dropdown-content">
-        <a href="<?=$base_url?>/Producto/nuevo">Producto</a>
-        <a href="<?=$base_url?>/Venta/nuevaVenta">Venta</a>
-        <a href="<?=$base_url?>/Informes/mostrar">Inventario</a>
+        <a href="<?=$base_url?>/Producto/nuevo">Nuevo producto</a>
+        <a href="<?=$base_url?>/Venta/nuevaVenta">Nueva Venta</a>
+        <a href="<?=$base_url?>/Informes/mostrarinventario">Inventario</a>
         <a href="<?=$base_url?>/Venta/productosVendidosHoy">Productos vendidos</a>
         <a href="<?=$base_url?>/Informes/mostrarPedidos">pedidos</a>
       </div>

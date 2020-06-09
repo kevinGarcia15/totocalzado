@@ -27,16 +27,21 @@ class Informes_model extends CI_Model{
 		return $rows;
 	}
 
-	function listarMarcas() {
-		$sql = "SELECT id_marca, nombre
-				FROM 	marca
-				order by nombre ASC
-				LIMIT 	100";
+	function listar_productos() {
+		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
+						prod.precio_compra compra,prod.oferta oferta,
+						m.nombre marca, col.nombre color, es.nombre estilo,
+						gen.nombre genero
+
+						FROM producto prod
+						join marca m on prod.marca_id_marca = m.id_marca
+						join color col on prod.color_id_color = col.id_color
+						join estilo es on prod.estilo_id_estilo = es.id_estilo
+						join genero gen on prod.genero_id_genero = gen.id_genero
+						";
 
 		$dbres = $this->db->query($sql);
-
 		$rows = $dbres->result_array();
-
 		return $rows;
 	}
 

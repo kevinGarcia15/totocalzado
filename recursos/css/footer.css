@@ -159,6 +159,12 @@ margin-bottom: 5px;
 .footer-center-icon{
   margin: 9px 0;
 }
+.footer-left img{
+  width: 200px;
+}
+.footer-center img{
+  width: 24px;
+}
 @media (max-width: 600px) {
 
 .footer-distributed{

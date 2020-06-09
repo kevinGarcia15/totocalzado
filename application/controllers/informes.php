@@ -24,35 +24,12 @@ class Informes extends CI_Controller {
 
 		$this->load->view('nueva_incersion', $data);
 	}
-	public function inventario(){
-		
-	}
 
-	public function mostrar()
+	public function mostrarinventario()
 	{
 		$data['base_url'] = $this->config->item('base_url');
-
-		$data['arr'] = $this->Informes_model->listarMarcas();
-
-		$this->load->view('listar_marca', $data);
-	}
-
-	public function mostrarEstilo($id=0)
-	{
-		$data['base_url'] = $this->config->item('base_url');
-
-		$data['arr'] = $this->Informes_model->listarEstilo($id);
-
-		$this->load->view('listar_estilo', $data);
-	}
-
-	public function mostrarCategoria($id=0)
-	{
-		$data['base_url'] = $this->config->item('base_url');
-
-		$data['arr'] = $this->Informes_model->listarCategoria($id);
-
-		$this->load->view('listar_categoria', $data);
+		$data['prod'] = $this->Informes_model->listar_productos();
+		$this->load->view('listar_productos', $data);
 	}
 
 	public function mostrarProducto($id=0)

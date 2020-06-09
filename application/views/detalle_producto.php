@@ -82,7 +82,27 @@
         </div>
         <div id="numero" class="item_name">
         </div>
-        <button class="btn btn-success" id="add" type="button" name="button">LO QUIERO</button>
+        <button
+          class="btn btn-success"
+          id="add"
+          type="button"
+          name="button">
+          LO QUIERO
+        </button>
+        <div class="pedir_whatsapp">
+          Ó
+          <button
+          id="btn_silicitar_whatsapp"
+          class="btn"
+          type="button">
+          SOLICITAR POR whatsapp
+          <img
+          src="<?=$base_url?>/recursos/img/icon-whatsapp.png"
+          alt="whatsapp"
+          style="width:21px;margin-left: 8px;"
+          >
+        </button>
+        </div>
       </div>
     </div>
   </section>
@@ -135,44 +155,47 @@
 <!--Imagen modal------------------------------------------------------------->
 </body>
 <script type="text/javascript">
-//lightbox
-var modal = document.getElementById("myModal");
-var img0 = document.getElementById("myImg0");
-var img1 = document.getElementById("myImg1");
-var img2 = document.getElementById("myImg2");
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-var x = 0;
-img0.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
-img1.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
-img2.onclick = function(){
-  modal.style.display = "block";
-  modalImg.src = this.src;
-  captionText.innerHTML = this.alt;
-}
+$( document ).ready(function() {
+  $('.pedir_whatsapp').hide()
 
-var span = document.getElementById("close");
-span.onclick = function() {
-  var myImg = document.getElementById("img01");
-  var currWidth = myImg.clientWidth;
-  if (currWidth >= 1190) {
-    myImg.style.width = (700) + "px";
-  }else if (currWidth >= 850) {
-    myImg.style.width = (400) + "px";
+  //lightbox
+  var modal = document.getElementById("myModal");
+  var img0 = document.getElementById("myImg0");
+  var img1 = document.getElementById("myImg1");
+  var img2 = document.getElementById("myImg2");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  var x = 0;
+  img0.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
   }
-  modal.style.display = "none";
-}
+  img1.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+  img2.onclick = function(){
+    modal.style.display = "block";
+    modalImg.src = this.src;
+    captionText.innerHTML = this.alt;
+  }
+
+  var span = document.getElementById("close");
+  span.onclick = function() {
+    var myImg = document.getElementById("img01");
+    var currWidth = myImg.clientWidth;
+    if (currWidth >= 1190) {
+      myImg.style.width = (700) + "px";
+    }else if (currWidth >= 850) {
+      myImg.style.width = (400) + "px";
+    }
+    modal.style.display = "none";
+  }
   $('#img01').on('dblclick' ,function(){
-      var myImg = document.getElementById("img01");
-      var currWidth = myImg.clientWidth;
+    var myImg = document.getElementById("img01");
+    var currWidth = myImg.clientWidth;
 
     if (currWidth >= 1190) {
       myImg.style.width = (700) + "px";
@@ -182,60 +205,70 @@ span.onclick = function() {
       myImg.style.width = (currWidth + 500) + "px";
     }
   })
-//fin lightbox
-function addCarrito(){
-  var precio = $("#precio").val();
-  var id_producto = $("#id_producto").val();
-  var cantidad = 1;
+  //fin lightbox
+  function addCarrito(){
+    var precio = $("#precio").val();
+    var id_producto = $("#id_producto").val();
+    var cantidad = 1;
 
-  var request = $.ajax({
-    method: "POST",
-    url: "<?=$base_url?>/proventa/add",
-    data: {
-          id_producto: id_producto,
-          precio_producto: precio,
-          cantidad: cantidad
-        }
-  });
-  request.done(function(respuesta){
-    swal.fire('Agregado al carrito exitosamente')
-    console.log(respuesta)
-//    location.reload();
-  });
-}
-//validado el select para los numeros
-$('#add').on('click', function(){
-  var numero = $('.item_size option:selected').text()
-  if (numero == 'seleccionar') {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Debe seleccionar un número!',
-      footer: '<a href></a>'
-    })
-  }else {
-    Swal.fire(
+    var request = $.ajax({
+      method: "POST",
+      url: "<?=$base_url?>/proventa/add",
+      data: {
+        id_producto: id_producto,
+        precio_producto: precio,
+        cantidad: cantidad
+      }
+    });
+    request.done(function(respuesta){
+      swal.fire('Agregado al carrito exitosamente')
+      console.log(respuesta)
+      //    location.reload();
+    });
+  }
+  //validado el select para los numeros
+  $('#add').on('click', function(){
+    var numero = $('.item_size option:selected').text()
+    if (numero == 'seleccionar') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe seleccionar un número!',
+        footer: '<a href></a>'
+      })
+    }else {
+      Swal.fire(
       'Excelente!',
       'Producto agregado al carrito de compras',
       'success'
-    )
-  }
-})
+      )
+    }
+  })
 
-$('.item_size').on('change', function(){
-  var numero = $('.item_size option:selected').text()
-  if (numero == 'seleccionar') {
-    $('#add').removeClass('item_add')
-  }else {
-    $('#add').addClass('item_add')
-    $('#numero').text(numero)
-    console.log(numero)
-    console.log('clase agregada')
-  }
-})
+  $('.item_size').on('change', function(){
+    var numero = $('.item_size option:selected').text()
+    if (numero == 'seleccionar') {
+      $('#add').removeClass('item_add')
+      $('.pedir_whatsapp').hide()
+    }else {
+      $('#add').addClass('item_add')
+      $('#numero').text(numero)
+      $('.pedir_whatsapp').show()
+      //    console.log(numero)
+      //    console.log('clase agregada')
+    }
+  })
 
-function detalle(id,dep){
-  window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
-}
+  function detalle(id,dep){
+    window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
+  }
+
+  $("#btn_silicitar_whatsapp").on('click', function(){
+    var numero = $('.item_size option:selected').text()
+    var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
+    location.href = txt;
+    console.log(txt)
+  })
+});
 </script>
 </html>

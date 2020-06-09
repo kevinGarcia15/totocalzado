@@ -34,24 +34,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           class="carousel-item__img"
           src="<?=$base_url?>/<?=$key['img_carrusel']?>"
           alt="">
-          <div class="carousel-item__details">
-            <div>
-              <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-                <img
-                class="carousel-item__details--img"
-                src="<?=$base_url?>/recursos/img/plus-icon.png"
-                alt="Plus Icon">
-              </a>
-            </div>
+          <div class="item">
             <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-              <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
-              <?php if ($key['oferta'] == '0'): ?>
-                <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
-              <?php else: ?>
-                <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
-              <?php endif; ?>
-            </div>
-          </a>
+              <div class="detalle">
+                <h5><?=$key['marca'].' '.$key['estilo']?></h5>
+                <?php if ($key['oferta'] == '0'): ?>
+                  <span>Precio <strong>Q. <?=$key['compra']?></strong>+ Envio gratis</span>
+                <?php else: ?>
+                  <strike  style="color: #a00c2f ">Q. <?=$key['compra']?></strike><br>
+                  <span>Oferta <strong>Q. <?=$key['oferta']?></strong>+ Envio gratis</span>
+                <?php endif; ?>
+              </div>
+            </a>
+          </div>
         </div>
       <?php endforeach; ?>
     </div>
@@ -73,32 +68,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         class="carousel-item__img"
         src="<?=$base_url?>/<?=$key['img_carrusel']?>"
         alt=""/>
-        <div class="carousel-item__details">
-          <div>
-            <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-              <img
-              class="carousel-item__details--img"
-              src="<?=$base_url?>/recursos/img/plus-icon.png"
-              alt="Plus Icon">
-            </a>
-          </div>
-          <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
-          <?php if ($key['oferta'] == '0'): ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
-          <?php else: ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
-          <?php endif; ?>
+        <div class="item">
+          <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
+            <div class="detalle">
+              <h5><?=$key['marca'].' '.$key['estilo']?></h5>
+              <?php if ($key['oferta'] == '0'): ?>
+                <span>Precio <strong>Q. <?=$key['compra']?></strong>+ Envio gratis</span>
+              <?php else: ?>
+                <strike  style="color: #a00c2f ">Q. <?=$key['compra']?></strike><br>
+                <span>Oferta <strong>Q. <?=$key['oferta']?></strong>+ Envio gratis</span>
+              <?php endif; ?>
+            </div>
+          </a>
         </div>
       </div>
     <?php endforeach; ?>
     <!--Ver mas-->
       <div class="carousel-item">
+        <div class="carousel-item-verMas">
         <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">
-          <img
-          class="carousel-item__img"
-          src="<?=$base_url?>/recursos/img/ver-mas.jpg"
-          alt=""/>
+          <h1>VER MAS</h1>
         </a>
+        </div>
       </div>
     </div>
   </section>
@@ -116,32 +107,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         class="carousel-item__img"
         src="<?=$base_url?>/<?=$key['img_carrusel']?>"
         alt=""/>
-        <div class="carousel-item__details">
-          <div>
-            <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
-              <img
-              class="carousel-item__details--img"
-              src="<?=$base_url?>/recursos/img/plus-icon.png"
-              alt="Plus Icon">
-            </a>
-          </div>
-          <p class="carousel-item__details--title"><?php echo $key['marca'].' '.$key['estilo']; ?></p>
-          <?php if ($key['oferta'] == '0'): ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'Q.'.$key['compra'];?></p>
-          <?php else: ?>
-            <p class="carousel-item__details--subtitle"><?php echo 'OFERTA Q.'.$key['oferta'];?></p>
-          <?php endif; ?>
+        <div class="item">
+          <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
+            <div class="detalle">
+              <h5><?=$key['marca'].' '.$key['estilo']?></h5>
+              <?php if ($key['oferta'] == '0'): ?>
+                <span>Precio <strong>Q. <?=$key['compra']?></strong>+ Envio gratis</span>
+              <?php else: ?>
+                <strike  style="color: #a00c2f ">Q. <?=$key['compra']?></strike><br>
+                <span>Oferta <strong>Q. <?=$key['oferta']?></strong>+ Envio gratis</span>
+              <?php endif; ?>
+            </div>
+          </a>
         </div>
       </div>
     <?php endforeach; ?>
     <!--Ver mas-->
       <div class="carousel-item">
-        <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">
-          <img
-          class="carousel-item__img"
-          src="<?=$base_url?>/recursos/img/ver-mas.jpg"
-          alt=""/>
-        </a>
+        <div class="carousel-item-verMas">
+          <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">
+            <h1>VER MAS</h1>
+          </a>
+        </div>
       </div>
     </div>
   </section>

@@ -27,7 +27,7 @@
           <h5 style="color: white">Tallas</h5>
           <div class="row">
             <?php foreach ($numeros as $key): ?>
-              <div class="col-3 col-lg-4 col-sm-3">
+              <div class="col-2 col-lg-4 col-sm-3">
                 <div class="tallas">
                   <a
                   href="<?=$base_url?>/Departamento/dep?dep=<?=$dep?>&t=<?=$num?>&tallid=<?=$key['id_ncategoria']?>&tall=<?=$key['numero']?>">

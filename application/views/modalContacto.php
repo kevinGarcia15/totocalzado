@@ -47,12 +47,12 @@
 			<span class="close">×</span>
 			<h2>Contacto</h2>
 			<div class="">
-				<a href="https://wa.me/50257469663">
+				<a href="https://wa.me/50259788865">
 					<img
 						src="<?=$base_url?>/recursos/img/whatsappGreen.png"
 						alt=""
 						style="width: 48px;">
-						+(502) 5746 9663
+						+(502) 5723 3015
 				</a>
 			</div>
 			<div class="">
