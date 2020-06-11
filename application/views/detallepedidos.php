@@ -59,13 +59,14 @@
                 <th>Número</th>
                 <th>Precio</th>
                 <th>unidades</th>
+                <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-                <input type="hidden" name="id_pedido" value="<?=$pedidos[0]['id_pedidos']?>">
+                <input id="id_pedido" type="hidden" name="id_pedido" value="<?=$pedidos[0]['id_pedidos']?>">
                 <?php foreach ($pedidos as $key): ?>
                   <!--valida si hay en existencia dicho producto--------------------------------->
-                  <tr><?php if ($key['cant_stock'] < 1): ?>
+                  <tr id="fileProducto"><?php if ($key['cant_stock'] < 1): ?>
                     <input type="hidden" name="flag" value="0"><!--nos ayuda a saber cuantos productos hay disponibles-->
                     <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
                     <td><?=$key['codigo']?></td>
@@ -77,30 +78,79 @@
                       <?=$key['unidades']?>
                       <i title="Sin existencia" class="fas fa-exclamation-circle"></i>
                     </td>
+                    <td>
+                      <a
+                        class="btn btn-danger"
+                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>">
+                        <i class="fas fa-trash-alt" style="margin-left: 0px;"></i>
+                      </a>
+                    </td>
                   <?php else: ?>
-                    <input type="hidden" name="id_linea[]" value="<?=$key['id_linea']?>">
-                    <input type="hidden" name="id_producto[]" value="<?=$key['id_producto']?>">
-                    <input type="hidden" name="codigo[]" value="<?=$key['codigo']?>">
-                    <input type="hidden" name="cantidad[]" value="<?=$key['unidades']?>">
-                    <input type="hidden" name="numero[]" value="<?=$key['id_stock']?>">
-                    <input type="hidden" name="precioUnidad[]" value="<?=$key['precio_compra']?>">
                     <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
-                    <td><?=$key['codigo']?></td>
+                    <td><?=$key['codigo']?>
+                      <!--la variable $key['id_stock'] concatenado genera un id unico entre los inputs-->
+                      <input
+                        id="id_linea_<?=$key['id_stock']?>"
+                        type="hidden"
+                        name="id_linea[]"
+                        value="<?=$key['id_linea']?>"
+                      >
+                      <input
+                        id="id_producto_<?=$key['id_stock']?>"
+                        type="hidden"
+                        name="id_producto[]"
+                        value="<?=$key['id_producto']?>"
+                      >
+                      <input
+                        id="codigo_<?=$key['id_stock']?>"
+                        type="hidden"
+                        name="codigo[]"
+                        value="<?=$key['codigo']?>"
+                      >
+                      <input
+                        id="cantidad_<?=$key['id_stock']?>"
+                        type="hidden"
+                        name="cantidad[]"
+                        value="<?=$key['unidades']?>"
+                        >
+                      <input
+                        id="numero_<?=$key['id_stock']?>"
+                        type="hidden"
+                        name="numero[]"
+                        value="<?=$key['id_stock']?>"
+                      >
+                    </td>
                     <td><?=$key['marca']?></td>
                     <td><?=$key['color']?></td>
                     <td><?=$key['numero']?></td>
-                    <td>Q.<?=$key['precio_compra']?></td>
+                    <td>
+                      <input
+                      id="precioUnidad_<?=$key['id_stock']?>"
+                      type="number"
+                      name="precioUnidad[]"
+                      value="<?=$key['precio_compra']?>"
+                      class="form-control"
+                      >
+                    </td>
                     <td><?=$key['unidades']?></td>
-
+                    <td>
+                      <a
+                        class="btn btn-danger"
+                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>">
+                        <i class="fas fa-trash-alt" style="margin-left: 0px;"></i>
+                      </a>
+                      <a
+                        onclick="ingresarAVenta(<?=$key['id_stock']?>)"
+                        class="btn btn-success">
+                        <i class="far fa-check-circle"></i>
+                      </a>
+                    </td>
                   <?php endif; ?>
                 </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
         </div>
-        <div class="accion">
-            <button class="btn btn-warning" type="submit" name="guardar">Despachar</button>
-        </div><br>
       </form>
     <?php endif; ?>
 
@@ -142,6 +192,32 @@
   <?php $this->load->view('footer'); ?>
 </body>
 <script type="text/javascript">
+  function ingresarAVenta(stock){
+    var id_pedido = $('#id_pedido').val()
+    var id_linea = $('#id_linea_'+stock).val()
+    var id_producto = $('#id_producto_'+stock).val()
+    var cantidad = $('#cantidad_'+stock).val()
+    var numero = $('#numero_'+stock).val()
+    var precioUnidad = $('#precioUnidad_'+stock).val()
+
+    var request = $.ajax({
+      method: "POST",
+      url: "<?=$base_url?>/venta/ingresarventaPorUnidad",
+      data: {
+        id_pedido: id_pedido,
+        numero: numero,
+        precioUnidad: precioUnidad,
+        id_producto: id_producto,
+        id_linea: id_linea,
+        cantidad: cantidad
+      }
+    });
+
+    request.done(function(resultado) {
+      location. reload();
+    });
+
+  }
 
 </script>
 </html>

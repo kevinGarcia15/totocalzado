@@ -30,6 +30,7 @@
   .table{
     width: 90%;
   }
+  .pagination{display: flex !important;}
 </style>
 <body>
   <?php $this->load->view('menu'); ?>

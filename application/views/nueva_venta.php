@@ -6,6 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<?php $this->load->view('header'); ?>
+	<link rel="stylesheet" href="<?=$base_url?>/recursos/css/nueva_venta.css">
 	<title>Nueva inserción</title>
 </head>
 <body>

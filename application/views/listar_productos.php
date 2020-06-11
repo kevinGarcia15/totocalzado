@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $htmltrow = "<tr>
+				<td><img src=\"${base_url}/./%s\"></td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -16,7 +17,7 @@ $htmltrows = "";
 
 foreach ($prod as $a) {
 	$htmltrows .= sprintf($htmltrow,
-		$a['codigo'], htmlspecialchars($a['marca']), htmlspecialchars($a['estilo']),htmlspecialchars($a['color']),
+		$a['img'],$a['codigo'], htmlspecialchars($a['marca']), htmlspecialchars($a['estilo']),htmlspecialchars($a['color']),
 		htmlspecialchars($a['genero']),$a['compra'],$a['oferta'],$a['id_producto']);
 	}
 ?>
@@ -30,6 +31,9 @@ foreach ($prod as $a) {
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 	<style media="screen">
 		.pagination{display: flex !important;}
+		#items img{
+			width: 100px;
+		}
 	</style>
 	<title>Inventario</title>
 </head>
@@ -40,6 +44,7 @@ foreach ($prod as $a) {
 		<div class="table table-responsive">
 			<table id="example" class="table table-striped" style="width:100%">
 				<thead>
+					<th>Img</th>
 					<th>Código</th>
 					<th>Marca</th>
 					<th>Estilo</th>
@@ -49,7 +54,7 @@ foreach ($prod as $a) {
 					<th>Oferta</th>
 					<th>Opciones</th>
 				</thead>
-				<tbody>
+				<tbody id="items">
 					<?=$htmltrows?>
 				</tbody>
 			</table>
@@ -57,7 +62,7 @@ foreach ($prod as $a) {
 	</body>
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var groupColumn = 1;
+		var groupColumn = 2;
 		var table = $('#example').DataTable({
 			"language": {
 						"lengthMenu": "_MENU_",

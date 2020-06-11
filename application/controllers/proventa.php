@@ -55,7 +55,7 @@ class Proventa extends CI_Controller {
 	}
 	public function datosPedido(){
 		$data['base_url'] = $this->config->item('base_url');
-		$this->restringirAcceso();
+//		$this->restringirAcceso();
 			$contador = $_POST['contador'];//numero de productos
 			$codigo= $_POST['codigo'];//ARRAY
 			$numero= $_POST['talla'];//ARRAY
@@ -76,5 +76,21 @@ class Proventa extends CI_Controller {
 						}
 						echo "1";
 					}
-			}
+		}
+
+	public function pedido_espera_whatsapp(){
+		$data['base_url'] = $this->config->item('base_url');
+		$codigo= $_POST['codigo'];
+		$numero= $_POST['talla'];
+		$cantidad= 1;
+		$id_persona = $_POST['id_persona'];
+		$id_aldea = 1;
+		$direccionEnvio = 'N/A';
+		$telefono = '00000000';
+
+		$id_pedido = $this->Informes_model->crearPedido(
+			$id_persona,$id_aldea,$direccionEnvio,$telefono);
+		$this->Informes_model->ingresarProductos(
+			$id_pedido,$codigo,$cantidad,$numero);
+	}
 }

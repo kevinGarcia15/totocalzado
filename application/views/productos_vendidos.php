@@ -6,6 +6,9 @@ $totalDia = 0;
 <html lang="en">
 <head>
 	<?php $this->load->view('header'); ?>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<title>productos vendidos</title>
 </head>
@@ -55,7 +58,7 @@ $totalDia = 0;
 										<?php $totalDia = $totalDia + $venta['total'];?>
 									<tr>
 										<td><?php echo $venta['codigo']; ?></td>
-										<td><?php echo $venta['marca'].' '.$venta['estilo'].' '.$venta['color'].' '.$venta['categoria']; ?></td>
+										<td><?php echo $venta['marca'].' '.$venta['estilo'].' '.$venta['color'].' '.$venta['categoria'].' '.$venta['categoria']; ?></td>
 										<td><?php echo 'Q. '.$venta['unidad']; ?></td>
 										<td><?php echo $venta['cantidad']; ?></td>
 										<td><?php echo 'Q. '.$venta['total']; ?></td>
@@ -75,7 +78,7 @@ $totalDia = 0;
 <script type="text/javascript">
 //muestra antes de cargar la pàgina
 $(window).load(function() {
-	swal("Seleccione una fecha!");
+	Swal.fire("Seleccione una fecha!");
 });
 //
 function mostrarProductos(){
@@ -98,7 +101,7 @@ function mostrarProductos(){
 			 month: 'long'
 		 };
 		 let fechaConNombre = date.toLocaleDateString('es-MX', options);
-			swal("Ventas del día", fechaConNombre, "success");
+			Swal.fire("Ventas del día", fechaConNombre, "success");
 				$('#fechaNombre').html(fechaConNombre);
 				$('#producto').html(resultado);
 		});
