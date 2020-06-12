@@ -156,10 +156,14 @@ function setCodigo(codigo){
 	if (contador == 1) {
 		$('#codigo0').val(codigo)
 		buscar_codigo(id='codigo0',0)
+		$('#texto').val('0');
+		BtnBuscarProducto()
 	}else {
 		var index = contador - 1
 		$('#codigo'+index).val(codigo)
 		buscar_codigo(id='codigo'+index,index)
+		$('#texto').val('0');
+		BtnBuscarProducto()
 	}
 }
 //switalert para el boton eliminar
