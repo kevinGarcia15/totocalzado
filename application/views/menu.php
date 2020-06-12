@@ -82,8 +82,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </div>
   <?php endif; ?>
-  <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">Dama</a>
-  <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">Caballero</a>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">Damas</a>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">Caballeros</a>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Niño&t=2">Niños</a><!--tabla id_categotia-->
   <a class="dropbtn" href="<?=$base_url?>/Departamento/oferta">OFERTAS</a>
 
    <div class="dropdown-second">

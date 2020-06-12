@@ -265,9 +265,23 @@ $( document ).ready(function() {
 
   $("#btn_silicitar_whatsapp").on('click', function(){
     var numero = $('.item_size option:selected').text()
+    var id_stock = $('.item_size option:selected').val()
     var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
-    location.href = txt;
-    console.log(txt)
+    var codigo = '<?=$detalle[0]['codigo']?>'
+
+    var request = $.ajax({
+      method: "POST",
+      url: "<?=$base_url?>/proventa/pedido_espera_whatsapp",
+      data: {
+              codigo: codigo,
+              talla: id_stock,
+              id_persona: 7
+            }
+    });
+
+    request.done(function(resultado) {
+      location.href = txt;
+    });
   })
 });
 </script>

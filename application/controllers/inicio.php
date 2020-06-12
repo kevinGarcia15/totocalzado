@@ -17,6 +17,7 @@ class Inicio extends CI_Controller {
 		$data['caballeros'] = $this->Informes_model->mostrarProductoCaballeros();
 		$data['Damas'] = $this->Informes_model->mostrarProductoDamas();
 		$data['Ofertas'] = $this->Informes_model->mostrarProductoOfertas();
+		$data['niños'] = $this->Informes_model->mostrarProductoNiños();
 		$this->load->view('inicio', $data);
 	}
 

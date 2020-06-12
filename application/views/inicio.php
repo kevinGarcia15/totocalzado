@@ -132,8 +132,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </div>
   </section>
+
+  <!--caballeros------------------------------------------------------------------->
+<div class="title-carousel">
+<a href="<?=$base_url?>/Departamento/dep?dep=Niño&t=2">
+  <h3 class="categories__title">Niños</h3>
+</a><br><br><br>
+</div>
+  <section class="carousel">
+    <div class="carousel__container">
+
+    <?php foreach ($niños as $key): ?>
+      <div onclick="detalle(<?=$key['id_producto'];?>,'<?=$key['dep']?>')" class="carousel-item">
+        <img
+        class="carousel-item__img"
+        src="<?=$base_url?>/<?=$key['img_carrusel']?>"
+        alt=""/>
+        <div class="item">
+          <a href="<?=$base_url?>/proventa/detalle?id=<?=$key['id_producto'];?>&dep=<?=$key['dep']?>">
+            <div class="detalle">
+              <h5><?=$key['marca'].' '.$key['estilo']?></h5>
+              <?php if ($key['oferta'] == '0'): ?>
+                <span>Precio <strong>Q. <?=$key['compra']?></strong>+ Envio gratis</span>
+              <?php else: ?>
+                <strike  style="color: #a00c2f ">Q. <?=$key['compra']?></strike><br>
+                <span>Oferta <strong>Q. <?=$key['oferta']?></strong>+ Envio gratis</span>
+              <?php endif; ?>
+            </div>
+          </a>
+        </div>
+      </div>
+    <?php endforeach; ?>
+    <!--Ver mas-->
+      <div class="carousel-item">
+        <div class="carousel-item-verMas">
+        <a href="<?=$base_url?>/Departamento/dep?dep=Niño&t=2">
+          <h1>VER MAS</h1>
+        </a>
+        </div>
+      </div>
     </div>
   </section>
+
   <?php $this->load->view('FloatingActionButton'); ?>
 
   <?php $this->load->view('footer'); ?>

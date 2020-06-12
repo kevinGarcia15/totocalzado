@@ -65,7 +65,16 @@ class Informes extends CI_Controller {
 		$id = $_GET['id'];
 		$data['pedidos'] = $this->Informes_model->seleccionarLineaPedidos($id);
 		$data['despachado'] = $this->Informes_model->seleccionarVentaPedidos($id);
-
+		/*verifica si está trayendo algun dato en entre las dos consultas
+		y si no, significa que no se ingresó ninguna venta y se eliminaron todos los pedidos
+		*/
+		if ((count($data['pedidos']) < 1) and (count($data['despachado']) > 0)) {
+			$this->Informes_model->actalizarPedido($id);
+		}
+		if ((count($data['pedidos']) < 1) and (count($data['despachado']) < 1)) {
+			$this->Informes_model->eliminarPedido($id);
+			redirect("/Informes/mostrarPedidos");
+		}
 		$this->load->view('detallepedidos', $data);
 	}
 

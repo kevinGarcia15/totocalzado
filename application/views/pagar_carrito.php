@@ -81,7 +81,7 @@ $(function (){
     var telefono = $('#num_telefono').val()
     var aldea = $('#aldea').val()
     var direccionExacta = $('#dirEspecifico').val()
-    var id_persona = '<?=$this->session->ID?>';
+    var id_persona = 7;
 
     var codigo = [];
     var numero = [];

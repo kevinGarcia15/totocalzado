@@ -29,7 +29,7 @@ class Informes_model extends CI_Model{
 
 	function listar_productos() {
 		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
-						prod.precio_compra compra,prod.oferta oferta,
+						prod.precio_compra compra,prod.oferta oferta,prod.img_carrusel img,
 						m.nombre marca, col.nombre color, es.nombre estilo,
 						gen.nombre genero
 
@@ -123,7 +123,23 @@ class Informes_model extends CI_Model{
 		$dbres = $this->db->query($sql);
 		$rows = $dbres->result_array();
 		return $rows;
-	}
+	}	function 	mostrarProductoNiños() {
+			$sql = "SELECT prod.id_producto id_producto, prod.precio_compra compra,
+										cat.nombre categoria,m.nombre marca, es.nombre estilo,
+										prod.img_carrusel img_carrusel,prod.oferta oferta, gen.nombre dep
+
+							FROM producto prod
+							join categoria cat on prod.categoria_id_categoria = cat.id_categoria
+							join marca m on prod.marca_id_marca = m.id_marca
+							join genero gen on prod.genero_id_genero = gen.id_genero
+							join estilo es on prod.estilo_id_estilo = es.id_estilo
+							where gen.nombre = 'Niño'
+							limit 5";
+
+			$dbres = $this->db->query($sql);
+			$rows = $dbres->result_array();
+			return $rows;
+		}
 
 	function 	mostrarProductoDamas() {
 		$sql = "SELECT prod.id_producto id_producto, prod.precio_compra compra,
@@ -436,5 +452,23 @@ class Informes_model extends CI_Model{
 		$dbres = $this->db->query($sql,$num);
 		$rows = $dbres->result_array();
 		return $rows;
+	}
+
+	function eliminarPedido($id_pedido) {
+		$sql = "DELETE FROM `pedidos` WHERE `pedidos`.`id_pedidos` = ?";
+		$valores = array($id_pedido);
+		$dbres = $this->db->query($sql, $valores);
+		return $dbres;
+	}
+
+	function actalizarPedido($id_pedido) {
+		$sql = "UPDATE pedidos
+					SET estado = ?
+					WHERE id_pedidos = ?
+					";
+		$estado = 'B';
+		$valores = array($estado,$id_pedido);
+		$dbres = $this->db->query($sql,$valores);
+		return $dbres;
 	}
 }

@@ -1,0 +1,17 @@
+.page-content{
+  color: white;
+}
+#buscador a{
+  color: white;
+}
+@media only screen and (max-width: 600px) {
+  .headTable-m{
+    width: 80px;
+  }
+  .headTable-L{
+    width: 110px;
+  }
+  .headTable-XL{
+    width: 200px;
+  }
+}

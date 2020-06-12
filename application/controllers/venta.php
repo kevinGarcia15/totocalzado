@@ -15,8 +15,7 @@ class Venta extends CI_Controller {
 		$data['base_url'] = $this->config->item('base_url');
 	}
 
-	public function nuevaVenta()
-	{
+	public function nuevaVenta(){
 		$data['base_url'] = $this->config->item('base_url');
 
 		if (isset($_POST['guardar'])) {
@@ -27,59 +26,45 @@ class Venta extends CI_Controller {
 				$cantidad = $_POST['cantidad'];
 				$precioUnidad = $_POST['precioUnidad'];
 				$id_producto = $_POST['id_producto'];
-				$id_pedido = $_POST['id_pedido'];
 				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
 			$this->Venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
 																				$montoTotal,$id_producto[$i],
-																				1,$numero[$i],$id_pedido);
+																				1,$numero[$i],null);
 
-				if (isset($_POST['id_linea'])) {
-					$id_linea = $_POST['id_linea'];
-					$this->Venta_model->borrarLineaPedido($id_linea[$i]);
-
-				}
-			}
-//si flag existe significa que no hay existencia en algun producto
-			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
-				$id_pedido = $_POST['id_pedido'];
-				$this->Venta_model->actalizarPedido($id_pedido);
-				redirect("/informes/detallepedidos?id=${id_pedido}");
 			}
 		}
 		$this->load->view('nueva_venta', $data);
 	}
 
-	public function ingresarventa()
-	{
+	//ingreso a venta desde pedidos de whatsapp uno por uno
+	public function ingresarventaPorUnidad(){
 		$data['base_url'] = $this->config->item('base_url');
 
-		$id_pedido = $_POST['id_pedido'];
-		if (isset($_POST['guardar'])) {
-			$elementos = count($_POST['id_producto']);
-
-			for ($i=0; $i < $elementos; $i++) {
-				$numero = $_POST['numero'];
-				$cantidad = $_POST['cantidad'];
-				$precioUnidad = $_POST['precioUnidad'];
-				$id_producto = $_POST['id_producto'];
-				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
-				$this->Venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
-																				$montoTotal,$id_producto[$i],
-																				1,$numero[$i],$id_pedido);
-
-				$id_linea = $_POST['id_linea'];
-				$this->Venta_model->borrarLineaPedido($id_linea[$i]);
-
-			}
-//si flag existe significa que no hay existencia en algun producto y no cambia el valor de pedido a despachado
-			if (isset($_POST['id_pedido']) and !isset($_POST['flag'])) {
-				$id_pedido = $_POST['id_pedido'];
-				$this->Venta_model->actalizarPedido($id_pedido);
-				redirect("/informes/detallepedidos?id=${id_pedido}");
-			}
-			redirect("/informes/detallepedidos?id=${id_pedido}");
-		}
+			$id_pedido = $_POST['id_pedido'];
+			$numero = $_POST['numero'];
+			$cantidad = $_POST['cantidad'];
+			$precioUnidad = $_POST['precioUnidad'];
+			$id_producto = $_POST['id_producto'];
+			$montoTotal = $cantidad * $precioUnidad;
+			$this->Venta_model->ingresarVenta(
+				$cantidad,$precioUnidad,
+				$montoTotal,$id_producto,
+				1,$numero,$id_pedido
+			);
+			$id_linea = $_POST['id_linea'];
+			$this->Venta_model->borrarLineaPedido($id_linea);
+		redirect("/informes/detallepedidos?id=${id_pedido}");
 	}
+
+	public function eliminarProductoDeLinea(){
+		$data['base_url'] = $this->config->item('base_url');
+
+		$id_pedido = $_GET['id_ped'];
+		$id_linea = $_GET['lin_ped'];
+		$this->Venta_model->borrarLineaPedido($id_linea);
+		redirect("/informes/detallepedidos?id=${id_pedido}");
+	}
+
 
 	public function buscar_codigo(){
 		$data['base_url'] = $this->config->item('base_url');
@@ -91,7 +76,11 @@ class Venta extends CI_Controller {
 			echo "Producto inexistente";
 		}else {
 			foreach ($data['codigo'] as $key) {
-				echo '<strong> Marca: </strong>'.$key['marca'].'<strong> estilo: </strong>'.$key['nombre_prod'].'<strong> Color: </strong>'.$key['color'].'<strong> Numeración: </strong>'.$key['categoria'];
+				echo '<strong> Marca: </strong>'.$key['marca'].'<strong> estilo: </strong>'
+							.$key['nombre_prod'].'<strong> Color: </strong>'.$key['color']
+							.'<strong> Numeración: </strong>'.$key['categoria']
+							.'<strong> precio: </strong>'.$key['precio']
+							.'<strong> Oferta: </strong>'.$key['oferta'];
 				echo '<input type="hidden" name="id_producto[]" value="'.$key['id_producto'].'"></>';
 			}
 		}
@@ -118,7 +107,13 @@ class Venta extends CI_Controller {
 			echo "ingresa la marca a buscar";
 		}else {
 			foreach ($data['res'] as $key) {
-				echo '<a href="">'.$key['marca'].' '.$key['nombre_prod'].' '.$key['color'].' '.$key['categoria'].' '.'<strong> Código: '.$key['codigo'].'</strong></a><br>';
+				$codigo = "'".$key['codigo']."'";
+				echo '<a href="#" onclick="setCodigo('
+							.$codigo.')">
+								<div>'.$key['marca'].' '.$key['nombre_prod'].' '.$key['color'].' '.$key['categoria'].' '.'
+									<strong> Código: '.$key['codigo'].'</strong>
+								</div>
+							</a><br>';
 			}
 		}
 	}
@@ -144,13 +139,13 @@ class Venta extends CI_Controller {
 				$totalDia = $totalDia + $key['total'];
 				echo '<tr>
 								<td>'.$key['codigo'].'</td>
+								<td>'.$key['talla'].'</td>
 								<td>'.$key['marca'].' '.$key['estilo'].' '.$key['color'].' '.$key['categoria'].'</td>
 								<td>Q. '.$key['unidad'].'</td>
 								<td>'.$key['cantidad'].'</td>
-								<td>Q. '.$key['total'].'</td>
-								<td>Q. '.$totalDia.'</td>
-							</tr>';
+								<td>Q. '.$key['total'].'</td>';
 			}
+			echo '<td><b>Q. '.$totalDia.'</b></td></tr>';
 		}
 	}
 
