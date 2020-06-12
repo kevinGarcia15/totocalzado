@@ -104,7 +104,13 @@ class Venta extends CI_Controller {
 			echo "ingresa la marca a buscar";
 		}else {
 			foreach ($data['res'] as $key) {
-				echo '<a href="">'.$key['marca'].' '.$key['nombre_prod'].' '.$key['color'].' '.$key['categoria'].' '.'<strong> Código: '.$key['codigo'].'</strong></a><br>';
+				$codigo = "'".$key['codigo']."'";
+				echo '<a href="#" onclick="setCodigo('
+							.$codigo.')">
+								<div>'.$key['marca'].' '.$key['nombre_prod'].' '.$key['color'].' '.$key['categoria'].' '.'
+									<strong> Código: '.$key['codigo'].'</strong>
+								</div>
+							</a><br>';
 			}
 		}
 	}

@@ -6,6 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<?php $this->load->view('header'); ?>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 	<link rel="stylesheet" href="<?=$base_url?>/recursos/css/nueva_venta.css">
 	<title>Nueva inserción</title>
 </head>
@@ -22,23 +26,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<form action="<?=$base_url?>/venta/nuevaVenta/" method="POST">
 				<br>
 				<div class="row">
-					<div class="col-8"><strong>Buscador:</strong> Ingrese la marca del producto
-						<input onkeyup="BtnBuscarProducto()" id="texto" class="form-control" type="text" placeholder="Marca">
+					<div class="col-12 col-sm-12"><strong>Buscador:</strong> Ingrese la marca del producto
+						<input oninput="BtnBuscarProducto()" id="texto" class="form-control" type="text" placeholder="Marca">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-10" id="buscador">
+					<div class="col-12" id="buscador">
 					</div>
 				</div><br><br>
 				<div class="table-responsive">
-				<table class="table table-bordered" style="color: #000;" id="tablaVenta">
+				<table class="table table-bordered" id="tablaVenta">
 					<thead>
 						<tr>
-							<th><div class="sizeTable">Código</div></th>
-							<th><div class="sizeTableXL">Descripción del producto</div></th>
-							<th><div class="sizeTable">Número</div></th>
+							<th><div class="headTable-m">Código</div></th>
+							<th><div class="headTable-XL">Descripción del producto</div></th>
+							<th><div class="headTable-m">Número</div></th>
 							<th>Cantidad</th>
-							<th><div class="sizeTable">precio unidad</div></th>
+							<th><div class="headTable-L">precio unidad</div></th>
 							<th><div class="sizeTable">Subtotal</div></th>
 							<th>Quitar</th>
 						</tr>
@@ -47,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr id="fila">
 							<td>
 								<input required
-									onchange="buscar_codigo(id='codigo0',0)"
+									oninput="buscar_codigo(id='codigo0',0)"
 									id="codigo0"
 									class="form-control"
 									type="text"
@@ -147,9 +151,20 @@ var BtnBuscarProducto = function() {
 		$('#buscador').html(resultado);
 	});
 }
+
+function setCodigo(codigo){
+	if (contador == 1) {
+		$('#codigo0').val(codigo)
+		buscar_codigo(id='codigo0',0)
+	}else {
+		var index = contador - 1
+		$('#codigo'+index).val(codigo)
+		buscar_codigo(id='codigo'+index,index)
+	}
+}
 //switalert para el boton eliminar
 function eliminar(indice){
-	swal({
+	Swal.fire({
   title: "Estas seguro?",
   text: "Una vez eliminado, no podrás revertir la acción!",
   icon: "warning",
@@ -159,8 +174,9 @@ function eliminar(indice){
 .then((willDelete) => {
   if (willDelete) {
 		$("#fila"+indice).remove();
+		contador = contador -1
   } else {
-    swal("El producto no se ha eliminado!");
+    Swal.fire("El producto no se ha eliminado!");
   }
 });
 }
@@ -256,7 +272,7 @@ $(document).ready(function(){
 
 //---------cancelar venta-------------
 $("#cancelar").click(function(){
-		swal({
+		Swal.fire({
 		title: "Estas seguro?",
 		text: "Una vez cancelado, se perderán todos los datos!",
 		icon: "warning",
@@ -267,7 +283,7 @@ $("#cancelar").click(function(){
 		if (willDelete) {
 			window.location.replace("<?=$base_url?>/inicio");
 		} else {
-			swal("La acción fué cancelada!");
+			Swal.fire("La acción fué cancelada!");
 		}
 	});
 });
