@@ -233,7 +233,7 @@ $( document ).ready(function() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Debe seleccionar un número!',
+        text: 'Debe seleccionar una talla!',
         footer: '<a href></a>'
       })
     }else {
@@ -266,7 +266,7 @@ $( document ).ready(function() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Debe seleccionar un número!',
+        text: 'Debe seleccionar una talla!',
         footer: '<a href></a>'
       })
     }else {
