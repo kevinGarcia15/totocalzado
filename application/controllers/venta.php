@@ -139,13 +139,13 @@ class Venta extends CI_Controller {
 				$totalDia = $totalDia + $key['total'];
 				echo '<tr>
 								<td>'.$key['codigo'].'</td>
+								<td>'.$key['talla'].'</td>
 								<td>'.$key['marca'].' '.$key['estilo'].' '.$key['color'].' '.$key['categoria'].'</td>
 								<td>Q. '.$key['unidad'].'</td>
 								<td>'.$key['cantidad'].'</td>
-								<td>Q. '.$key['total'].'</td>
-								<td>Q. '.$totalDia.'</td>
-							</tr>';
+								<td>Q. '.$key['total'].'</td>';
 			}
+			echo '<td><b>Q. '.$totalDia.'</b></td></tr>';
 		}
 	}
 

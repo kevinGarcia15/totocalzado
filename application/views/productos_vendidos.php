@@ -46,6 +46,7 @@ $totalDia = 0;
 								<thead>
 									<tr>
 										<th><div class="sizeTable">Código</div></th>
+										<th><div class="sizeTable">Número</div></th>
 										<th><div class="sizeTableXL">Descripción</div></th>
 										<th><div class="sizeTable">Costo C/U</div></th>
 										<th>Cantidad</th>
@@ -56,14 +57,6 @@ $totalDia = 0;
 								<tbody id="producto">
 									<?php foreach($ventas as $venta){ ?>
 										<?php $totalDia = $totalDia + $venta['total'];?>
-									<tr>
-										<td><?php echo $venta['codigo']; ?></td>
-										<td><?php echo $venta['marca'].' '.$venta['estilo'].' '.$venta['color'].' '.$venta['categoria'].' '.$venta['categoria']; ?></td>
-										<td><?php echo 'Q. '.$venta['unidad']; ?></td>
-										<td><?php echo $venta['cantidad']; ?></td>
-										<td><?php echo 'Q. '.$venta['total']; ?></td>
-										<td><?php echo 'Q. '.$totalDia; ?></td>
-									</tr>
 								<?php } ?>
 								</tbody>
 							</table>
