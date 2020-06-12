@@ -8,7 +8,7 @@ $totalDia = 0;
 	<?php $this->load->view('header'); ?>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
-
+	<link rel="stylesheet" href="<?=$base_url?>recursos/css/productos_vendidos.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<title>productos vendidos</title>
 </head>

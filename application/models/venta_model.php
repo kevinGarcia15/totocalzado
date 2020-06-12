@@ -9,7 +9,9 @@ class Venta_model extends CI_Model{
 	}
 
 		function seleccionarCodigo($id) {
-		$sql = "SELECT p.id_producto id_producto, p.codigo codigo, cat.nombre categoria, e.nombre nombre_prod, m.nombre marca, c.nombre color
+		$sql = "SELECT p.id_producto id_producto, p.codigo codigo, cat.nombre categoria,
+						e.nombre nombre_prod, m.nombre marca, c.nombre color,p.precio_compra precio,
+						p.oferta oferta
 				FROM 	producto p
 				join marca m on p.marca_id_marca = m.id_marca
 				join estilo e on p.estilo_id_estilo = e.id_estilo

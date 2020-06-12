@@ -76,7 +76,11 @@ class Venta extends CI_Controller {
 			echo "Producto inexistente";
 		}else {
 			foreach ($data['codigo'] as $key) {
-				echo '<strong> Marca: </strong>'.$key['marca'].'<strong> estilo: </strong>'.$key['nombre_prod'].'<strong> Color: </strong>'.$key['color'].'<strong> Numeración: </strong>'.$key['categoria'];
+				echo '<strong> Marca: </strong>'.$key['marca'].'<strong> estilo: </strong>'
+							.$key['nombre_prod'].'<strong> Color: </strong>'.$key['color']
+							.'<strong> Numeración: </strong>'.$key['categoria']
+							.'<strong> precio: </strong>'.$key['precio']
+							.'<strong> Oferta: </strong>'.$key['oferta'];
 				echo '<input type="hidden" name="id_producto[]" value="'.$key['id_producto'].'"></>';
 			}
 		}

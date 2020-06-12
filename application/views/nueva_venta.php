@@ -130,6 +130,7 @@ var buscar_codigo = function(id,desc) {
 
 	request.done(function(resultado) {
 		$('#descripcion'+desc).html(resultado);
+//		$('#precio'+desc).val()
 		$(function(){
 			$.post('<?=$base_url?>/venta/numeros',{codigo: codigo_prod}).done(function(respuesta){
 				$('#numero'+desc).html(respuesta);
