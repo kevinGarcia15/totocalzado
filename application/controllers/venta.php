@@ -26,11 +26,10 @@ class Venta extends CI_Controller {
 				$cantidad = $_POST['cantidad'];
 				$precioUnidad = $_POST['precioUnidad'];
 				$id_producto = $_POST['id_producto'];
-				$id_pedido = $_POST['id_pedido'];
 				$montoTotal = $cantidad[$i] * $precioUnidad[$i];
 			$this->Venta_model->ingresarVenta($cantidad[$i],$precioUnidad[$i],
 																				$montoTotal,$id_producto[$i],
-																				1,$numero[$i],$id_pedido);
+																				1,$numero[$i],null);
 
 			}
 		}
