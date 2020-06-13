@@ -13,6 +13,10 @@ body {
   justify-content: center;
   flex-direction: row;
 }
+.costos{
+  display: flex;
+  flex-direction: row;
+}
 .envio{
     color: white;
     background-color: rgba(255,255,255,0.1);
@@ -56,10 +60,17 @@ body {
   flex-direction: row;
   justify-content: center;
 }
-.accion button{
+#ModalGenPDF{
   width: 40%;
   height: 60px;
   font-size: 30px;
+}
+#tableForPdf{
+  display: none;
+}
+#generarPDF{
+  color:black;
+  text-align: left;
 }
 .despachadoBtn{
   color: white;
