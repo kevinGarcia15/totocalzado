@@ -61,7 +61,9 @@ class Venta extends CI_Controller {
 
 		$id_pedido = $_GET['id_ped'];
 		$id_linea = $_GET['lin_ped'];
-		$this->Venta_model->borrarLineaPedido($id_linea);
+		$id_Stock = $_GET['num'];
+		$cantidad = $_GET['cant'];
+		$this->Venta_model->borrarLineaPedidoYaumStock($id_linea,$id_Stock,$cantidad);
 		redirect("/informes/detallepedidos?id=${id_pedido}");
 	}
 

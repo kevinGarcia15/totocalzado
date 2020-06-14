@@ -294,6 +294,10 @@ class Informes_model extends CI_Model{
 	$valores = array($id_pedido,$rows[0]['id_producto'],$cantidad,$talla);
 	$dbres = $this->db->query($sql, $valores);
 
+	$sql2="UPDATE stock SET cantidad = cantidad - ? WHERE stock.id_stock = ?;";
+		$valores_update = array($cantidad,$talla);
+		$this->db->query($sql2, $valores_update);
+
 	return $rows;
 	}
 

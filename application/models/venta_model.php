@@ -45,19 +45,34 @@ class Venta_model extends CI_Model{
 	$sql = "INSERT INTO venta(cantidad, monto_unidad, monto_total,
 														producto_id_producto, vendedor_id_vendedor,
 														numero_categoria_id,pedidos_id_pedidos)
-			VALUES (?,?,?,?,?,?,?)";
-
-	$valores = array($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria,$id_pedido);
-
-	$dbres = $this->db->query($sql, $valores);
-
-	return $dbres;
+			VALUES (?,?,?,?,?,?,?);
+			";
+			$valores = array($cantidad, $precioUnidad, $montoTotal, $id_producto, $id_vendedor, $id_numero_categoria,$id_pedido);
+			$dbres = $this->db->query($sql, $valores);
+//si $idpedido es null, significa que se està realizando una incersion desde modulo nuevaVenta
+	if ($id_pedido == null) {
+		$sql2="UPDATE stock SET cantidad = cantidad - ? WHERE stock.id_stock = ?;";
+		$valores_update = array($cantidad,$id_numero_categoria);
+		$this->db->query($sql2, $valores_update);
 	}
+	return $dbres;
+}
 
 	function borrarLineaPedido($linea) {
 	$sql = "DELETE FROM `lineapedido` WHERE `lineapedido`.`id_lineaPedido` = ?";
 	$valores = array($linea);
 	$dbres = $this->db->query($sql, $valores);
+	return $dbres;
+	}
+
+	function borrarLineaPedidoYaumStock($linea,$id_stock,$cantidad) {
+	$sql = "DELETE FROM `lineapedido` WHERE `lineapedido`.`id_lineaPedido` = ?";
+	$valores = array($linea);
+	$dbres = $this->db->query($sql, $valores);
+
+	$sql2="UPDATE stock SET cantidad = cantidad + ? WHERE stock.id_stock = ?;";
+	$valores_update = array($cantidad,$id_stock);
+	$this->db->query($sql2, $valores_update);
 	return $dbres;
 	}
 

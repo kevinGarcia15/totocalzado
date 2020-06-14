@@ -50,7 +50,7 @@
       <div class="productos">
 
         <?php if(!empty($pedidos)): ?>
-        <h4>Solicitudes sin despachar</h4>
+        <h4>Solicitudes sin confirmar</h4>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -70,27 +70,6 @@
                 <?php $sumaTotal = 0;?>
                 <?php foreach ($pedidos as $key): ?>
                     <?php $sumaTotal = $sumaTotal + $key['precio_compra'] ?>
-                  <!--valida si hay en existencia dicho producto--------------------------------->
-                  <tr id="fileProducto"><?php if ($key['cant_stock'] < 1): ?>
-                    <input type="hidden" name="flag" value="0"><!--nos ayuda a saber cuantos productos hay disponibles-->
-                    <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
-                    <td><?=$key['codigo']?></td>
-                    <td><?=$key['marca']?></td>
-                    <td><?=$key['color']?></td>
-                    <td><?=$key['numero']?></td>
-                    <td>Q.<?=$key['precio_compra']?></td>
-                    <td>
-                      <?=$key['unidades']?>
-                      <i title="Sin existencia" class="fas fa-exclamation-circle"></i>
-                    </td>
-                    <td>
-                      <a
-                        class="btn btn-danger"
-                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>">
-                        <i class="fas fa-trash-alt" style="margin-left: 0px;"></i>
-                      </a>
-                    </td>
-                  <?php else: ?>
                     <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
                     <td><?=$key['codigo']?>
                       <!--la variable $key['id_stock'] concatenado genera un id unico entre los inputs-->
@@ -141,7 +120,7 @@
                     <td>
                       <a
                         class="btn btn-danger"
-                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>">
+                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>&num=<?=$key['id_stock']?>&cant=<?=$key['unidades']?>">
                         <i class="fas fa-trash-alt" style="margin-left: 0px;"></i>
                       </a>
                       <a
@@ -150,7 +129,6 @@
                         <i class="far fa-check-circle"></i>
                       </a>
                     </td>
-                  <?php endif; ?>
                 </tr>
               <?php endforeach; ?>
             </tbody>
@@ -200,7 +178,16 @@
           data-whatever="@mdo">
           Generar PDF
         </button>
+        <button
+          id="agregar_producto"
+          class="btn btn-success"
+          data-toggle="modal"
+          data-target="#AddProducto"
+          data-whatever="@mdo">
+          Agregar producto
+        </button>
         <?php $this->load->view('detallePedidoModalGenPDF'); ?>
+        <?php $this->load->view('detallePedidoModalAddProd'); ?>
       </div>
       </div>
     </div><br><br>
