@@ -181,9 +181,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script type="text/javascript">
 	$(document).ready(function(){
+    var screenWidth = 0;
+    screen.width > 600 ? screenWidth = 472 : screenWidth = 311
       Swal.fire({
         imageUrl: '<?=$base_url?>/recursos/img/anuncio-fb-liviano.jpg',
-        imageHeight: 472,
+        imageHeight: screenWidth,
         imageAlt: 'A tall image',
         showCancelButton: true,
         cancelButtonText: 'Cerrar',
