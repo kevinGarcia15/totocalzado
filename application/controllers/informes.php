@@ -87,4 +87,10 @@ class Informes extends CI_Controller {
 						'.$key['nombre_etiqueta'].'</a>'."\n";
 		}
 	}
+	public function buscar(){
+		$data['base_url'] = $this->config->item('base_url');
+		$codigo_prod = $_POST['busqueda'];
+		$data['buscarProd'] = $this->Informes_model->Buscar($codigo_prod);
+		$this->load->view('busqueda', $data);
+	}
 }

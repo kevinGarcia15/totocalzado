@@ -65,6 +65,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <img src="<?=$base_url?>/recursos/img/arrow-left.png" alt="arrow left">
       </a>
     </div>
+    <div id="navbarTogglerDemo01">
+     <form class="form-inline" id="navbarTogglerDemo01" action="<?=$base_url?>/informes/buscar" method="POST">
+       <input class="form-control mr-sm-2" name="busqueda" type="search" placeholder="Código de producto" aria-label="Search">
+       <button class="btn btn-outline-success mr-sm-2" type="submit">Buscar</button>
+     </form>
+   </div>
   <div class="topnav" id="myTopnav">
    <a  id="textMenuHover" href="<?=$base_url?>" class="active">Menú</a>
 

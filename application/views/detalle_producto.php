@@ -206,26 +206,7 @@ $( document ).ready(function() {
     }
   })
   //fin lightbox
-  function addCarrito(){
-    var precio = $("#precio").val();
-    var id_producto = $("#id_producto").val();
-    var cantidad = 1;
 
-    var request = $.ajax({
-      method: "POST",
-      url: "<?=$base_url?>/proventa/add",
-      data: {
-        id_producto: id_producto,
-        precio_producto: precio,
-        cantidad: cantidad
-      }
-    });
-    request.done(function(respuesta){
-      swal.fire('Agregado al carrito exitosamente')
-      console.log(respuesta)
-      //    location.reload();
-    });
-  }
   //validado el select para los numeros
   $('#add').on('click', function(){
     var numero = $('.item_size option:selected').text()
@@ -271,20 +252,7 @@ $( document ).ready(function() {
       })
     }else {
       var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
-      var codigo = '<?=$detalle[0]['codigo']?>'
-
-      var request = $.ajax({
-        method: "POST",
-        url: "<?=$base_url?>/proventa/pedido_espera_whatsapp",
-        data: {
-          codigo: codigo,
-          talla: id_stock,
-          id_persona: 17
-        }
-      });
-      request.done(function(resultado) {
-        location.href = txt;
-      });
+      location.href = txt;
     }
   })
 });

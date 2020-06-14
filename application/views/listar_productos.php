@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $htmltrow = "<tr>
-				<td><img src=\"${base_url}/./%s\"></td>
-				<td>%s</td>
+				<td><a href=\"${base_url}/informes/mostrarProducto/{$prod[0]['id_producto']}\"><img src=\"${base_url}/./%s\"></a></td>
+				<td><a href=\"${base_url}/informes/mostrarProducto/{$prod[0]['id_producto']}\">%s</a></td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>

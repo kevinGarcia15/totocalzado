@@ -21,11 +21,28 @@ class Informes_model extends CI_Model{
 				LIMIT 	1";
 
 		$dbres = $this->db->query($sql, $id);
-
 		$rows = $dbres->result_array();
-
 		return $rows;
 	}
+
+	function Buscar($codigo) {
+	$sql = "SELECT p.id_producto id_producto, p.codigo codigo,p.img_carrusel img,
+						p.codigo_proveedor codigo_proveedor,cat.nombre categoria,
+						e.nombre nombre_prod, m.nombre marca, c.nombre color,gen.nombre depto
+			FROM 	producto p
+			join marca m on p.marca_id_marca = m.id_marca
+			join estilo e on p.estilo_id_estilo = e.id_estilo
+			join color c on p.color_id_color = c.id_color
+			join categoria cat on p.categoria_id_categoria = cat.id_categoria
+			join genero gen on p.genero_id_genero = gen.id_genero
+
+			Where p.codigo = ?
+			LIMIT 	1";
+
+	$dbres = $this->db->query($sql, $codigo);
+	$rows = $dbres->result_array();
+	return $rows;
+}
 
 	function listar_productos() {
 		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
