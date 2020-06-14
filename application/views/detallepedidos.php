@@ -151,24 +151,7 @@
                       </a>
                     </td>
                   <?php endif; ?>
-            </tr>
-            <!--tabla oculta para implementar en pdf-->
-                  <table id="tableForPdf">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>DESCIPCION</th>
-                        <th>PRECIO</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><?=$key['unidades']?></td>
-                        <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> <?=$key['numero']?></td>
-                        <td>Q.<?=$key['precio_compra']?></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                </tr>
               <?php endforeach; ?>
             </tbody>
           </table>
@@ -222,6 +205,26 @@
       </div>
     </div><br><br>
   <?php $this->load->view('footer'); ?>
+</tr>
+<!--tabla oculta para implementar en pdf-->
+      <table id="tableForPdf">
+        <thead>
+          <tr>
+            <th></th>
+            <th>DESCIPCION</th>
+            <th>PRECIO</th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($pedidos as $key): ?>
+            <tr>
+              <td><?=$key['unidades']?></td>
+              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> <?=$key['numero']?></td>
+              <td>Q.<?=$key['precio_compra']?></td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+      </table>
 </body>
 <script type="text/javascript">
   function ingresarAVenta(stock){
