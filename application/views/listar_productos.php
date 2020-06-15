@@ -34,6 +34,9 @@ foreach ($prod as $a) {
 		#items img{
 			width: 100px;
 		}
+		#navbarTogglerDemo01{
+			display: none;
+		}
 	</style>
 	<title>Inventario</title>
 </head>
