@@ -19,6 +19,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://unpkg.com/jspdf"></script>
 <script type="text/javascript" src="https://unpkg.com/jspdf-autotable"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
+
   <title>Detalle del pedido</title>
 </head>
 <body>
@@ -60,16 +64,16 @@
                 <th>Estilo</th>
                 <th>Color</th>
                 <th>Número</th>
-                <th>Precio</th>
+                <th><div class="headTable_m">Precio</div></th>
                 <th>unidades</th>
-                <th>Opciones</th>
+                <th><div class="headTable_m">Opciones</div></th>
               </tr>
             </thead>
             <tbody>
                 <input id="id_pedido" type="hidden" name="id_pedido" value="<?=$pedidos[0]['id_pedidos']?>">
                 <?php $sumaTotal = 0;?>
                 <?php foreach ($pedidos as $key): ?>
-                    <?php $sumaTotal = $sumaTotal + $key['precio_compra'] ?>
+                    <?php $sumaTotal = $sumaTotal + ($key['precio_compra'] * $key['unidades']) ?>
                     <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
                     <td><?=$key['codigo']?>
                       <!--la variable $key['id_stock'] concatenado genera un id unico entre los inputs-->
@@ -119,8 +123,9 @@
                     <td><?=$key['unidades']?></td>
                     <td>
                       <a
+                        onclick="eliminarProducto('<?=$key['id_linea']?>','<?=$pedidos[0]['id_pedidos']?>','<?=$key['id_stock']?>','<?=$key['unidades']?>')"
                         class="btn btn-danger"
-                        href="<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped=<?=$key['id_linea']?>&id_ped=<?=$pedidos[0]['id_pedidos']?>&num=<?=$key['id_stock']?>&cant=<?=$key['unidades']?>">
+                        href="#">
                         <i class="fas fa-trash-alt" style="margin-left: 0px;"></i>
                       </a>
                       <a
@@ -206,8 +211,8 @@
             <?php foreach ($pedidos as $key): ?>
             <tr>
               <td><?=$key['unidades']?></td>
-              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> <?=$key['numero']?></td>
-              <td>Q.<?=$key['precio_compra']?></td>
+              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> #<?=$key['numero']?> Q.<?=$key['precio_compra']?>uni.</td>
+              <td>Q.<?=$key['precio_compra'] * $key['unidades']?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -222,23 +227,39 @@
     var numero = $('#numero_'+stock).val()
     var precioUnidad = $('#precioUnidad_'+stock).val()
 
-    var request = $.ajax({
-      method: "POST",
-      url: "<?=$base_url?>/venta/ingresarventaPorUnidad",
-      data: {
-        id_pedido: id_pedido,
-        numero: numero,
-        precioUnidad: precioUnidad,
-        id_producto: id_producto,
-        id_linea: id_linea,
-        cantidad: cantidad
-      }
-    });
-
-    request.done(function(resultado) {
-      location. reload();
-    });
-  }
+    Swal.fire({
+    title: 'Confirmar producto?',
+    text: "El producto se guardará",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Confirmar!'
+  }).then((result) => {
+    if (result.value) {
+      var request = $.ajax({
+        method: "POST",
+        url: "<?=$base_url?>/venta/ingresarventaPorUnidad",
+        data: {
+          id_pedido: id_pedido,
+          numero: numero,
+          precioUnidad: precioUnidad,
+          id_producto: id_producto,
+          id_linea: id_linea,
+          cantidad: cantidad
+        }
+      });
+      request.done(function(resultado) {
+        location. reload();
+      });
+      Swal.fire(
+        'Guardado!',
+        'El producto se despachó exitosamente.',
+        'success'
+      )
+    }
+  })
+}
 
 $('#generar-pdf').on('click', function(){
   var f = new Date();
@@ -314,7 +335,7 @@ $('#generar-pdf').on('click', function(){
   doc.text(147,159,'Q.'+costo_Envio+'.00')
   doc.line(140, 162, 200, 162);//linea horizontal entre datos
   doc.text(108,165,'Descuento especial')
-  doc.text(147,165,'Q.'+descuento+'.00')
+  doc.text(147,165,'<Q.'+descuento+'.00>')
   doc.line(140, 168, 200, 168);//linea horizontal entre datos
   doc.text(127,171,'Otros')
   doc.text(147,171,'Q.'+otros_costos+'.00')
@@ -326,9 +347,30 @@ $('#generar-pdf').on('click', function(){
   doc.autoTable({
     html: '#tableForPdf',
     theme: 'plain',
-    margin: { top: 100 },
+    margin: { top: 95},
 })
   doc.save(nombre_cliente+'_'+fechaActual+'.pdf');
 })
+
+function eliminarProducto(id_linea,id_pedido,id_stock,unidades){
+  Swal.fire({
+  title: 'Esta seguro?',
+  text: "El producto se eliminará del pedido!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, eliminar!'
+}).then((result) => {
+  if (result.value) {
+    window.location.href = "<?=$base_url?>/venta/eliminarProductoDeLinea?lin_ped="+id_linea+"&id_ped="+id_pedido+"&num="+id_stock+"&cant="+unidades+""
+    Swal.fire(
+      'Eliminado!',
+      'El producto ha sido eliminado.',
+      'success'
+    )
+  }
+})
+}
 </script>
 </html>

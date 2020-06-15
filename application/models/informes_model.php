@@ -492,4 +492,18 @@ class Informes_model extends CI_Model{
 		$dbres = $this->db->query($sql,$valores);
 		return $dbres;
 	}
+
+	function add_prod_a_pedido($id_pedido,$producto_id_producto,$unidades,$stock_id_stock){
+		$sql = "INSERT INTO lineapedido(pedido_id_pedido, producto_id_producto,
+							unidades,stock_id_stock)
+						VALUES (?, ?, ?, ?)";
+
+	$valores = array($id_pedido,$producto_id_producto,$unidades,$stock_id_stock);
+	$dbres = $this->db->query($sql, $valores);
+
+	$sql2="UPDATE stock SET cantidad = cantidad - ? WHERE stock.id_stock = ?;";
+		$valores_update = array($unidades,$stock_id_stock);
+		$this->db->query($sql2, $valores_update);
+	return $dbres;
+	}
 }

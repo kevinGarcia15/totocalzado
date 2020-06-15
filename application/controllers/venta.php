@@ -83,7 +83,7 @@ class Venta extends CI_Controller {
 							.'<strong> Numeración: </strong>'.$key['categoria']
 							.'<strong> precio: </strong>'.$key['precio']
 							.'<strong> Oferta: </strong>'.$key['oferta'];
-				echo '<input type="hidden" name="id_producto[]" value="'.$key['id_producto'].'"></>';
+				echo '<input id="id_producto_addProd" type="hidden" name="id_producto[]" value="'.$key['id_producto'].'"></>';
 			}
 		}
 	}

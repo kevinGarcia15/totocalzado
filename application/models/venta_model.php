@@ -32,7 +32,7 @@ class Venta_model extends CI_Model{
 							join numero_categoria ncat on ncat.id = s.numero_categoria_id
               join numero_calzado n on ncat.id_numero = n.id_numero
 							WHERE s.producto_id_producto = (SELECT p.id_producto
-		    			FROM producto p WHERE p.codigo = ?)";
+		    			FROM producto p WHERE p.codigo = ?) and s.cantidad > 0";
 
 			$dbres = $this->db->query($sql, $codigo);
 

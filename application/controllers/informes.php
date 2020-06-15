@@ -93,4 +93,15 @@ class Informes extends CI_Controller {
 		$data['buscarProd'] = $this->Informes_model->Buscar($codigo_prod);
 		$this->load->view('busqueda', $data);
 	}
+	public function add_Producto_A_pedido(){
+		$data['base_url'] = $this->config->item('base_url');
+		$id_pedido = $_POST['pedido_id_pedido'];
+		$producto_id_producto = $_POST['producto_id_producto'];
+		$unidades = $_POST['unidades'];
+		$stock_id_stock = $_POST['stock_id_stock'];
+		$this->Informes_model->add_prod_a_pedido(
+			$id_pedido,$producto_id_producto,$unidades,$stock_id_stock
+		);
+		echo "producto ingresasdo exitosamente";
+	}
 }

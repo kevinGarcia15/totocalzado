@@ -61,14 +61,24 @@ body {
   justify-content: center;
 }
 #ModalGenPDF{
-  width: 40%;
-  height: 60px;
-  font-size: 30px;
+  width: 30%;
+  height: 45px;
+  font-size: 20px;
+  margin-right: 18px;
+}
+#agregar_producto{
+  width: 30%;
+  height: 45px;
+  font-size: 20px;
 }
 #tableForPdf{
   display: none;
 }
 #generarPDF{
+  color:black;
+  text-align: left;
+}
+#AddProducto{
   color:black;
   text-align: left;
 }
@@ -93,5 +103,22 @@ body {
   }
   .despachadoBtn{
     font-size: 20px;
+  }
+  #ModalGenPDF{
+    font-size: 15px;
+    width: 35%;
+  }
+  #agregar_producto{
+    font-size: 15px;
+    width: 35%;
+  }
+  .headTable_m{
+    width: 100px;
+  }
+  .headTable_L{
+    width: 110px;
+  }
+  .headTable_XL{
+    width: 200px;
   }
 }
