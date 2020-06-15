@@ -73,7 +73,8 @@
                 <input id="id_pedido" type="hidden" name="id_pedido" value="<?=$pedidos[0]['id_pedidos']?>">
                 <?php $sumaTotal = 0;?>
                 <?php foreach ($pedidos as $key): ?>
-                    <?php $sumaTotal = $sumaTotal + ($key['precio_compra'] * $key['unidades']) ?>
+                    <?php $precio = ($key['oferta'] > 0) ? $key['oferta'] : $key['precio_compra']; ?>
+                    <?php $sumaTotal = $sumaTotal + ($precio * $key['unidades']) ?>
                     <td><img src="<?=$base_url?>/<?=$key['img']?>"></img></td>
                     <td><?=$key['codigo']?>
                       <!--la variable $key['id_stock'] concatenado genera un id unico entre los inputs-->
@@ -116,7 +117,7 @@
                       id="precioUnidad_<?=$key['id_stock']?>"
                       type="number"
                       name="precioUnidad[]"
-                      value="<?=$key['precio_compra']?>"
+                      value="<?=$precio?>"
                       class="form-control"
                       >
                     </td>
@@ -165,7 +166,8 @@
                   <td><?=$key['marca']?></td>
                   <td><?=$key['color']?></td>
                   <td><?=$key['numero']?></td>
-                  <td>Q.<?=$key['precio_unidad']?></td>
+                  <?php $precio = ($key['oferta'] > 0) ? $key['oferta'] : $key['precio_compra']; ?>
+                  <td>Q.<?=$precio?></td>
                   <td><?=$key['unidades']?></td>
                   <td><?=$key['fecha']?></td>
                 </tr>
@@ -210,9 +212,10 @@
         <tbody>
             <?php foreach ($pedidos as $key): ?>
             <tr>
+              <?php $precio = ($key['oferta'] > 0) ? $key['oferta'] : $key['precio_compra']; ?><!--verifica si existe alguna oferta-->
               <td><?=$key['unidades']?></td>
-              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> #<?=$key['numero']?> Q.<?=$key['precio_compra']?>uni.</td>
-              <td>Q.<?=$key['precio_compra'] * $key['unidades']?></td>
+              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> #<?=$key['numero']?> Q.<?=$precio?>uni.</td>
+              <td>Q.<?=$precio * $key['unidades']?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>

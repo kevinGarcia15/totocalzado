@@ -333,6 +333,7 @@ class Informes_model extends CI_Model{
 									per.usuario usuario,ald.nombre aldea,
 
 									prod.codigo codigo, prod.precio_compra precio_compra,
+									prod.oferta oferta,
 									prod.img_carrusel img, prod.id_producto id_producto,
 
 									marc.nombre marca, col.nombre color, ncalz.numero numero,
