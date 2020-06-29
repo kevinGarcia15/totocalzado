@@ -183,19 +183,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	$(document).ready(function(){
     var screenWidth = 0;
     screen.width > 600 ? screenWidth = 472 : screenWidth = 311
-      Swal.fire({
-        imageUrl: '<?=$base_url?>/recursos/img/anuncio-fb-liviano.jpg',
-        imageHeight: screenWidth,
-        imageAlt: 'A tall image',
-        showCancelButton: true,
-        cancelButtonText: 'Cerrar',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Ir',
-      }).then((result) => {
-        if (result.value) {
-          window.location.href = "<?=$base_url?>/Departamento/tag?tag=Para trabajo";
-        }
-      })
+    /*Swal para promocion especial*/
+      // Swal.fire({
+      //   imageUrl: '<?=$base_url?>/recursos/img/anuncio-fb-liviano.jpg',
+      //   imageHeight: screenWidth,
+      //   imageAlt: 'A tall image',
+      //   showCancelButton: true,
+      //   cancelButtonText: 'Cerrar',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: 'Ir',
+      // }).then((result) => {
+      //   if (result.value) {
+      //     window.location.href = "<?=$base_url?>/Departamento/tag?tag=Para trabajo";
+      //   }
+      // })
 });
   function detalle(id,dep){
     window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
