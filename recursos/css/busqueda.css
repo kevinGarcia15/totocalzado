@@ -1,14 +1,14 @@
-.font-color-white{
-  color:white;
+.font-color-white {
+  color: white;
 }
 @media only screen and (max-width: 600px) {
-  .headTable-m{
+  .headTable-m {
     width: 80px;
   }
-  .headTable-L{
+  .headTable-L {
     width: 135px;
   }
-  .headTable-XL{
+  .headTable-XL {
     width: 310px;
   }
 }
