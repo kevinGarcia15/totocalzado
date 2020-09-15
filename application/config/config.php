@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://13.84.34.160:80/totocalzado';
-$config['base_url'] = 'http://localhost/totocalzado';
+$config['base_url'] = 'http://localhost:8080/totocalzado';
 //$config['base_url'] = 'http://192.168.0.109/totocalzado';
 
 /*
