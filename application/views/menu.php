@@ -67,7 +67,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
     <div id="navbarTogglerDemo01">
      <form class="form-inline" id="navbarTogglerDemo01" action="<?=$base_url?>/informes/buscar" method="POST">
-       <input class="form-control mr-sm-2" name="busqueda" type="search" placeholder="Código de producto" aria-label="Search">
+       <input class="form-control mr-sm-2" name="busqueda" type="search" placeholder="Marca del producto" aria-label="Search">
        <button class="btn btn-outline-success mr-sm-2" type="submit">Buscar</button>
      </form>
    </div>

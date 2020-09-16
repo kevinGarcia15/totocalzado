@@ -25,7 +25,7 @@ class Informes_model extends CI_Model{
 		return $rows;
 	}
 
-	function Buscar($codigo) {
+	function Buscar($argumentos) {
 	$sql = "SELECT p.id_producto id_producto, p.codigo codigo,p.img_carrusel img,
 						p.codigo_proveedor codigo_proveedor,cat.nombre categoria,
 						e.nombre nombre_prod, m.nombre marca, c.nombre color,gen.nombre depto
@@ -36,10 +36,11 @@ class Informes_model extends CI_Model{
 			join categoria cat on p.categoria_id_categoria = cat.id_categoria
 			join genero gen on p.genero_id_genero = gen.id_genero
 
-			Where p.codigo = ?
-			LIMIT 	1";
+			Where m.nombre like ?
+			LIMIT 	15";
 
-	$dbres = $this->db->query($sql, $codigo);
+	$findArgument = $argumentos.'%';
+	$dbres = $this->db->query($sql, $findArgument);
 	$rows = $dbres->result_array();
 	return $rows;
 }

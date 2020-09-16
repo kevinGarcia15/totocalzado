@@ -89,10 +89,11 @@ class Informes extends CI_Controller {
 	}
 	public function buscar(){
 		$data['base_url'] = $this->config->item('base_url');
-		$codigo_prod = $_POST['busqueda'];
-		$data['buscarProd'] = $this->Informes_model->Buscar($codigo_prod);
+		$argumentos = $_POST['busqueda'];
+		$data['buscarProd'] = $this->Informes_model->Buscar($argumentos);
 		$this->load->view('busqueda', $data);
 	}
+
 	public function add_Producto_A_pedido(){
 		$data['base_url'] = $this->config->item('base_url');
 		$id_pedido = $_POST['pedido_id_pedido'];
