@@ -4,13 +4,13 @@
   <!-- Full-width images with number and caption text -->
   <div class="mySlides fade">
     <div class="numbertext">1 / 2</div>
-    <img src="<?=$base_url?>/recursos/img/totocalzadoSlide1.jpeg">
+    <img src="<?=$base_url?>/recursos/img/totocalzadoSlide1.jpg">
     <div class="text">DURABILIDAD</div>
   </div>
 
   <div class="mySlides fade">
     <div class="numbertext">2 / 2</div>
-    <img src="<?=$base_url?>/recursos/img/totocalzadoSlide2.jpeg">
+    <img src="<?=$base_url?>/recursos/img/totocalzadoSlide2.jpg">
     <div class="text">BUEN PRECIO</div>
   </div>
 
