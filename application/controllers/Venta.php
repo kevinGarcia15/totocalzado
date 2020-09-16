@@ -127,7 +127,7 @@ class Venta extends CI_Controller {
 			$mes = date("m");
 			$año = date("Y");
 			$ajaxFecha = $dia."/".$mes."/".$año;
-			$data['ventas'] = $this->Venta_model->seleccionarVenta($ajaxFecha);
+			$data['ventas'] = $this->Venta_model->seleccionarTodasLasVenta();
 		$this->load->view('productos_vendidos', $data);
 	}
 
