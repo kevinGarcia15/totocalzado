@@ -16,9 +16,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <!-- PDFjs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://unpkg.com/jspdf"></script>
-<script type="text/javascript" src="https://unpkg.com/jspdf-autotable"></script>
+<script src="<?=$base_url?>/recursos/js/pdfjs/jspdf.min.js"></script>
+<script src="<?=$base_url?>/recursos/js/pdfjs/jspdf.plugin.autotable.min.js"></script>
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" id="theme-styles">
@@ -264,6 +263,18 @@
   })
 }
 
+$('#generar-listado').on('click', function(){
+  var f = new Date();
+  var fechaActual = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
+
+  const doc = new jsPDF();
+  doc.autoTable({
+    html: '#tableForPdf',
+    theme: 'plain',
+    margin: { top: 5},
+})
+  doc.save(fechaActual+'.pdf');
+})
 $('#generar-pdf').on('click', function(){
   var f = new Date();
   var fechaActual = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
@@ -277,7 +288,7 @@ $('#generar-pdf').on('click', function(){
   var otros_costos = parseInt($('#otros-costos').val())
   var Total = (subtotal + costo_Envio + otros_costos)-descuento
 
-  var doc = new jsPDF();0
+  const doc = new jsPDF();
   var x1 = 10
   var x2 = 200
   var y1 = 10
