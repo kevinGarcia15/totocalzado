@@ -108,7 +108,8 @@
                         value="<?=$key['id_stock']?>"
                       >
                     </td>
-                    <td><?=$key['marca']?></td>
+
+                    <td><?=$key['marca'].' '.$key['estilo']?></td>
                     <td><?=$key['color']?></td>
                     <td><?=$key['numero']?></td>
                     <td>
@@ -165,8 +166,7 @@
                   <td><?=$key['marca']?></td>
                   <td><?=$key['color']?></td>
                   <td><?=$key['numero']?></td>
-                  <?php $precio = ($key['oferta'] > 0) ? $key['oferta'] : $key['precio_compra']; ?>
-                  <td>Q.<?=$precio?></td>
+                  <td>Q.<?=$key['precio_unidad']?></td>
                   <td><?=$key['unidades']?></td>
                   <td><?=$key['fecha']?></td>
                 </tr>
@@ -213,7 +213,7 @@
             <tr>
               <?php $precio = ($key['oferta'] > 0) ? $key['oferta'] : $key['precio_compra']; ?><!--verifica si existe alguna oferta-->
               <td><?=$key['unidades']?></td>
-              <td><?=$key['codigo']?> <?=$key['marca']?> <?=$key['color']?> #<?=$key['numero']?> Q.<?=$precio?>uni.</td>
+              <td><?=$key['codigo']?> <?=$key['marca'].' '.$key['estilo']?> <?=$key['color']?> #<?=$key['numero']?> Q.<?=$precio?>uni.</td>
               <td>Q.<?=$precio * $key['unidades']?></td>
             </tr>
             <?php endforeach; ?>
@@ -266,6 +266,7 @@
 $('#generar-listado').on('click', function(){
   var f = new Date();
   var fechaActual = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
+  var nombre_cliente = $('#nombre-cliente').val()
 
   const doc = new jsPDF();
   doc.autoTable({
@@ -273,8 +274,9 @@ $('#generar-listado').on('click', function(){
     theme: 'plain',
     margin: { top: 5},
 })
-  doc.save(fechaActual+'.pdf');
+  doc.save(nombre_cliente+fechaActual+'.pdf');
 })
+
 $('#generar-pdf').on('click', function(){
   var f = new Date();
   var fechaActual = f.getDate() + "/" + (f.getMonth() +1) + "/" + f.getFullYear();
