@@ -47,7 +47,7 @@
 			<span class="close">×</span>
 			<h2>Contacto</h2>
 			<div class="">
-				<a href="https://wa.me/50259788865">
+				<a href="https://wa.me/50257469663">
 					<img
 						src="<?=$base_url?>/recursos/img/whatsappGreen.png"
 						alt=""

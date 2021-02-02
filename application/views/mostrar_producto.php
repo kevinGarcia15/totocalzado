@@ -10,18 +10,39 @@ if (count($arr) < 1) {
 <html lang="en">
 <head>
 	<?php $this->load->view('header'); ?>
+	<style media="screen">
+		body{
+			color:white;
+		}
+		.border{
+			border: 3px solid;
+			border-radius: 10px;
+			margin: 0 5px;
+		}
+		.table_Width{
+			width: 90%;
+		}
+		.sizeTable_md{
+			width: 80px;
+		}
+	@media only screen and (max-width: 600px) {
+	.border{
+		margin: 5px 0;
+	}
+}
+	</style>
 	<title>Estilos</title>
 </head>
 <body>
-	<div class="page-content p-5" id="content">
-		<br>
+	<header>
 		<?php $this->load->view('menu'); ?>
-
+	</header>
+	<div class="page-content p-5" id="content">
 		<?php foreach ($arr as $key) {?>
 			<div class="row justify-content-md-center">
-				<div class="col col-xl-4">
+				<div class="col-12 col-xl-4 col-ms-12 border">
 					<h4>Datos del producto</h4><br>
-					<table class="table-color">
+					<table class="table-color table_Width">
 						<tbody>
 							<tr>
 								<td><strong>Código del producto: </strong></td>
@@ -54,14 +75,14 @@ if (count($arr) < 1) {
 						</tbody>
 					</table>
 				</div>
-				<div class="col col-xl-5">
+				<div class="col-12 col-xl-5 col-md-12 border">
 					<form action="<?=$base_url?>/informes/actualizar/<?php echo $arr[0]['id_producto']; ?>" method="post">
 						<h4>Inventario de este producto</h4>
-						<table class="table-color">
+						<table class="table-color table_Width">
 							<?php foreach ($numeros as $a) {?>
 								<tr>
 									<td>numero: <?=$a['numero']?></td>
-									<td><div class="sizeTable"><input type="number" min="0" max="200" class="form-control" placeholder="Ingrese valor" value="<?=$a['cantidad']?>" name="cantidad_actualizar[]"></div></td>
+									<td><div class="sizeTable_md"><input type="number" min="0" max="200" class="form-control" placeholder="Ingrese valor" value="<?=$a['cantidad']?>" name="cantidad_actualizar[]"></div></td>
 									<td><input type="hidden" value="<?=$a['id_stock']?>" name="id_stock[]"></td>
 								</tr>
 							<?php } ?>
@@ -70,12 +91,11 @@ if (count($arr) < 1) {
 				</div>
 			</div>
 			<div class="row">
-				<a class='btn btn-outline-success' href="javascript:history.back()"><i class='fa fa-angle-double-left'></i></a>
 				<a class='btn btn-outline-warning' href="<?=$base_url?>/inicio/">listo <i class='fa fa-check'></i></a>
 				<button type="submit" name="button" class='btn btn-outline-success'>Actualizar<i class='fa fa-hdd-o'></i></button>
-			</form>		  <!-- Demo content -->
 			</div>
+			</form>		  <!-- Demo content -->
 		<?php } ?>
-		  <?php $this->load->view('footer'); ?>
 		<br>
 	</div><br><br><br>
+	<?php $this->load->view('footer'); ?>

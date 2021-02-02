@@ -7,6 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php $this->load->view('header'); ?>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 	<link rel="stylesheet" href="<?=$base_url?>/recursos/css/home.css" media="screen">
   <link rel="stylesheet" href="<?=$base_url?>/recursos/css/carouselInicio.css" media="screen">
 <?php $inicio = true; ?>
@@ -173,13 +175,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </div>
   </section>
-
   <?php $this->load->view('FloatingActionButton'); ?>
-
   <?php $this->load->view('footer'); ?>
 </body>
 
 <script type="text/javascript">
+	$(document).ready(function(){
+    var screenWidth = 0;
+    screen.width > 600 ? screenWidth = 472 : screenWidth = 311
+    /*Swal para promocion especial*/
+      // Swal.fire({
+      //   imageUrl: '<?=$base_url?>/recursos/img/anuncio-fb-liviano.jpg',
+      //   imageHeight: screenWidth,
+      //   imageAlt: 'A tall image',
+      //   showCancelButton: true,
+      //   cancelButtonText: 'Cerrar',
+      //   cancelButtonColor: '#d33',
+      //   confirmButtonText: 'Ir',
+      // }).then((result) => {
+      //   if (result.value) {
+      //     window.location.href = "<?=$base_url?>/Departamento/tag?tag=Para trabajo";
+      //   }
+      // })
+});
   function detalle(id,dep){
     window.location.href = "<?=$base_url?>/proventa/detalle?id="+id+"&dep="+dep+"";
   }

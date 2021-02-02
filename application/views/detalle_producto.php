@@ -156,7 +156,7 @@
 </body>
 <script type="text/javascript">
 $( document ).ready(function() {
-  $('.pedir_whatsapp').hide()
+
 
   //lightbox
   var modal = document.getElementById("myModal");
@@ -206,26 +206,7 @@ $( document ).ready(function() {
     }
   })
   //fin lightbox
-  function addCarrito(){
-    var precio = $("#precio").val();
-    var id_producto = $("#id_producto").val();
-    var cantidad = 1;
 
-    var request = $.ajax({
-      method: "POST",
-      url: "<?=$base_url?>/proventa/add",
-      data: {
-        id_producto: id_producto,
-        precio_producto: precio,
-        cantidad: cantidad
-      }
-    });
-    request.done(function(respuesta){
-      swal.fire('Agregado al carrito exitosamente')
-      console.log(respuesta)
-      //    location.reload();
-    });
-  }
   //validado el select para los numeros
   $('#add').on('click', function(){
     var numero = $('.item_size option:selected').text()
@@ -233,7 +214,7 @@ $( document ).ready(function() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Debe seleccionar un número!',
+        text: 'Debe seleccionar una talla!',
         footer: '<a href></a>'
       })
     }else {
@@ -249,13 +230,9 @@ $( document ).ready(function() {
     var numero = $('.item_size option:selected').text()
     if (numero == 'seleccionar') {
       $('#add').removeClass('item_add')
-      $('.pedir_whatsapp').hide()
     }else {
       $('#add').addClass('item_add')
       $('#numero').text(numero)
-      $('.pedir_whatsapp').show()
-      //    console.log(numero)
-      //    console.log('clase agregada')
     }
   })
 
@@ -266,22 +243,17 @@ $( document ).ready(function() {
   $("#btn_silicitar_whatsapp").on('click', function(){
     var numero = $('.item_size option:selected').text()
     var id_stock = $('.item_size option:selected').val()
-    var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
-    var codigo = '<?=$detalle[0]['codigo']?>'
-
-    var request = $.ajax({
-      method: "POST",
-      url: "<?=$base_url?>/proventa/pedido_espera_whatsapp",
-      data: {
-              codigo: codigo,
-              talla: id_stock,
-              id_persona: 7
-            }
-    });
-
-    request.done(function(resultado) {
+    if (numero == 'seleccionar') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe seleccionar una talla!',
+        footer: '<a href></a>'
+      })
+    }else {
+      var txt = "https://wa.me/50257469663?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
       location.href = txt;
-    });
+    }
   })
 });
 </script>

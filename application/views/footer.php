@@ -17,7 +17,7 @@
         </div>
         <div class="footer-center-icon">
           <img src="<?=$base_url?>/recursos/img/phone-white.svg" alt="room">
-      		<p>5978 8865</p>
+      		<p>5746 9663</p>
     		</div>
   		<div class="footer-center-icon">
         <img src="<?=$base_url?>/recursos/img/email-white.svg" alt="room">
@@ -39,7 +39,7 @@
             src="<?=$base_url?>/recursos/img/icon-whatsapp.png"
             alt="whatsapp">
         </i>
-        <p><a href="">+502 5978 8865</a></p>
+        <p><a href="">+502 5746 9663</a></p>
       </div>
 		</div>
 
@@ -56,7 +56,7 @@
         </a>
       </div>
       <div class="icon-whatsapp">
-					<span style="color: white;">+502 5978 8865</span>
+					<span style="color: white;">+502 5746 9663</span>
         <img
         style="width:24px; height: 24px; margin: 0 0 7px 7px"
         src="<?=$base_url?>/recursos/img/icon-whatsapp.png"

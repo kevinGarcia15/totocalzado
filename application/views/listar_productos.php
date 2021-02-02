@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $htmltrow = "<tr>
-				<td><img src=\"${base_url}/./%s\"></td>
-				<td>%s</td>
+				<td><a href=\"${base_url}/informes/mostrarProducto/%s\"><img src=\"${base_url}/./%s\"></a></td>
+				<td><a href=\"${base_url}/informes/mostrarProducto/%s\">%s</a></td>
 				<td>%s</td>
 				<td>%s</td>
 				<td>%s</td>
@@ -17,7 +17,7 @@ $htmltrows = "";
 
 foreach ($prod as $a) {
 	$htmltrows .= sprintf($htmltrow,
-		$a['img'],$a['codigo'], htmlspecialchars($a['marca']), htmlspecialchars($a['estilo']),htmlspecialchars($a['color']),
+		$a['id_producto'],$a['img'],$a['id_producto'],$a['codigo'], htmlspecialchars($a['marca']), htmlspecialchars($a['estilo']),htmlspecialchars($a['color']),
 		htmlspecialchars($a['genero']),$a['compra'],$a['oferta'],$a['id_producto']);
 	}
 ?>
@@ -33,6 +33,9 @@ foreach ($prod as $a) {
 		.pagination{display: flex !important;}
 		#items img{
 			width: 100px;
+		}
+		#navbarTogglerDemo01{
+			display: none;
 		}
 	</style>
 	<title>Inventario</title>

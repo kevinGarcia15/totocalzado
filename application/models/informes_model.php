@@ -21,11 +21,28 @@ class Informes_model extends CI_Model{
 				LIMIT 	1";
 
 		$dbres = $this->db->query($sql, $id);
-
 		$rows = $dbres->result_array();
-
 		return $rows;
 	}
+
+	function Buscar($codigo) {
+	$sql = "SELECT p.id_producto id_producto, p.codigo codigo,p.img_carrusel img,
+						p.codigo_proveedor codigo_proveedor,cat.nombre categoria,
+						e.nombre nombre_prod, m.nombre marca, c.nombre color,gen.nombre depto
+			FROM 	producto p
+			join marca m on p.marca_id_marca = m.id_marca
+			join estilo e on p.estilo_id_estilo = e.id_estilo
+			join color c on p.color_id_color = c.id_color
+			join categoria cat on p.categoria_id_categoria = cat.id_categoria
+			join genero gen on p.genero_id_genero = gen.id_genero
+
+			Where p.codigo = ?
+			LIMIT 	1";
+
+	$dbres = $this->db->query($sql, $codigo);
+	$rows = $dbres->result_array();
+	return $rows;
+}
 
 	function listar_productos() {
 		$sql = "SELECT prod.id_producto id_producto, prod.codigo codigo,
@@ -277,6 +294,10 @@ class Informes_model extends CI_Model{
 	$valores = array($id_pedido,$rows[0]['id_producto'],$cantidad,$talla);
 	$dbres = $this->db->query($sql, $valores);
 
+	$sql2="UPDATE stock SET cantidad = cantidad - ? WHERE stock.id_stock = ?;";
+		$valores_update = array($cantidad,$talla);
+		$this->db->query($sql2, $valores_update);
+
 	return $rows;
 	}
 
@@ -312,6 +333,7 @@ class Informes_model extends CI_Model{
 									per.usuario usuario,ald.nombre aldea,
 
 									prod.codigo codigo, prod.precio_compra precio_compra,
+									prod.oferta oferta,
 									prod.img_carrusel img, prod.id_producto id_producto,
 
 									marc.nombre marca, col.nombre color, ncalz.numero numero,
@@ -470,5 +492,19 @@ class Informes_model extends CI_Model{
 		$valores = array($estado,$id_pedido);
 		$dbres = $this->db->query($sql,$valores);
 		return $dbres;
+	}
+
+	function add_prod_a_pedido($id_pedido,$producto_id_producto,$unidades,$stock_id_stock){
+		$sql = "INSERT INTO lineapedido(pedido_id_pedido, producto_id_producto,
+							unidades,stock_id_stock)
+						VALUES (?, ?, ?, ?)";
+
+	$valores = array($id_pedido,$producto_id_producto,$unidades,$stock_id_stock);
+	$dbres = $this->db->query($sql, $valores);
+
+	$sql2="UPDATE stock SET cantidad = cantidad - ? WHERE stock.id_stock = ?;";
+		$valores_update = array($unidades,$stock_id_stock);
+		$this->db->query($sql2, $valores_update);
+	return $dbres;
 	}
 }

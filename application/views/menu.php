@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <div class="rigth__menu">
     <div class="whatsapp">
-      <a href="https://wa.me/50259788865">
+      <a href="https://wa.me/50257469663">
         <img
           src="<?=$base_url?>/recursos/img/whatsappGreen.png"
           alt=""
@@ -65,6 +65,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <img src="<?=$base_url?>/recursos/img/arrow-left.png" alt="arrow left">
       </a>
     </div>
+    <div id="navbarTogglerDemo01">
+     <form class="form-inline" id="navbarTogglerDemo01" action="<?=$base_url?>/informes/buscar" method="POST">
+       <input class="form-control mr-sm-2" name="busqueda" type="search" placeholder="Código de producto" aria-label="Search">
+       <button class="btn btn-outline-success mr-sm-2" type="submit">Buscar</button>
+     </form>
+   </div>
   <div class="topnav" id="myTopnav">
    <a  id="textMenuHover" href="<?=$base_url?>" class="active">Menú</a>
 
@@ -84,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <?php endif; ?>
   <a href="<?=$base_url?>/Departamento/dep?dep=Dama&t=8">Damas</a>
   <a href="<?=$base_url?>/Departamento/dep?dep=Caballero&t=7">Caballeros</a>
+  <a href="<?=$base_url?>/Departamento/dep?dep=Joven&t=5">Joven</a>
   <a href="<?=$base_url?>/Departamento/dep?dep=Niño&t=2">Niños</a><!--tabla id_categotia-->
   <a class="dropbtn" href="<?=$base_url?>/Departamento/oferta">OFERTAS</a>
 

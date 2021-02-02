@@ -314,6 +314,16 @@ body {
     float: right;
     display: block;
   }
+  .form-inline{
+    justify-content: center;
+    margin-bottom: 0px;
+  }
+  .form-inline input{
+    width: 170px;
+  }
+  .form-inline button{
+    width: 70px;
+  }
 }
 @media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
