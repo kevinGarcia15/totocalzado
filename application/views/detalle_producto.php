@@ -251,7 +251,7 @@ $( document ).ready(function() {
         footer: '<a href></a>'
       })
     }else {
-      var txt = "https://wa.me/50259788865?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
+      var txt = "https://wa.me/50257469663?text=Hola,%20me%20interesa%20el%20calzado:%20<?=$detalle[0]['marca']?>%20codigo:<?=$detalle[0]['codigo']?>%20y%20numero%20"+numero+".%20Gracias"
       location.href = txt;
     }
   })
