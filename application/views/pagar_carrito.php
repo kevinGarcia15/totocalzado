@@ -91,7 +91,9 @@ $(function (){
       numero[i] = $('.row-'+i+' td').eq(3).html();
       cantidad[i] = $('.row-'+i+' td').eq(6).html();
     }
-
+    console.log(codigo)
+    console.log(numero)
+    console.log(cantidad)
       var request = $.ajax({
         method: "POST",
         url: "<?=$base_url?>/Proventa/datosPedido",

@@ -54,6 +54,14 @@ $totalDia = 0;
 								</thead>
 								<tbody id="producto">
 									<?php foreach($ventas as $venta){ ?>
+										<tr>
+											<td><?=$venta['codigo']?></td>
+											<td><?=$venta['talla']?></td>
+											<td><?=$venta['marca'].' '.$venta['estilo'].' '.$venta['color']?></td>
+											<td><?=$venta['unidad']?></td>
+											<td><?=$venta['cantidad']?></td>
+											<td><?=$venta['total']?></td>
+										</tr>
 										<?php $totalDia = $totalDia + $venta['total'];?>
 								<?php } ?>
 								</tbody>

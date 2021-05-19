@@ -39,7 +39,7 @@
 </style>
 <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <div class="fab simpleCart_checkout" style="cursor:pointer">
+  <div class="fab simpleCart_checkout ">
     <i class="material-iconsfab">
       <div
         class="css-901oao r-1awozwy r-urgr8i r-f6ebdl r-sdzlij r-1phboty

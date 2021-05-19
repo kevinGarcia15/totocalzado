@@ -1,6 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 $mensaje = isset($mensaje) ? $mensaje : "";
+$display = '';
+if ($this->session->ROL != "Admin") {
+	$display = 'style="display:none"';
+}
 if (!empty($buscarProd)) {
 	$htmltrow = "<tr>
 	<td><a href=\"${base_url}/proventa/detalle?id={$buscarProd[0]['id_producto']}&dep={$buscarProd[0]['depto']}\"><img src=\"${base_url}/./%s\"></a></td>
@@ -9,12 +13,16 @@ if (!empty($buscarProd)) {
 	<td>%s</td>
 	<td>%s</td>
 	<td>%s</td>
-	<td><a class='btn btn-secondary' href=\"${base_url}/proventa/detalle?id=%s&dep={$buscarProd[0]['depto']}\">Ver</a></td>
+	<td><a href=\"${base_url}/proventa/detalle?id=%s&dep={$buscarProd[0]['depto']}\">Ver producto</a></td>
+	<td $display><a href=\"${base_url}/informes/mostrarProducto/%s\">Ver inventario</a></td>
 	</tr>";
 
 	$htmltrows = "";
 	foreach ($buscarProd as $a) {
-		$htmltrows .= sprintf($htmltrow,$a['img'],$a['codigo'],$a['marca'],$a['nombre_prod'],$a['color'],$a['categoria'],$a['id_producto']);
+		$htmltrows .= sprintf(
+			$htmltrow,$a['img'],$a['codigo'],$a['marca'],$a['nombre_prod'],
+			$a['color'],$a['categoria'],$a['id_producto'],$a['id_producto']
+		);
 	}
 }else {
 	$htmltrow = "";

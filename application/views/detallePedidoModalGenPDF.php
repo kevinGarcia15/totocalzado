@@ -90,6 +90,14 @@
 							data-dismiss="modal">
 							Generar
 						</button>
+						<button
+						 	id="generar-listado"
+							type="button"
+							class="btn btn-primary"
+							data-dismiss="modal">
+							Generar modo listado
+						</button>
+
 					</div>
 			</div>
 		</div>
