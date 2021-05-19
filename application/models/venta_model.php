@@ -93,6 +93,27 @@ class Venta_model extends CI_Model{
 		return $rows;
 	}
 
+		function seleccionarTodasLasVenta() {
+		$sql = "SELECT DATE_FORMAT(v.fecha_venta,'%d/%m/%Y') as fecha, v.cantidad cantidad,
+										v.monto_unidad unidad,p.codigo codigo,
+									 v.monto_total total,m.nombre marca, e.nombre estilo,
+									 c.nombre color, cat.nombre categoria,ncalz.numero talla
+				FROM 	venta v
+				join producto p on p.id_producto = v.producto_id_producto
+				join marca m on p.marca_id_marca = m.id_marca
+				join estilo e on p.estilo_id_estilo = e.id_estilo
+				join color c on p.color_id_color = c.id_color
+				join categoria cat on p.categoria_id_categoria = cat.id_categoria
+				JOIN stock stk on stk.id_stock = v.numero_categoria_id
+				JOIN numero_categoria ncat on stk.numero_categoria_id = ncat.id
+				JOIN numero_calzado ncalz on ncalz.id_numero = ncat.id_numero
+				ORDER BY v.fecha_venta ASC";
+
+		$dbres = $this->db->query($sql);
+		$rows = $dbres->result_array();
+		return $rows;
+	}
+
 		function seleccionarVenta($fechaBuscar) {
 		$sql = "SELECT DATE_FORMAT(v.fecha_venta,'%d/%m/%Y') as fecha, v.cantidad cantidad,
 										v.monto_unidad unidad,p.codigo codigo,

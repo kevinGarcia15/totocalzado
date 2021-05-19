@@ -25,7 +25,7 @@ class Informes_model extends CI_Model{
 		return $rows;
 	}
 
-	function Buscar($codigo) {
+	function Buscar($argumentos) {
 	$sql = "SELECT p.id_producto id_producto, p.codigo codigo,p.img_carrusel img,
 						p.codigo_proveedor codigo_proveedor,cat.nombre categoria,
 						e.nombre nombre_prod, m.nombre marca, c.nombre color,gen.nombre depto
@@ -36,10 +36,11 @@ class Informes_model extends CI_Model{
 			join categoria cat on p.categoria_id_categoria = cat.id_categoria
 			join genero gen on p.genero_id_genero = gen.id_genero
 
-			Where p.codigo = ?
-			LIMIT 	1";
+			Where m.nombre like ?
+			LIMIT 	15";
 
-	$dbres = $this->db->query($sql, $codigo);
+	$findArgument = $argumentos.'%';
+	$dbres = $this->db->query($sql, $findArgument);
 	$rows = $dbres->result_array();
 	return $rows;
 }
@@ -337,7 +338,7 @@ class Informes_model extends CI_Model{
 									prod.img_carrusel img, prod.id_producto id_producto,
 
 									marc.nombre marca, col.nombre color, ncalz.numero numero,
-									stk.id_stock id_stock,stk.cantidad cant_stock
+									stk.id_stock id_stock,stk.cantidad cant_stock,es.nombre estilo
 
 
 					FROM lineapedido linped
@@ -348,9 +349,11 @@ class Informes_model extends CI_Model{
 					JOIN marca marc on prod.marca_id_marca = marc.id_marca
 					JOIN color col on prod.color_id_color = col.id_color
 					JOIN stock stk on stk.id_stock = linped.stock_id_stock
+					join estilo es on prod.estilo_id_estilo = es.id_estilo
 					JOIN numero_categoria ncat on stk.numero_categoria_id = ncat.id
 					JOIN numero_calzado ncalz on ncalz.id_numero = ncat.id_numero
-					WHERE linped.pedido_id_pedido = ?";
+					WHERE linped.pedido_id_pedido = ?
+					order by numero ASC";
 
 		$dbres = $this->db->query($sql, $id);
 		$rows = $dbres->result_array();
@@ -436,7 +439,7 @@ class Informes_model extends CI_Model{
 
 								 per.usuario usuario,ald.nombre aldea,
 
-								 prod.img_carrusel img, prod.codigo codigo,
+								 prod.img_carrusel img, prod.codigo codigo, 
 
 								 marc.nombre marca,ncalz.numero numero,col.nombre color
 

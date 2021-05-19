@@ -27,6 +27,5 @@
       <a href="<?=$base_url?>/loggin">Iniciar sesión</a>
     </section>
   </section>
-  <?php $this->load->view('footer'); ?>
 </body>
 </html>

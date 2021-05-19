@@ -38,8 +38,6 @@
       </p>
     </section>
   </section>
-
-  <?php $this->load->view('footer'); ?>
 </body>
 <script type="text/javascript">
   $(document).ready(function() {
